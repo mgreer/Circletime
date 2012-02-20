@@ -42,6 +42,7 @@ gem "simple_form"
 gem 'ui_datepicker-rails3'
 
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'
