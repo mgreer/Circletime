@@ -1,0 +1,14 @@
+%p#notice= notice
+%p
+  %b User:
+  = @application.user
+%p
+  %b Job:
+  = @application.job
+%p
+  %b Created:
+  = @application.created_at
+
+= link_to 'Edit', edit_application_path(@application)
+|
+\#{link_to 'Back', applications_path}

@@ -1,0 +1,6 @@
+= simple_form_for @job do |f|
+  = f.input :description
+  = f.input :stars, :collection => 1..10 
+  = f.input :location
+  = f.input :date, :as => :ui_date_time_picker
+  = f.button :submit

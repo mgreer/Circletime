@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %b Description:
+  = @job.description
+%p
+  %b Stars:
+  = @job.stars
+%p
+  %b Location:
+  = @job.location
+%p
+  %b Date:
+  = @job.date
+= link_to 'Edit', edit_job_path(@job)
+|
+\#{link_to 'Back', jobs_path}

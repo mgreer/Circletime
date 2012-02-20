@@ -1,0 +1,35 @@
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  has_many :authentications, :dependent => :delete_all  
+  has_many :applications
+  has_many :jobs, :through => :applications
+
+  validates :name, :email, :presence => true
+
+  def apply_omniauth(auth)
+    # In previous omniauth, 'user_info' was used in place of 'raw_info'
+    self.name = auth['extra']['raw_info']['name']
+    self.email = auth['extra']['raw_info']['email']
+    self.location = auth['extra']['raw_info']['location']['name']
+    
+    # Again, saving token is optional. If you haven't created the column in authentications table, this will fail
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'])
+  end
+
+  def to_s
+    name
+  end
+
+  before_save :default_values
+  def default_values
+    self.stars = 0 unless self.stars
+  end
+  
+end

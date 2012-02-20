@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyText
+  stars: 1
+  location: MyText
+  date: 2012-02-11 20:00:55
+
+two:
+  description: MyText
+  stars: 1
+  location: MyText
+  date: 2012-02-11 20:00:55
