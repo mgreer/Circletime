@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @circle.name
+%p
+  %b User:
+  = @circle.user
+= link_to 'Edit', edit_circle_path(@circle)
+|
+\#{link_to 'Back', circles_path}

@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   
   has_many :authentications, :dependent => :delete_all  
   has_many :applications
+
+  has_many :circles
+  has_many :memberships  
+
   has_many :jobs, :through => :applications
 
   validates :name, :email, :presence => true

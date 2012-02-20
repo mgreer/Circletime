@@ -1,0 +1,7 @@
+= simple_form_for(@membership) do |f|
+  = f.error_notification
+  .inputs
+    = f.association :circle
+    = f.association :user
+  .actions
+    = f.button :submit

@@ -1,4 +1,8 @@
 Circletime::Application.routes.draw do
+  resources :memberships
+
+  resources :circles
+
   devise_for :users
 
   resources :users
