@@ -1,4 +1,7 @@
 = simple_form_for @application do |f|
-  = f.association :user
-  = f.association :job
-  = f.button :submit
+  = f.error_notification
+  .inputs
+    = f.association :user
+    = f.association :job
+  .actions
+    = f.button :submit

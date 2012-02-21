@@ -1,5 +1,8 @@
 class Job < ActiveRecord::Base
-  has_one :application
+  belongs_to :user
+  has_many :applications
+  belongs_to :circle
+  
   def to_s
     description
   end

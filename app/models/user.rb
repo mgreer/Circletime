@@ -10,10 +10,13 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :delete_all  
   has_many :applications
 
+  has_many :invitations, :class_name => self.class.to_s, :as => :invited_by
+
   has_many :circles
   has_many :memberships  
 
-  has_many :jobs, :through => :applications
+  has_many :jobs
+  has_many :work_jobs, :through => :applications
 
   validates :name, :email, :presence => true
 

@@ -3,7 +3,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = current_user.jobs
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +42,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(params[:job])
+    @job.user = current_user
 
     respond_to do |format|
       if @job.save

@@ -3,8 +3,10 @@
   %b Name:
   = @circle.name
 %p
-  %b User:
-  = @circle.user
+  %b Members:
+  - @circle.users.each do |member|
+    = member
+    
 = link_to 'Edit', edit_circle_path(@circle)
 |
 \#{link_to 'Back', circles_path}
