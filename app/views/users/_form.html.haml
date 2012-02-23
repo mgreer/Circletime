@@ -1,6 +1,9 @@
 = simple_form_for @user do |f|
-  = f.input :name
-  = f.input :stars
-  = f.input :location
-  = f.input :email
-  = f.button :submit
+  .inputs
+    = f.input :name
+    = f.input :stars
+    = f.input :location
+    = f.input :email
+    = f.association :memberships, :through => :circle
+  .actions
+    = f.button :submit
