@@ -1,0 +1,6 @@
+%h2 Send invitation!
+= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+  .inputs
+    =f.input :email
+  .actions
+    = f.submit "Send an invitation"

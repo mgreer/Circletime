@@ -3,8 +3,8 @@ Circletime::Application.routes.draw do
 
   resources :circles
 
-  devise_for :users
-
+  devise_for :users, :controllers => { :invitations => 'users/invitations' }
+  
   resources :users
   
   resources :applications

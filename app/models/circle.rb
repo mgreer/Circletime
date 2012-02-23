@@ -5,6 +5,12 @@ class Circle < ActiveRecord::Base
   has_many :users, :through => :memberships
   
   def to_s
-    user.name + "'s " + name + " circle"
+    user.name + "'s circle"
   end
+  
+  before_save :default_values
+  def default_values
+    self.name = "Friends" unless self.name
+  end
+  
 end

@@ -2,5 +2,6 @@
   = f.error_notification
   .inputs
     = f.input :name
+    = f.association :users, :through => :memberships
   .actions
     = f.button :submit

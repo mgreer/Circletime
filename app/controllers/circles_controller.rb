@@ -3,11 +3,11 @@ class CirclesController < ApplicationController
   # GET /circles
   # GET /circles.json
   def index
-    @circles = current_user.circles
+    @circle = current_user.circle
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @circles }
+      format.json { render :json => @circle }
     end
   end
 

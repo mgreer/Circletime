@@ -26,6 +26,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     @job = Job.new
+    @job.circle = current_user.circle
 
     respond_to do |format|
       format.html # new.html.erb
