@@ -6,6 +6,11 @@
     = csrf_meta_tags
   %body
     %h1= link_to "Circletime", :root
+
+    - [:notice, :error, :message].each do |key| 
+      - unless flash[key].blank? 
+        %p{ :class => "flash flash_#{key}" }= flash[key]
+        
     %ul.user_nav
       - if user_signed_in?
         %li
