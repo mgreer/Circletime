@@ -1,7 +1,6 @@
 = simple_form_for @job do |f|
   = f.error_notification
   .inputs
-    = f.association :circle
     = f.input :description
     = f.input :stars, :collection => 1..10 
     = f.input :location
