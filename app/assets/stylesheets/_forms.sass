@@ -1,0 +1,163 @@
+/* ----- SimpleForm Styles -----
+
+.simple_form
+  overflow: visible
+  div.input
+    margin-bottom: 10px
+  label
+    float: left
+    width: 150px
+    text-align: right
+    margin: 2px 10px
+  .error
+    clear: left
+    color: black
+    display: block
+    margin-left: 170px
+    font-size: 12px
+  .hint
+    clear: left
+    margin-left: 170px
+    font-size: 12px
+    color: #555
+    display: block
+    font-style: italic
+
+.placeholder
+  color: #ccc
+
+input
+  &::-webkit-input-placeholder, &:-moz-placeholder
+    color: #ccc !important
+
+div.boolean, .simple_form input[type='submit']
+
+div.boolean label
+  float: none
+  margin: 0
+
+label.collection_radio
+  float: none
+  margin: 0
+  margin-right: 10px
+  vertical-align: -2px
+  margin-left: 2px
+
+.field_with_errors
+  background-color: #ff3333
+
+input
+  &.radio
+    margin-right: 5px
+    vertical-align: -3px
+  &.check_boxes
+    margin-left: 3px
+    vertical-align: -3px
+
+label.collection_check_boxes
+  float: none
+  margin: 0
+  vertical-align: -2px
+  margin-left: 2px
+
+.single
+  padding-top: 1.4em
+  margin-left: 1.4em
+
+.singleHeader
+  color: white
+  margin: 0
+  font-size: 1.1538461538461537em
+  line-height: 1.4em
+  font-family: MuseoSans500, Helvetica, Arial, sans-serif
+  font-weight: 700
+
+.singleLabel
+  color: white
+  margin: 0
+  font-size: 1.1538461538461537em
+  line-height: 1.4em
+  margin-bottom: 1.4em
+  font-family: MuseoSans500, Helvetica, Arial, sans-serif
+  font-style: italic
+
+.single .hint
+  margin-left: 0
+  color: white
+  font-size: 9px
+
+.form_error
+  text-align: center
+  color: #FFF
+  background: #C33
+  padding: 2px 5px
+
+.field_with_errors
+  background: none
+  input
+    border: 2px solid #C33
+  .error
+    color: #C33
+    display: block
+
+.madlibs      
+  overflow: visible
+  font-size: 18px
+  line-height: 40px
+  div.input
+    display: inline-block
+  label
+    white-space: nowrap
+    padding: 0 0 .5em
+    display: -moz-inline-stack
+    display: inline-block
+    vertical-align: top
+    zoom: 1
+    *display: inline
+    font-size: .6em
+    line-height: .8em
+    opacity: .7
+    filter: alpha(opacity = 70)s
+    position: absolute
+    padding-top: 30px                
+  input
+    display: inline-block
+    width:auto
+  input,textarea
+    margin-top: 4px
+    border: none
+    background: none
+    border-bottom: 1px dashed #c2c2c2
+    width: 98%
+    font-size: inherit
+    color: #21759B
+  input:focus,textarea:focus
+    background-color: #fff
+    border: 1px solid #333
+
+  .madlib_select
+    display: inline-block
+    position: relative
+    height: 2em
+    line-height: 2em
+    overflow: visible
+    width: 0px
+    vertical-align: middle
+    ul.display
+      position: absolute
+      top: 0
+      left: 0
+      list-style-type: none
+      margin: 0
+      padding: 0
+      overflow: auto
+      li
+        text-align: left
+        .current
+          display: block
+          width: 100px
+          a
+            color: red
+        a
+          font-size: 18px
+          line-height: 30px

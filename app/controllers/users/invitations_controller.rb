@@ -17,7 +17,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # PUT /resource/invitation
   def update
-    @user = :user.accept_invitation!(params[resource_name])
+    self.resource = resource_class.accept_invitation!(params[resource_name])
 
     if resource.errors.empty?
       set_flash_message :notice, :updated

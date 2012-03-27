@@ -1,21 +1,47 @@
 @import "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css"
+@import mixins
+  
+body
+  width: 975px
+  margin: 0 auto
+  font-family: "Proxima Nova Italic"
+  font-family: "Museo Slab 500"
+  font-family: "Proxima Nova Bold"
+  font-family: "Proxima Nova Regular"
 
-/* css for timepicker
-.ui-timepicker-div
-  .ui-widget-header
-    margin-bottom: 8px
-  dl
-    text-align: left
-    dt
-      height: 25px
-      margin-bottom: -25px
-    dd
-      margin: 0 10px 10px 65px
-  td
-    font-size: 90%
+  /* css for timepicker
+  .ui-timepicker-div
+    .ui-widget-header
+      margin-bottom: 8px
+    dl
+      text-align: left
+      dt
+        height: 25px
+        margin-bottom: -25px
+      dd
+        margin: 0 10px 10px 65px
+    td
+      font-size: 90%
 
-.ui-tpicker-grid-label
-  background: none
-  border: none
-  margin: 0
-  padding: 0
+  .ui-tpicker-grid-label
+    background: none
+    border: none
+    margin: 0
+    padding: 0
+
+  .simple_form  
+    padding: 15px
+    overflow: auto
+
+    .actions
+      float: right
+
+    div.field_with_errors
+      background: none 
+      input
+        background: rgba(255,0,0,.1)
+      .error
+        text-transform: capitalize
+        color: red
+        
+           
