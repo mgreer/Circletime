@@ -1,5 +1,19 @@
 /* ----- SimpleForm Styles -----
+.simple_form  
+  padding: 15px
+  overflow: auto
 
+  .actions
+    float: right
+
+  div.field_with_errors
+    background: none 
+    input
+      background: rgba(255,0,0,.1)
+    .error
+      text-transform: capitalize
+      color: red
+      
 .simple_form
   overflow: visible
   div.input
@@ -135,29 +149,28 @@ label.collection_check_boxes
     background-color: #fff
     border: 1px solid #333
 
-  .madlib_select
+  .custom_select
+    width: 100px
+    height: 40px
     display: inline-block
     position: relative
-    height: 2em
-    line-height: 2em
-    overflow: visible
-    width: 0px
-    vertical-align: middle
-    ul.display
+    ul
       position: absolute
-      top: 0
-      left: 0
-      list-style-type: none
-      margin: 0
-      padding: 0
-      overflow: auto
+      top: 10px
       li
-        text-align: left
-        .current
+        list-style-type: none
+        &.option
+          z-index: 1
+          padding: 0
+          margin: 0
+          display: none
+          height: 35px
+        &.current
           display: block
-          width: 100px
-          a
-            color: red
         a
-          font-size: 18px
-          line-height: 30px
+          padding: 10px
+          background-color: #eee
+        &:hover a
+          background-color: #ccc
+        cursor: default
+

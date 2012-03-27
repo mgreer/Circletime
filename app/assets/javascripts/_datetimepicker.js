@@ -19,7 +19,6 @@
 */
 
 (function($) {
-
 $.extend($.ui, { timepicker: { version: "0.9.9" } });
 
 /* Time picker manager.
