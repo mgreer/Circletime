@@ -16,12 +16,13 @@ $.fn.madlib = function(options) {
       $option = $(this);
       return $ul.append("<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>");
     });
-    $("a", $ul).click($.fn.madlib.clickHandler);
+    $("li a", $ul).click(function(e){false});
     $(this).hide();
     $ul.find("li:first").addClass("current");
     $el.width($("li.current *", $ul).width());
-    return $(".custom_select ul li.option").click(function() {
+    return $(".custom_select ul li.option").click(function($event) {
       $(this).siblings().toggle().removeClass("current");
+      $event.stopPropagation() 
       return $(this).addClass("current");
     });
   });
@@ -32,9 +33,9 @@ $(function() {
     */  
   $('input.ui-date-picker').datepicker();
   $('input.ui-datetime-picker').datetimepicker();
-  $(".madlibs > div.select").madlib()[0];
+  $(".madlibs > div.select").madlib();
   return $(document).click(function() {
-    return $(".select ul li.option").siblings().not(".darr").css("display", "none");
+    return $(".custom_select ul li.option").siblings().not(".current").css("display", "none");
   });
 });
 
