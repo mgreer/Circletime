@@ -21,12 +21,12 @@ $.fn.madlib = function(options) {
     $selected_value = $this.find("option:selected").val();
     $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
     $el.width($("li.current *", $ul).width());
-    return $(".custom_select ul li.option").click(function($event) {
+    return $("ul li.option",$el).click(function($ev) {
+      $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
-      $el = $(this).parents(".custom_select")
+      var $el = $(this).parents(".custom_select")
       $el.find("select option:selected").removeAttr("selected");
       $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
-      $event.stopPropagation() 
       $(this).addClass("current");
       $el.width($("li.current", $el).width());
     });
@@ -38,7 +38,7 @@ $(function() {
     */  
   $('input.ui-date-picker').datepicker();
   $('input.ui-datetime-picker').datetimepicker();
-  $(".madlibs > div.select").madlib();
+  $(".madlibs select:parent").madlib();
   return $(document).click(function() {
     return $(".custom_select ul li.option").siblings().not(".current").css("display", "none");
   });

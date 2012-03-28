@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221040732) do
+ActiveRecord::Schema.define(:version => 20120328170739) do
 
   create_table "applications", :force => true do |t|
     t.datetime "created_at"
@@ -35,15 +35,25 @@ ActiveRecord::Schema.define(:version => 20120221040732) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "invites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "inviter_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "circle_id"
+  end
+
   create_table "jobs", :force => true do |t|
     t.text     "description"
     t.integer  "stars"
     t.text     "location"
-    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "circle_id"
+    t.date     "date"
+    t.time     "time"
+    t.integer  "duration"
   end
 
   create_table "memberships", :force => true do |t|
@@ -52,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20120221040732) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "memberships", ["circle_id", "user_id"], :name => "memberships_user_circle", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

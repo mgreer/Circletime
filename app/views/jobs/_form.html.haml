@@ -2,10 +2,12 @@
   = f.error_notification
   .madlibs
     I want babysitting on
-    = f.input :date, :as => :ui_date_time_picker  
+    = f.input :date, :as => :ui_date_picker  
     at
-    = f.input :location, :as => :string
+    = f.input :time
     for
+    = f.input :duration, :collection => 1..10, :include_blank => false
+    hours, worth
     = f.input :stars, :collection => 1..10, :include_blank => false
     stars.
     %i More info
