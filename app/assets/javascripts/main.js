@@ -26,9 +26,9 @@ $.fn.madlib = function(options) {
       $el = $(this).parents(".custom_select")
       $el.find("select option:selected").removeAttr("selected");
       $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
-      $el.width($("li.current", $el).width());
       $event.stopPropagation() 
-      return $(this).addClass("current");
+      $(this).addClass("current");
+      $el.width($("li.current", $el).width());
     });
   });
 };
