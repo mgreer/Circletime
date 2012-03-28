@@ -22,6 +22,8 @@ $.fn.madlib = function(options) {
     $el.width($("li.current *", $ul).width());
     return $(".custom_select ul li.option").click(function($event) {
       $(this).siblings().toggle().removeClass("current");
+      $(this).parents(".custom_select").find("select option:selected").removeAttr("selected");
+      $(this).parents(".custom_select").find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $event.stopPropagation() 
       return $(this).addClass("current");
     });

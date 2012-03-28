@@ -165,12 +165,19 @@ label.collection_check_boxes
           margin: 0
           display: none
           height: 35px
+          background-color: #eee
+        &:hover
+          background-color: #ccc
         &.current
           display: block
+          background-color: transparent
         a
-          padding: 10px
-          background-color: #eee
-        &:hover a
-          background-color: #ccc
+          display: inline-block
+          
+          font-size: 18px
+          line-height: 40px
+        a:hover
+          background-color: transparent
+          color: inherit
         cursor: default
 
