@@ -21,14 +21,15 @@ $.fn.madlib = function(options) {
     $selected_value = $this.find("option:selected").val();
     $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
     $el.width($("li.current *", $ul).width());
-    return $("ul li.option",$el).click(function($ev) {
+    return $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
-      var $el = $(this).parents(".custom_select")
-      $el.find("select option:selected").removeAttr("selected");
-      $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
+      var $ul = $(this).parents(".custom_select ul")
+      $ul.find("select option:selected").removeAttr("selected");
+      $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $(this).addClass("current");
-      $el.width($("li.current", $el).width());
+      $ul.width($("li.current", $ul).width());
+      $ul.css("top" ,($("li.current", $ul).position().top*-1)+10 );      
     });
   });
 };
