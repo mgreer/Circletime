@@ -5,7 +5,7 @@ $.fn.madlib = function(options) {
     var $el, $this, $ul, madlib;
     $this = $(this);
     madlib = $this;
-    $this.val($this.find("option:first").val());
+    $this.val($this.find("option:selected").val());
     $this.wrap("<div class=\"custom_select\"></div>");
     $el = $(this).parents(".custom_select");
     this.modifying = false;
@@ -18,12 +18,15 @@ $.fn.madlib = function(options) {
     });
     $("li a", $ul).click(function(e){false});
     $(this).hide();
-    $ul.find("li:first").addClass("current");
+    $selected_value = $this.find("option:selected").val();
+    $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
     $el.width($("li.current *", $ul).width());
     return $(".custom_select ul li.option").click(function($event) {
       $(this).siblings().toggle().removeClass("current");
-      $(this).parents(".custom_select").find("select option:selected").removeAttr("selected");
-      $(this).parents(".custom_select").find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
+      $el = $(this).parents(".custom_select")
+      $el.find("select option:selected").removeAttr("selected");
+      $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
+      $el.width($("li.current", $el).width());
       $event.stopPropagation() 
       return $(this).addClass("current");
     });
