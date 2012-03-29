@@ -25,6 +25,7 @@ $.fn.madlib = function(options) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
       var $ul = $(this).parents(".custom_select ul")
+      $ul.toggleClass("lit");
       $ul.find("select option:selected").removeAttr("selected");
       $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $(this).addClass("current");
@@ -41,7 +42,7 @@ $(function() {
   $('input.ui-datetime-picker').datetimepicker();
   $(".madlibs select:parent").madlib();
   return $(document).click(function() {
-    return $(".custom_select ul li.option").siblings().not(".current").css("display", "none");
+    return $(".madlibs ul.lit li.option").filter(".current").click();
   });
 });
 
