@@ -14,7 +14,7 @@ $.fn.madlib = function(options) {
     $("option", $this).each(function() {
       var $option;
       $option = $(this);
-      return $ul.append("<li class=\"option\" data-value=\"" + $option.val() + "\"><span>" + $option.html() + "</span></li>");
+      return $ul.append("<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>");
     });
     $("li a", $ul).click(function(e){false});
     $(this).hide();
@@ -23,23 +23,20 @@ $.fn.madlib = function(options) {
     $el.width($("li.current *", $ul).width());
     return $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
-      var $ul = $(this).parent();
-      $ul.toggleClass("lit");      
-//      $(this).siblings().toggle().removeClass("current");
-      $(this).siblings().removeClass("current");
+      $(this).siblings().toggle().removeClass("current");
+      var $ul = $(this).parents(".custom_select ul")
       $ul.find("select option:selected").removeAttr("selected");
       $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $(this).addClass("current");
       $ul.width($("li.current", $ul).width());
-      $ul.parent().width($ul.width());
       $ul.css("top" ,($("li.current", $ul).position().top*-1)+10 );      
     });
   });
 };
 $(function() {
   /*
-  Form elements setup
-  */  
+    Form elements setup
+    */  
   $('input.ui-date-picker').datepicker();
   $('input.ui-datetime-picker').datetimepicker();
   $(".madlibs select:parent").madlib();

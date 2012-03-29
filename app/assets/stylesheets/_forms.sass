@@ -1,11 +1,11 @@
 /* ----- SimpleForm Styles -----
 .simple_form  
   padding: 15px
-  overflow: visible
-  background: #cba
+  overflow: auto
+
   .actions
     float: right
-    overflow: visible
+
   div.field_with_errors
     background: none 
     input
@@ -13,6 +13,9 @@
     .error
       text-transform: capitalize
       color: red
+      
+.simple_form
+  overflow: visible
   div.input
     margin-bottom: 10px
   label
@@ -34,24 +37,132 @@
     display: block
     font-style: italic
 
-  .madlibs      
-    overflow: visible
-    font-size: 18px
-    line-height: 40px
-    div.input
-      display: inline-block
-    label
-      display: none               
-    input
-      display: inline-block
-      width:auto
-    input,textarea
-      margin-top: 4px
-      border: none
-      background: none
-      border-bottom: 1px dashed #c2c2c2
-      font-size: inherit
-      color: #21759B
-    input:focus,textarea:focus
-      background-color: #fff
-      border: 1px solid #333
+.placeholder
+  color: #ccc
+
+input
+  &::-webkit-input-placeholder, &:-moz-placeholder
+    color: #ccc !important
+
+div.boolean, .simple_form input[type='submit']
+
+div.boolean label
+  float: none
+  margin: 0
+
+label.collection_radio
+  float: none
+  margin: 0
+  margin-right: 10px
+  vertical-align: -2px
+  margin-left: 2px
+
+.field_with_errors
+  background-color: #ff3333
+
+input
+  &.radio
+    margin-right: 5px
+    vertical-align: -3px
+  &.check_boxes
+    margin-left: 3px
+    vertical-align: -3px
+
+label.collection_check_boxes
+  float: none
+  margin: 0
+  vertical-align: -2px
+  margin-left: 2px
+
+.single
+  padding-top: 1.4em
+  margin-left: 1.4em
+
+.singleHeader
+  color: white
+  margin: 0
+  font-size: 1.1538461538461537em
+  line-height: 1.4em
+  font-family: MuseoSans500, Helvetica, Arial, sans-serif
+  font-weight: 700
+
+.singleLabel
+  color: white
+  margin: 0
+  font-size: 1.1538461538461537em
+  line-height: 1.4em
+  margin-bottom: 1.4em
+  font-family: MuseoSans500, Helvetica, Arial, sans-serif
+  font-style: italic
+
+.single .hint
+  margin-left: 0
+  color: white
+  font-size: 9px
+
+.form_error
+  text-align: center
+  color: #FFF
+  background: #C33
+  padding: 2px 5px
+
+.field_with_errors
+  background: none
+  input
+    border: 2px solid #C33
+  .error
+    color: #C33
+    display: block
+
+.madlibs      
+  overflow: visible
+  font-size: 18px
+  line-height: 40px
+  div.input
+    display: inline-block
+  label
+    display: none               
+  input
+    display: inline-block
+    width:auto
+  input,textarea
+    margin-top: 4px
+    border: none
+    background: none
+    border-bottom: 1px dashed #c2c2c2
+    font-size: inherit
+    color: #21759B
+  input:focus,textarea:focus
+    background-color: #fff
+    border: 1px solid #333
+
+  .custom_select
+    height: 40px
+    display: inline-block
+    position: relative
+    ul
+      position: absolute
+      top: 10px
+      li
+        list-style-type: none
+        cursor: pointer
+        &.option
+          z-index: 1
+          padding: 0
+          margin: 0
+          display: none
+          height: 35px
+          background-color: #eee
+        &:hover
+          background-color: #ccc
+        &.current
+          display: block
+          background-color: transparent
+        a
+          display: inline-block
+          font-size: 18px
+          line-height: 40px
+        a:hover
+          background-color: transparent
+          color: inherit
+
