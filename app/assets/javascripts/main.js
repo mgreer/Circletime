@@ -24,13 +24,13 @@ $.fn.madlib = function(options) {
     return $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
-      var $ul = $(this).parents(".custom_select ul")
+      var $ul = $(this).parents(".custom_select ul");
       $ul.toggleClass("lit");
       $ul.find("select option:selected").removeAttr("selected");
       $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $(this).addClass("current");
       $ul.width($("li.current", $ul).width());
-      $ul.css("top" ,($("li.current", $ul).position().top*-1)+10 );      
+      $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
     });
   });
 };

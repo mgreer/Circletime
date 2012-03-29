@@ -1,3 +1,4 @@
+@import mixins
 /* ----- SimpleForm Styles -----
 .simple_form  
   padding: 15px
@@ -116,8 +117,10 @@ label.collection_check_boxes
 
 .madlibs      
   overflow: visible
-  font-size: 18px
-  line-height: 40px
+  font-size: 4em
+  letter-spacing: .05em
+  font-family: "Adelle Light", Georgia, serif
+  line-height: 1em
   div.input
     display: inline-block
   label
@@ -131,18 +134,21 @@ label.collection_check_boxes
     background: none
     border-bottom: 1px dashed #c2c2c2
     font-size: inherit
+    font-family: inherit    
     color: #21759B
   input:focus,textarea:focus
     background-color: #fff
-    border: 1px solid #333
 
   .custom_select
     height: 40px
     display: inline-block
     position: relative
-    ul
+    ul    
       position: absolute
-      top: 10px
+      top: 0
+      left: -10px
+      &.lit
+        box-shadow: 0 0 2px 2px rgb(200,200,200)
       li
         list-style-type: none
         cursor: pointer
@@ -151,18 +157,26 @@ label.collection_check_boxes
           padding: 0
           margin: 0
           display: none
-          height: 35px
-          background-color: #eee
-        &:hover
-          background-color: #ccc
+          background-color: transparent
+          border-bottom: 1px dashed #c2c2c2
         &.current
           display: block
-          background-color: transparent
         a
           display: inline-block
-          font-size: 18px
-          line-height: 40px
+          text-decoration: none
+          font-size: 4em
+          letter-spacing: .05em
+          font-family: "Adelle Light", Georgia, serif
+          line-height: .8em
+          padding: 0 10px 10px 10px
         a:hover
-          background-color: transparent
+          background: none
           color: inherit
+        &.option a
+          
+      &.lit li 
+        background-color: #eee
+        border: none
+        &:hover 
+          background-color: #ccc
 
