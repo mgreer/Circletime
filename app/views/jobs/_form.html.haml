@@ -1,15 +1,18 @@
+- @num_collection = [["one",1],["two",2],["three",3],["four",4],["five",5],["six",6],["seven",7],["eight",8],["nine",9],["ten",10],["eleven",11],["twelve",12]]
+- @star_collection = [["one star",1],["two stars",2],["three stars",3],["four stars",4],["five stars",5]]
+
 = simple_form_for @job do |f|
   = f.error_notification
   .madlibs
-    I want babysitting on
+    I want a babysitter on
     = f.input :date, :as => :ui_date_picker, :input_html => { :maxlength => 8 }  
     at
     = f.input :time
     for
-    = f.input :duration, :collection => 1..10, :include_blank => false
+    = f.input :duration, :collection => @num_collection, :include_blank => false
     hours, worth
-    = f.input :stars, :collection => 1..10, :include_blank => false
-    stars.
+    = f.input :stars, :collection => @star_collection, :include_blank => false
+    \.
     %p.more 
       = f.input :description, :as => :string
 

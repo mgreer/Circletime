@@ -29,7 +29,7 @@ $.fn.madlib = function(options) {
       $ul.find("select option:selected").removeAttr("selected");
       $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
       $(this).addClass("current");
-      $ul.width($("li.current", $ul).width());
+      $ul.parent().width($("li.current a", $ul).width());
       $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
     });
   });
