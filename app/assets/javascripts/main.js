@@ -25,22 +25,16 @@ $.fn.madlib = function(options) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
       var $ul = $(this).parents(".custom_select ul");
-      $ul.toggleClass("lit");
       $ul.find("select option:selected").removeAttr("selected");
       $ul.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
-      $(this).addClass("current");
-      $ul.parent().width($("li.current a", $ul).width());
-      $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
-/*
       if( $ul.hasClass("lit")){
         $(this).addClass("current");
         $ul.parent().animate({
           width: $("li.current a", $ul).width()
         },200);
-        $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
       }
+      $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
       $ul.toggleClass("lit");
-*/
     });
   });
 };
