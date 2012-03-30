@@ -3,10 +3,11 @@
 .simple_form  
   padding: 15px
   overflow: auto
-
+  overflow: visible
+  div.input
+    margin-bottom: 10px
   .actions
     float: right
-
   div.field_with_errors
     background: none 
     input
@@ -14,107 +15,7 @@
     .error
       text-transform: capitalize
       color: red
-      
-.simple_form
-  overflow: visible
-  div.input
-    margin-bottom: 10px
-  label
-    float: left
-    width: 150px
-    text-align: right
-    margin: 2px 10px
-  .error
-    clear: left
-    color: black
-    display: block
-    margin-left: 170px
-    font-size: 12px
-  .hint
-    clear: left
-    margin-left: 170px
-    font-size: 12px
-    color: #555
-    display: block
-    font-style: italic
-
-.placeholder
-  color: #ccc
-
-input
-  &::-webkit-input-placeholder, &:-moz-placeholder
-    color: #ccc !important
-
-div.boolean, .simple_form input[type='submit']
-
-div.boolean label
-  float: none
-  margin: 0
-
-label.collection_radio
-  float: none
-  margin: 0
-  margin-right: 10px
-  vertical-align: -2px
-  margin-left: 2px
-
-.field_with_errors
-  background-color: #ff3333
-
-input
-  &.radio
-    margin-right: 5px
-    vertical-align: -3px
-  &.check_boxes
-    margin-left: 3px
-    vertical-align: -3px
-
-label.collection_check_boxes
-  float: none
-  margin: 0
-  vertical-align: -2px
-  margin-left: 2px
-
-.single
-  padding-top: 1.4em
-  margin-left: 1.4em
-
-.singleHeader
-  color: white
-  margin: 0
-  font-size: 1.1538461538461537em
-  line-height: 1.4em
-  font-family: MuseoSans500, Helvetica, Arial, sans-serif
-  font-weight: 700
-
-.singleLabel
-  color: white
-  margin: 0
-  font-size: 1.1538461538461537em
-  line-height: 1.4em
-  margin-bottom: 1.4em
-  font-family: MuseoSans500, Helvetica, Arial, sans-serif
-  font-style: italic
-
-.single .hint
-  margin-left: 0
-  color: white
-  font-size: 9px
-
-.form_error
-  text-align: center
-  color: #FFF
-  background: #C33
-  padding: 2px 5px
-
-.field_with_errors
-  background: none
-  input
-    border: 2px solid #C33
-  .error
-    color: #C33
-    display: block
-
+    
 .madlibs      
   overflow: visible
   font-size: 4em
@@ -127,6 +28,7 @@ label.collection_check_boxes
     display: none               
   input
     display: inline-block
+    overflow: hidden
     width:auto
   input,textarea
     margin-top: 4px
@@ -147,8 +49,10 @@ label.collection_check_boxes
       position: absolute
       top: 0
       left: -10px
+      z-index: 1
       &.lit
         box-shadow: 0 0 2px 2px rgb(200,200,200)
+        z-index: 2
       li
         list-style-type: none
         cursor: pointer
@@ -170,6 +74,7 @@ label.collection_check_boxes
           line-height: .8em
           padding: 0 10px 10px 10px
           white-space: nowrap
+          color: #21759B
         a:hover
           background: none
           color: inherit

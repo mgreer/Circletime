@@ -46,3 +46,4 @@ gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'
+gem "combined_time_select", "~> 0.0.1"

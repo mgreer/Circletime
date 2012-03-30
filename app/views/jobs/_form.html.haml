@@ -5,9 +5,9 @@
   = f.error_notification
   .madlibs
     I want a babysitter on
-    = f.input :date, :as => :ui_date_picker, :input_html => { :maxlength => 8 }  
+    = f.input :date, :as => :string, :input_html => { :class => 'ui-date-picker', :size => 8 } 
     at
-    = f.input :time
+    = f.input :time, :combined => true, :default => Time.now.change(:hour => 20, :min => 00), :minute_interval => 30,:time_separator => "",:start_hour => 9,:end_hour => 24
     for
     = f.input :duration, :collection => @num_collection, :include_blank => false
     hours, worth
