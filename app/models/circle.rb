@@ -1,5 +1,5 @@
 class Circle < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, :inverse_of => :circles
   has_many :jobs
   has_many :memberships
   has_many :users, :through => :memberships

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330163222) do
+ActiveRecord::Schema.define(:version => 20120330211952) do
 
   create_table "applications", :force => true do |t|
     t.datetime "created_at"
@@ -46,8 +46,9 @@ ActiveRecord::Schema.define(:version => 20120330163222) do
   create_table "job_types", :force => true do |t|
     t.string   "name"
     t.integer  "stars"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "work_unit_id"
   end
 
   create_table "jobs", :force => true do |t|
@@ -101,5 +102,10 @@ ActiveRecord::Schema.define(:version => 20120330163222) do
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "work_units", :force => true do |t|
+    t.string  "name"
+    t.integer "hours"
+  end
 
 end
