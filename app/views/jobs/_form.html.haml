@@ -4,13 +4,15 @@
 = simple_form_for @job do |f|
   = f.error_notification
   .madlibs
-    I want a babysitter on
-    = f.input :date, :as => :string, :input_html => { :class => 'ui-date-picker', :size => 8 } 
-    at
-    = f.input :time, :combined => true, :default => Time.now.change(:hour => 20, :min => 00), :minute_interval => 30,:time_separator => "",:start_hour => 9,:end_hour => 24
-    for
+    I want a    
+    = f.association :job_type, :include_blank => false
+    \ on
+    = f.input :date, :as => :string, :input_html => { :class => 'ui-date-picker', :size => 8 ,:value => Time.now.localtime.strftime("%m/%d/%Y")}
+    \ at
+    = f.input :time, :combined => true, :default => Time.now.change(:hour => 19, :min => 00), :minute_interval => 30,:time_separator => "",:start_hour => 9,:end_hour => 24
+    \ for
     = f.input :duration, :collection => @num_collection, :include_blank => false
-    hours, worth
+    \ hours, worth
     = f.input :stars, :collection => @star_collection, :include_blank => false
     \.
     %p.more 
