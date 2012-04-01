@@ -18,7 +18,7 @@
           = link_to "Welcome "+current_user.name, dashboard_path(current_user)       
           = link_to "logout", destroy_user_session_path, :method => :delete
         - else
-        = link_to 'Login with Facebook', '/auth/facebook/'
+          = link_to 'Login with Facebook', '/auth/facebook/'
 
     %section#content
       = yield
