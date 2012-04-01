@@ -27,6 +27,7 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @job.circle = current_user.circle
+    @job_types = JobType.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,6 +38,7 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
+    @job_types = JobType.all
   end
 
   # POST /jobs

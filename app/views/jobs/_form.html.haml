@@ -1,6 +1,13 @@
+- require "json"
 - @num_collection = [["one",1],["two",2],["three",3],["four",4],["five",5],["six",6],["seven",7],["eight",8],["nine",9],["ten",10],["eleven",11],["twelve",12]]
 - @star_collection = [["one star",1],["two stars",2],["three stars",3],["four stars",4],["five stars",5]]
 
+:javascript
+  var job_types = [];
+  #{
+    Array[@job_types.map { |r| "job_types[#{r.id}] = {'name':'#{r.name}','stars':'#{r.stars}','unit':'#{r.work_unit.name}','hours':'#{r.work_unit.hours}'};" }].join ' '
+  }
+  
 = simple_form_for @job do |f|
   = f.error_notification
   .madlibs
@@ -9,7 +16,7 @@
     \ on
     = f.input :date, :as => :string, :input_html => { :class => 'ui-date-picker', :size => 8 ,:value => Time.now.localtime.strftime("%m/%d/%Y")}
     \ at
-    = f.input :time, :combined => true, :default => Time.now.change(:hour => 19, :min => 00), :minute_interval => 30,:time_separator => "",:start_hour => 9,:end_hour => 24
+    = f.input :time, :default => Time.now.change(:hour => 19, :min => 00), :minute_interval => 30,:time_separator => ":",:start_hour => 9,:end_hour => 24
     \ for
     = f.input :duration, :collection => @num_collection, :include_blank => false
     \ hours, worth
