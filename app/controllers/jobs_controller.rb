@@ -28,6 +28,10 @@ class JobsController < ApplicationController
     @job = Job.new
     @job.circle = current_user.circle
     @job_types = JobType.all
+    #set type to default
+    @job.job_type = @job_types[0]
+    #set default stars to job_type default
+    @job.stars = @job.job_type.stars
 
     respond_to do |format|
       format.html # new.html.erb

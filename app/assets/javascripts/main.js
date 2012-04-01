@@ -24,9 +24,12 @@ $.fn.madlib = function(options) {
     return $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
-      var $ul = $(this).parents(".custom_select ul");
-      $ul.find("select option[value="+$(this).attr("data-value")+"]").click();
+      var $el = $(this).parents(".custom_select");
+      var $ul = $("ul", $el);
       if( $ul.hasClass("lit")){
+        $el.find("select option:selected").removeAttr("selected");
+        $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
+        $el.find("select option[value="+$(this).attr("data-value")+"]").change();
         $(this).addClass("current");
         $ul.parent().animate({
           width: $("li.current a", $ul).width()
