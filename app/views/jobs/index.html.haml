@@ -1,21 +1,19 @@
 %h1 Listing jobs
 %table
   %tr
-    %th Description
+    %th Type
     %th Stars
-    %th Location
-    %th Circle
     %th Date
+    %th Time
     %th
     %th
     %th
   - @jobs.each do |job|
     %tr
-      %td= job.description
+      %td= job.job_type
       %td= job.stars
-      %td= job.location
-      %td= job.circle
       %td= job.date
+      %td= job.time
       %td= link_to 'Show', job
       %td= link_to 'Edit', edit_job_path(job)
       %td= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete

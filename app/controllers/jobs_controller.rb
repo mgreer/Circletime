@@ -97,9 +97,12 @@ end
 module ActiveSupport
   class HashWithIndifferentAccess < Hash
     def parse_time_select!(attribute)
-      self[attribute] = Time.zone.parse("#{self["#{attribute}(1i)"]}-#{self["#{attribute}(2i)"]}-#{self["#{attribute}(3i)"]} #{self["#{attribute}(4i)"]}:#{self["#{attribute}(5i)"]}#{self["#{attribute}(6i)"]}")
+      @date_string = "#{self["date"]} #{self["#{attribute}(4i)"]}:#{self["#{attribute}(5i)"]}#{self["#{attribute}(6i)"]}"
+      Rails.logger.info("---------------------------------------!!!")
+      Rails.logger.info( @date_string )
+      Rails.logger.info("---------------------------------------!!!")
+      self[attribute] = Time.zone.parse(@date_string)
       (1..6).each { |i| self.delete "#{attribute}(#{i}i)" }
-      self
     end
   end
 end
