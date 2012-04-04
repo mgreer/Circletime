@@ -39,7 +39,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    combined_time_select (0.0.1)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -147,7 +146,6 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails
-  combined_time_select (~> 0.0.1)
   devise
   devise_invitable
   haml

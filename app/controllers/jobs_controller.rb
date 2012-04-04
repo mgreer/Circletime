@@ -48,6 +48,8 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
+    params[:job].parse_time_select! :time
+
     @job = Job.new(params[:job])
     @job.user = current_user
 
@@ -65,6 +67,7 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.json
   def update
+    params[:job].parse_time_select! :time
     @job = Job.find(params[:id])
 
     respond_to do |format|
@@ -87,6 +90,16 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to jobs_url }
       format.json { head :ok }
+    end
+  end
+end
+
+module ActiveSupport
+  class HashWithIndifferentAccess < Hash
+    def parse_time_select!(attribute)
+      self[attribute] = Time.zone.parse("#{self["#{attribute}(1i)"]}-#{self["#{attribute}(2i)"]}-#{self["#{attribute}(3i)"]} #{self["#{attribute}(4i)"]}:#{self["#{attribute}(5i)"]}#{self["#{attribute}(6i)"]}")
+      (1..6).each { |i| self.delete "#{attribute}(#{i}i)" }
+      self
     end
   end
 end

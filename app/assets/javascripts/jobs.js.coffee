@@ -21,11 +21,11 @@ $ ->
       
     #remove time if work_unit hours > 12
     if $job_type.hours < 24
-      $("#time",$el).show(500)
+      $("#time",$el).removeClass("hide")
       $ul = $("#time .custom_select ul", $el)
       $ul.parent().width( $("li.current a", $ul).width() )
     else
-      $("#time",$el).hide(500)  
+      $("#time",$el).addClass("hide")  
     
   #on stars and duration change
     #correct unit plural

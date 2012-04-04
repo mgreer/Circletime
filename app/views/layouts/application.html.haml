@@ -9,9 +9,6 @@
     %header
       %h1= link_to "Circletime", :root
 
-      - [:notice, :error, :message].each do |key| 
-        - unless flash[key].blank? 
-          %p{ :class => "flash flash_#{key}" }= flash[key]
         
       %nav#user_nav
         - if user_signed_in?
@@ -20,6 +17,11 @@
         - else
           = link_to 'Login with Facebook', '/auth/facebook/'
 
+    %section#messaging
+      - [:notice, :error, :message].each do |key| 
+        - unless flash[key].blank? 
+          %p{ :class => "flash flash_#{key}" }= flash[key]
+    
     %section#content
       = yield
 

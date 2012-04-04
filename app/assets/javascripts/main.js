@@ -1,12 +1,20 @@
 (function($) {
 
+function slugify(text) {
+	text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
+	text = text.replace(/-/gi, "_");
+	text = text.replace(/\s/gi, "-");
+	return text;
+}
+
 $.fn.madlib = function(options) {
   return this.each(function() {
     var $el, $this, $ul, madlib;
     $this = $(this);
     madlib = $this;
+    $name = slugify( $this.attr("name") );
     $this.val($this.find("option:selected").val());
-    $this.wrap("<div class=\"custom_select\"></div>");
+    $this.wrap("<div class=\"custom_select\ "+$name+"\"></div>");
     $el = $(this).parents(".custom_select");
     this.modifying = false;
     $el.append("<ul class=\"display\"></ul>");
