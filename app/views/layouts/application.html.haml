@@ -1,10 +1,9 @@
 %html
   %head
     %title Circletime
-    - if (ENV['RAILS_ENV']=='development')
-      = stylesheet_link_tag    "http://f.fontdeck.com/s/css/IA9YWTFkoF9SeWF+Xx2aVHrm7Kk/www.mylocalhost.com/9017.css"
-    - else
-      = stylesheet_link_tag    "http://f.fontdeck.com/s/css/XSGcErXwnY4I3fu7ycEPdSsJN+E/circletime.heroku.com/18062.css"
+    = javascript_include_tag "http://use.typekit.com/tsj8viv.js"
+    :javascript
+      try{Typekit.load();}catch(e){}    
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
