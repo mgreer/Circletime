@@ -32,7 +32,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
-gem 'therubyracer'
+#gem 'therubyracer'
 gem "haml"
 gem "will_paginate"
 gem "mocha"
