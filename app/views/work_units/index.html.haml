@@ -1,0 +1,17 @@
+%h1 Listing work_units
+%table
+  %tr
+    %th Name
+    %th Hours
+    %th
+    %th
+    %th
+  - @work_units.each do |work_unit|
+    %tr
+      %td= work_unit.name
+      %td= work_unit.hours
+      %td= link_to 'Show', work_unit
+      %td= link_to 'Edit', edit_work_unit_path(work_unit)
+      %td= link_to 'Destroy', work_unit, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Work unit', new_work_unit_path

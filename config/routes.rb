@@ -10,6 +10,10 @@ Circletime::Application.routes.draw do
   resources :applications
 
   resources :jobs
+
+  resources :work_units
+
+  resources :job_types
   
   root :to => "pages#home"
   

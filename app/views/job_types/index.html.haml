@@ -1,0 +1,13 @@
+%h1 Listing job_types
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @job_types.each do |job_type|
+    %tr
+      %td= link_to 'Show', job_type
+      %td= link_to 'Edit', edit_job_type_path(job_type)
+      %td= link_to 'Destroy', job_type, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Job type', new_job_type_path

@@ -29,9 +29,9 @@ $.fn.madlib = function(options) {
     $selected_value = $this.find("option:selected").val();
     $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
     $el.width($("li.current *", $ul).width());
-    $(window).scroll(function($ev){
-      console.log($this.scrollTop());
-    });
+//    $(window).scroll(function($ev){
+//      console.log($this.scrollTop());
+//    });
     return $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");

@@ -1,0 +1,8 @@
+= simple_form_for(@job_type) do |f|
+  = f.error_notification
+  .inputs
+    = f.input :name
+    = f.input :stars, :collection => 1..10  
+    = f.association :work_unit, :include_blank => false
+  .actions
+    = f.button :submit
