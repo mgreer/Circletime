@@ -1,6 +1,8 @@
 %h2 Send invitation!
 = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
-  .inputs
-    =f.input :email
+  .madlibs
+    Invite 
+    =f.input :email, :input_html => { :size => 8 }, :hint => "a friend"
+    to join your circle.
   .actions
     = f.submit "Send an invitation"

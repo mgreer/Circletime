@@ -32,7 +32,7 @@
     = f.input :stars, :collection => @star_collection, :include_blank => false
     \.
     %p.more 
-      = f.input :description, :as => :string
+      = f.input :description, :as => :string, :input_html => { :size => :auto }
 
   .actions
     = f.button :submit

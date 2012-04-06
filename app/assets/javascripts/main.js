@@ -7,8 +7,29 @@ function slugify(text) {
 	return text;
 }
 
+function test_width(content, fontSize, family){
+  $test = $("body").append("<div class='tester' id='tester'></div>");
+  $test = $("#tester");
+  $test.css("font-size", fontSize);
+  $test.css("font-family", family);
+  $test.html(content);
+  $height = $test.height();
+  $width = $test.width();
+  $test.remove();
+  return {"height":$height, "width":$width};
+}
+
+$.fn.resizeable = function(options) {
+  $(this).keydown(function(){
+    $dim = test_width( $(this).val(), $(this).css("font-size"), $(this).css("font-family") );
+    $(this).width($dim.width+40);;
+  })
+  return this;
+}
+
 $.fn.madlib = function(options) {
-  return this.each(function() {
+  /*wire up selects first*/
+  $(this).find("select:parent").each(function() {
     var $el, $this, $ul, madlib;
     $this = $(this);
     madlib = $this;
@@ -32,7 +53,7 @@ $.fn.madlib = function(options) {
 //    $(window).scroll(function($ev){
 //      console.log($this.scrollTop());
 //    });
-    return $("li.option",$ul).click(function($ev) {
+    $("li.option",$ul).click(function($ev) {
       $ev.stopPropagation() 
       $(this).siblings().toggle().removeClass("current");
       var $el = $(this).parents(".custom_select");
@@ -49,17 +70,30 @@ $.fn.madlib = function(options) {
       $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
       $ul.toggleClass("lit");
     });
+    /*kill open ones on doc click*/
+    $(document).click(function() {
+      return $("ul.lit li.option",this).filter(".current").click();
+    });    
   });
+
+  /*wire up text inputs first*/
+  $(this).find(":text:not(.ui-date-picker)").each(function() {
+    $(this).resizeable();
+  }); 
+  return this; 
 };
+
+
+
+
+
 $(function() {
   /*
     Form elements setup
     */  
   $('input.ui-date-picker').datepicker();
-  $(".madlibs select:parent").madlib();
-  return $(document).click(function() {
-    return $(".madlibs ul.lit li.option").filter(".current").click();
-  });
+
+  $(".madlibs").madlib();
 });
 
 
