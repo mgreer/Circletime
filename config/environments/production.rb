@@ -20,9 +20,6 @@ Circletime::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
   
-  #forcing your application to not access the DB or load models when precompiling your assets.
-  config.assets.initialize_on_precompile = false  
-
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
