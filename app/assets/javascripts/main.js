@@ -56,7 +56,6 @@ $(function() {
     Form elements setup
     */  
   $('input.ui-date-picker').datepicker();
-  $('input.ui-datetime-picker').datetimepicker();
   $(".madlibs select:parent").madlib();
   return $(document).click(function() {
     return $(".madlibs ul.lit li.option").filter(".current").click();
