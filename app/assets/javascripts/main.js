@@ -77,21 +77,26 @@ $.fn.madlib = function(options) {
   });
 
   /*wire up text inputs first*/
-  $(this).find(":text:not(.ui-date-picker)").each(function() {
+  $(this).find("input").not(".ui-date-picker").each(function() {
     $(this).resizeable();
+    $input= $(this);
+    $(this).focus(function(){
+      $(this).parent().find(".hint").hide(1000);
+    })
+    $(this).parent().find(".hint").click(function(){
+      $(this).hide(1000);
+      $input.focus();
+    });
   }); 
   return this; 
 };
-
-
-
 
 
 $(function() {
   /*
     Form elements setup
     */  
-  $('input.ui-date-picker').datepicker();
+  $('input.ui-date-picker').datepicker().resizeable();
 
   $(".madlibs").madlib();
 });

@@ -1,4 +1,43 @@
+$font_title: "adelle",georgia,serif
+$font_text: "droid-sans",helvetica,san-serif
+$color_link: #3FB4C2
+$color_hot: #FF5701
+$color_hot_light: #FF841F
+$color_cool: #21759B
+$color_cool_light: #53a8CF
+$color_special: #28ADD2
+$color_special_light: #5CC0DD
+$color_special_border: #41646F
+$color_accept: #8AB902
+$color_cancel: #BC4029
+$width_container: 960px
+
 @mixin rounded($radius:10px) 
-	-moz-border-radius: $radius
-	-webkit-border-radius: $radius
-	border-radius: $radius
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius
+@mixin gradient-bg($start, $end)
+  background-color: $end
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($start), to($end))
+  background-image: -webkit-linear-gradient(top, $start, $end)
+  background-image: -moz-linear-gradient(top, $start, $end)
+  background-image: -ms-linear-gradient(top, $start, $end)
+  background-image: -o-linear-gradient(top, $start, $end)
+
+@mixin transition($sec, $type:opacity)
+  -webkit-transition: $type $sec+s
+  -moz-transition:$type $sec+s
+  -o-transition:$type $sec+s
+
+@mixin edged($width:10)
+  box-shadow: 0 0 0 $width+px rgb(0,0,0)
+  box-shadow: 0 0 0 $width+px rgba(0,0,0,0.3)
+  @include rounded(4px)
+
+@mixin opacity($perc)
+  opacity: $perc
+  filter: alpha(opacity=$perc*100)
+
+@mixin rgba($r,$g,$b,$a)
+  $color: rgb($r,$g,$b)
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='" + $color + "', endColorstr='" + $color + "')

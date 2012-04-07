@@ -7,7 +7,9 @@
   div.input
     margin-bottom: 10px
   .actions
-    float: right
+    overflow: auto
+    input
+      float: right
   div.field_with_errors
     background: none 
     input
@@ -17,12 +19,27 @@
       color: red
   .hide
     display: none
-    
+  input[type=submit]
+    @include rounded(5px)
+    @include gradient-bg($color_cool_light,$color_cool)
+    text-align: center
+    font-family: $font_title
+    font-size: 20px
+    padding: 7px
+    border: 1px solid $color_cool
+    color: #fff
+    text-shadow: rgb(56, 101, 112) 0 1px 0
+    text-shadow: rgba(56, 101, 112,.8) 0 1px 0
+    &:active
+      box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 1), inset 0 0px 2px rgba(0, 0, 0, 0.9)
+    &:hover
+      opacity: .9
+
 .madlibs      
   overflow: visible
   font-size: 4em
   letter-spacing: .05em
-  font-family: "adelle", Georgia, serif
+  font-family: $font_title
   line-height: 1em
   div.input
     display: inline-block
@@ -39,9 +56,17 @@
     border-bottom: 1px dashed #c2c2c2
     font-size: inherit
     font-family: inherit    
-    color: #21759B
+    color: $color_cool
   input:focus,textarea:focus
     background-color: #fff
+  .input
+    position: relative
+  .hint
+    position: absolute
+    left: 0
+    top: .23em
+    opacity: .3
+
 
   .custom_select
     height: 40px
@@ -72,11 +97,11 @@
           text-decoration: none
           font-size: 4em
           letter-spacing: .05em
-          font-family: "adelle", Georgia, serif
+          font-family: $font_title
           line-height: .8em
           padding: 10px
           white-space: nowrap
-          color: #21759B
+          color: $color_cool
           min-height: 40px
           min-width: 50px
         a:hover
