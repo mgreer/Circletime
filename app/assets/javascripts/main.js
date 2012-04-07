@@ -7,11 +7,11 @@ function slugify(text) {
 	return text;
 }
 
-function test_width(content, fontSize, family){
+function test_size(content, object){
   $test = $("body").append("<div class='tester' id='tester'></div>");
   $test = $("#tester");
-  $test.css("font-size", fontSize);
-  $test.css("font-family", family);
+  $test.css("font-size", $(object).css("font-size"));
+  $test.css("font-family", $(object).css("font-family"));
   $test.html(content);
   $height = $test.height();
   $width = $test.width();
@@ -21,7 +21,7 @@ function test_width(content, fontSize, family){
 
 $.fn.resizeable = function(options) {
   $(this).keydown(function(){
-    $dim = test_width( $(this).val(), $(this).css("font-size"), $(this).css("font-family") );
+    $dim = test_size( $(this).val(), $(this) );
     $(this).width($dim.width+40);;
   })
   return this;
@@ -78,13 +78,17 @@ $.fn.madlib = function(options) {
 
   /*wire up text inputs first*/
   $(this).find("input").not(".ui-date-picker").each(function() {
-    $(this).resizeable();
+    $(this).resizeable();    
     $input= $(this);
+    $input.val("");
+    $hint = $(this).parent().find(".hint")
+    $dim = test_size( $hint.text(), $hint );
+    $(this).width($dim.width+40);    
     $(this).focus(function(){
-      $(this).parent().find(".hint").hide(1000);
+      $hint.hide(100);
     })
-    $(this).parent().find(".hint").click(function(){
-      $(this).hide(1000);
+    $hint.click(function(){
+      $(this).hide(100);
       $input.focus();
     });
   }); 
@@ -96,7 +100,7 @@ $(function() {
   /*
     Form elements setup
     */  
-  $('input.ui-date-picker').datepicker().resizeable();
+//  $('input.ui-date-picker').datepicker().resizeable();
 
   $(".madlibs").madlib();
 });

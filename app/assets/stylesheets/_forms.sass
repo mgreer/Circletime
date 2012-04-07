@@ -20,12 +20,12 @@
   .hide
     display: none
   input[type=submit]
-    @include rounded(5px)
+    @include rounded(.2em)
     @include gradient-bg($color_cool_light,$color_cool)
     text-align: center
     font-family: $font_title
-    font-size: 20px
-    padding: 7px
+    font-size: 2em
+    padding: .5em
     border: 1px solid $color_cool
     color: #fff
     text-shadow: rgb(56, 101, 112) 0 1px 0
@@ -57,8 +57,6 @@
     font-size: inherit
     font-family: inherit    
     color: $color_cool
-  input:focus,textarea:focus
-    background-color: #fff
   .input
     position: relative
   .hint
@@ -66,6 +64,7 @@
     left: 0
     top: .23em
     opacity: .3
+    white-space: nowrap
 
 
   .custom_select
