@@ -1,4 +1,5 @@
 (function($) {
+$is_mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
 
 function slugify(text) {
 	text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
@@ -28,53 +29,57 @@ $.fn.resizeable = function(options) {
 }
 
 $.fn.madlib = function(options) {
-  /*wire up selects first*/
-  $(this).find("select:parent").each(function() {
-    var $el, $this, $ul, madlib;
-    $this = $(this);
-    madlib = $this;
-    $name = slugify( $this.attr("name") );
-    $this.val($this.find("option:selected").val());
-    $this.wrap("<div class=\"custom_select\ "+$name+"\"></div>");
-    $el = $(this).parents(".custom_select");
-    this.modifying = false;
-    $el.append("<ul class=\"display\"></ul>");
-    $ul = $("ul", $el);
-    $("option", $this).each(function() {
-      var $option;
-      $option = $(this);
-      return $ul.append("<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>");
+
+  if( !$is_mobile ){
+    /*wire up selects first*/
+    $(this).find("select:parent").each(function() {
+      var $el, $this, $ul, madlib;
+      $this = $(this);
+      $madlib = $this;
+      $name = slugify( $this.attr("name") );
+      $this.val($this.find("option:selected").val());
+      $this.wrap("<div class=\"custom_select\ "+$name+"\"></div>");
+      $el = $(this).parents(".custom_select");
+ 
+      this.modifying = false;
+      $el.append("<ul class=\"display\"></ul>");
+      $ul = $("ul", $el);
+      $("option", $this).each(function() {
+        $option = $(this);
+        return $ul.append("<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>");
+      });
+      $("li a", $ul).click(function(e){false});
+      $(this).hide();
+      $selected_value = $this.find("option:selected").val();
+      $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
+      $el.width($("li.current *", $ul).width());
+  //    $(window).scroll(function($ev){
+  //      console.log($this.scrollTop());
+  //    });
+      $("li.option",$ul).click(function($ev) {
+        $ev.stopPropagation() 
+        var $el = $(this).parents(".custom_select");
+        var $ul = $("ul", $el);
+        $(this).siblings().toggle().removeClass("current");
+        if( $ul.hasClass("lit")){
+          $el.find("select option:selected").removeAttr("selected");
+          $option = $el.find("select option[value="+$(this).attr("data-value")+"]");
+          $option.attr("selected","selected");
+          $option.change();
+          $(this).addClass("current");
+          $ul.parent().animate(
+            {width: $("li.current a", $ul).width()}
+          ,200);
+        }
+        $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
+        $ul.toggleClass("lit");
+      });
+      /*kill open ones on doc click*/
+      $(document).click(function() {
+        return $("ul.lit li.option",this).filter(".current").click();
+      });    
     });
-    $("li a", $ul).click(function(e){false});
-    $(this).hide();
-    $selected_value = $this.find("option:selected").val();
-    $ul.find("li[data-value=\""+$selected_value+"\"]").addClass("current");
-    $el.width($("li.current *", $ul).width());
-//    $(window).scroll(function($ev){
-//      console.log($this.scrollTop());
-//    });
-    $("li.option",$ul).click(function($ev) {
-      $ev.stopPropagation() 
-      $(this).siblings().toggle().removeClass("current");
-      var $el = $(this).parents(".custom_select");
-      var $ul = $("ul", $el);
-      if( $ul.hasClass("lit")){
-        $el.find("select option:selected").removeAttr("selected");
-        $el.find("select option[value="+$(this).attr("data-value")+"]").attr("selected","selected");
-        $el.find("select option[value="+$(this).attr("data-value")+"]").change();
-        $(this).addClass("current");
-        $ul.parent().animate({
-          width: $("li.current a", $ul).width()
-        },200);
-      }
-      $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
-      $ul.toggleClass("lit");
-    });
-    /*kill open ones on doc click*/
-    $(document).click(function() {
-      return $("ul.lit li.option",this).filter(".current").click();
-    });    
-  });
+  }
 
   /*wire up text inputs first*/
   $(this).find("input").not(".ui-date-picker").each(function() {
@@ -103,6 +108,10 @@ $(function() {
 //  $('input.ui-date-picker').datepicker().resizeable();
 
   $(".madlibs").madlib();
+  if( !$is_mobile ){  
+    //for Safari testing
+    $("body").addClass(".mobile");
+  }
 });
 
 

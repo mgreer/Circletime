@@ -57,6 +57,18 @@
     font-size: inherit
     font-family: inherit    
     color: $color_cool
+  /* ----- good defaults for non-JS or mobile    
+  select
+    border: none
+    background: none
+    font-family: adelle
+    font-size: 1em
+    color: #21759B
+    border-bottom: 1px dashed #c2c2c2    
+  option
+    font-family: adelle
+    font-size: 1em
+    border: none
   .input
     position: relative
   .hint
@@ -97,12 +109,13 @@
           font-size: 4em
           letter-spacing: .05em
           font-family: $font_title
-          line-height: .8em
+          line-height: .7em
           padding: 10px
           white-space: nowrap
           color: $color_cool
           min-height: 40px
           min-width: 50px
+          outline: none
         a:hover
           background: none
           color: inherit
@@ -113,6 +126,9 @@
         border: none
         &:hover 
           background-color: #ccc
+
+
+
 
 .tester
   position: absolute
