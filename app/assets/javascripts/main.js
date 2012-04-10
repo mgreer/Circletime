@@ -1,5 +1,7 @@
 (function($) {
+
 $is_mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+//$is_mobile = true;
 
 function slugify(text) {
 	text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
@@ -21,10 +23,13 @@ function test_size(content, object){
 }
 
 $.fn.resizeable = function(options) {
-  $(this).keydown(function(){
+  this.resize = function(){
     $dim = test_size( $(this).val(), $(this) );
-    $(this).width($dim.width+40);;
-  })
+    $(this).width($dim.width+40);    
+  }
+  $(this).keydown(this.resize);
+  $(this).change(this.resize);
+  this.resize();
   return this;
 }
 
@@ -78,31 +83,10 @@ $.fn.madlib = function(options) {
         return $("ul.lit li.option",this).filter(".current").click();
       });    
     });
-  }else{
-    $("select",$(this)).change( function() {
-      $option = $("option:selected", $(this));
-      $dim = test_size( $option.text(), $option );
-      $option.width($dim.width+40);
-      $(this).width($dim.width+40);      
-    });
   }
 
   /*wire up text inputs first*/
-  $(this).find("input").not(".ui-date-picker").each(function() {
-    $(this).resizeable();    
-    $input= $(this);
-    $input.val("");
-    $hint = $(this).parent().find(".hint")
-    $dim = test_size( $hint.text(), $hint );
-    $(this).width($dim.width+40);    
-    $(this).focus(function(){
-      $hint.hide(100);
-    })
-    $hint.click(function(){
-      $(this).hide(100);
-      $input.focus();
-    });
-  }); 
+  $(this).find("input").resizeable(); 
   return this; 
 };
 
