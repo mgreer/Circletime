@@ -2,7 +2,7 @@
 = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
   .madlibs
     Invite 
-    =f.input :email, :input_html => { :size => 8 }, :hint => "a friend"
+    =f.input :email, :input_html => { :size => 8 }, :placeholder => "a friend"
     to join your circle.
   .actions
     = f.submit "Send an invitation"

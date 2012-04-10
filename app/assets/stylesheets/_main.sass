@@ -14,7 +14,6 @@ header, footer
   margin: 10px 0
   overflow: auto
 
-
 header h1
   font-family: $font_title
   font-size: 2em
@@ -22,7 +21,7 @@ header h1
   font-size-adjust: 0.516
   font-weight: 200
   font-style: normal
-    
+
 section h1
   font-family: $font_title
   font-size: 2em
@@ -31,16 +30,29 @@ section h1
   font-style: normal
   font-weight: normal
 
+p,td
+  font-size: 15px
+
+table
+  width: auto
+  box-shadow: 0 0 2px 2px rgb(200,200,200)
+  th
+    border-bottom: 1px dashed #aaa
+  tr:nth-child(even) td
+    background-color: lighten($color_cool,70%)  
+  tr:nth-child(odd) td
+  background-color: lighten($color_cool,60%)  
 nav
   &#user_nav
     float: right
-    width: 60
+    width: 60%
     text-align: right
   a
     font-size: 1.5em
     display: inline-block
     margin-right: .2px
     text-transform: uppercase
+    white-space: nowrap
 
 
 

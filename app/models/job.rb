@@ -7,9 +7,12 @@ class Job < ActiveRecord::Base
   def work_unit
     job_type.work_unit
   end
-    
-  def to_s
-    description
+  
+  before_save :default_values
+  def default_values
+    #attach to default circle
+    self.circle = self.user.circle unless self.circle
   end
-   
+  
+     
 end

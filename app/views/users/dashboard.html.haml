@@ -1,24 +1,75 @@
 %p#notice= notice
-%p
-  %b Name:
-  = @user.name
+
+%h2=@user.name
+
 %p
   %b Stars:
   = @user.stars
 %p
-  %b Location:
-  = @user.location
+  %b I need a
+  %table
+    %tr
+      %th Type
+      %th Stars
+      %th Date
+      %th Status
+    - @user.jobs.each do |job|
+      %tr
+        %td= link_to job.job_type, job_path(job)
+        %td= job.stars
+        %td= job.date
+        %td
+    %tr
+      %td= link_to "I need something else", new_job_path()
+      %td
+      %td
+      %td
+
 %p
-  %b Email:
-  = @user.email
+  %b Do I want to do this?
+  %table
+    %tr
+      %th Type
+      %th User
+      %th Stars
+      %th Date
+      %th Action
+    - @user.potential_jobs.each do |job|
+      %tr
+        %td= link_to job.job_type, job_path(job)
+        %td= job.user
+        %td= job.stars
+        %td= job.date
+        %td
+          %button Take It
+          %button Sorry
+
 %p
-  %b Applications:
-  = @user.applications
+  %b People in my circle
+  %table
+    %tr
+      %th Name
+      %th Action
+    - @user.circle.users.each do |friend|
+      %tr
+        %td= friend
+        %td X
+    %tr
+      %td= link_to "invite another", new_user_invitation_path()
+      %td
+
 %p
-  %b Jobs:
-  - @user.jobs.each do |job|
-    = link_to @job, job_path(@job)
-    
+  %b Circles I Am In:
+  %table
+    %tr
+      %th Friend
+      %th Action
+    - @user.circle_memberships.each do |circle|
+      %tr
+        %td= circle    
+        - if !circle.users.include?( @user )
+          %td= link_to "Add to my circle", new_user_invitation_path()    
+        
 = link_to 'Edit', edit_user_path(@user)
 |
 \#{link_to 'Back', users_path}

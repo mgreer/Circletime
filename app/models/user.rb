@@ -14,10 +14,12 @@ class User < ActiveRecord::Base
 
   has_one :circle
   has_many :memberships
+  has_many :circle_memberships, :through => :memberships, :source => :circle
 
   has_many :jobs
   has_many :work_jobs, :through => :applications
-
+  has_many :circle_jobs, :through => :circle_memberships, :source => :jobs
+  
   validates :name, :email, :presence => true
 
   def apply_omniauth(auth)
@@ -33,10 +35,17 @@ class User < ActiveRecord::Base
   def to_s
     name
   end
+  
+  def potential_jobs
+    self.circle_jobs.where('jobs.date > ?', Time.now.localtime )
+  end
 
   before_save :default_values
   def default_values
+    #give 0 stars to start
     self.stars = 0 unless self.stars
+    #create default circle on creation
+    self.circle = Circle.new(:name => "Default Circle") unless self.circle
   end
   
 end
