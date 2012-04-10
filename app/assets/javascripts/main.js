@@ -86,7 +86,7 @@ $.fn.madlib = function(options) {
   }
 
   /*wire up text inputs first*/
-  $(this).find("input").resizeable(); 
+//  $(this).find("input").resizeable(); 
   return this; 
 };
 
@@ -95,12 +95,10 @@ $(function() {
   /*
     Form elements setup
     */  
-//  $('input.ui-date-picker').datepicker().resizeable();
 
   $(".madlibs").madlib();
   if( !$is_mobile ){  
-    //for Safari testing
-    $("body").addClass(".mobile");
+    $('input.ui-date-picker').datepicker();
   }
 });
 
