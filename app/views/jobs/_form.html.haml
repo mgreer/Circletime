@@ -17,7 +17,7 @@
     I want a    
     = f.association :job_type, :include_blank => false
     \ on
-    = f.input :date, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => Time.now.localtime.strftime("%m/%d/%Y")}, :placeholder => "a date"
+    = f.input :date, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => Time.now.localtime.strftime("%b %d, %Y")}, :placeholder => "a date"
     %span#time{ :class => "#{@time_class}" }
       \ at
       = f.input :time, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :ignore_date => true, :minute_step => 15,:time_separator => ":",:start_hour => 9,:end_hour => 24
