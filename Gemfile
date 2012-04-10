@@ -50,4 +50,4 @@ gem 'omniauth-facebook'
 gem 'oauth2'
 #gem "combined_time_select", "~> 0.0.1"
 
-gem "newrelic_rpm"
+gem 'newrelic_rpm'
