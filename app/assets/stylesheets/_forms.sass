@@ -66,9 +66,10 @@
     color: #21759B
     border-bottom: 1px dashed #c2c2c2    
   option
-    font-family: adelle
-    font-size: 1em
+    font-family: inherit
+    font-size: inherit
     border: none
+    background: none
   .input
     position: relative
   .hint
@@ -128,8 +129,20 @@
           background-color: #ccc
 
 
-
-
+/* Smartphones (portrait and landscape) -----------
+@media only screen and (min-width : 320px) and (max-width : 569px)
+  .madlibs
+    font-size: 3.5em    
+    line-height: 1.2em
+    overflow: hidden
+    input
+      border: none
+      background: none
+    select, input
+      margin: 0
+      padding: 0
+      overflow: hidden
+  
 .tester
   position: absolute
   visibility: hidden
