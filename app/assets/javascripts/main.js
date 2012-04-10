@@ -29,7 +29,6 @@ $.fn.resizeable = function(options) {
 }
 
 $.fn.madlib = function(options) {
-
   if( !$is_mobile ){
     /*wire up selects first*/
     $(this).find("select:parent").each(function() {
@@ -78,6 +77,13 @@ $.fn.madlib = function(options) {
       $(document).click(function() {
         return $("ul.lit li.option",this).filter(".current").click();
       });    
+    });
+  }else{
+    $("select",$(this)).change( function() {
+      $option = $("option:selected", $(this));
+      $dim = test_size( $option.text(), $option );
+      $option.width($dim.width+40);
+      $(this).width($dim.width+40);      
     });
   }
 
