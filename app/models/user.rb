@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
   has_many :authentications, :dependent => :delete_all  
-  has_many :applications
 
   has_many :invitations, :class_name => self.class.to_s, :as => :invited_by
 
@@ -17,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :circle_memberships, :through => :memberships, :source => :circle
 
   has_many :jobs
-  has_many :work_jobs, :through => :applications
+  has_many :work_jobs, :foreign_key => "worker_id"
   has_many :circle_jobs, :through => :circle_memberships, :source => :jobs
   
   validates :name, :email, :presence => true

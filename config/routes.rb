@@ -21,6 +21,8 @@ Circletime::Application.routes.draw do
 
   match '/users/:id/dashboard' => 'users#dashboard' , :as => :dashboard
 
+  match '/jobs/:id/sign_up' => 'jobs#sign_up' , :as => :sign_up_for_job
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
