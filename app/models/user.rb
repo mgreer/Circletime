@@ -36,7 +36,11 @@ class User < ActiveRecord::Base
   end
   
   def potential_jobs
-    self.circle_jobs.where('jobs.date > ?', Time.now.localtime )
+    self.circle_jobs.where('jobs.date > ? AND jobs.worker_id IS NULL', Time.now.localtime )
+  end
+  
+  def upcoming_work_jobs
+    self.work_jobs.where('jobs.date > ?', Time.now.localtime )
   end
 
   before_save :default_values

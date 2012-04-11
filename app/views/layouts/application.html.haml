@@ -57,9 +57,8 @@
     / #main-container
     #footer-container
       %footer.wrapper
-        %h3
-          = link_to "Welcome "+current_user.name, dashboard_path(current_user)       
         - if user_signed_in?
+          %h3= link_to "Welcome "+current_user.name, dashboard_path(current_user)       
           %nav
             %li= link_to "logout", destroy_user_session_path, :method => :delete
         

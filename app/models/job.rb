@@ -10,7 +10,7 @@ class Job < ActiveRecord::Base
   
   def status
     if worker
-      return "Taken by " + worker.name
+      return worker.name + " will do it"
     else
       return "Open"
     end

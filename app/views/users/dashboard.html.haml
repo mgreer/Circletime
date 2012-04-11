@@ -45,6 +45,21 @@
           %button Sorry
 
 %p
+  %b I'm signed up for:
+  %table
+    %tr
+      %th Type
+      %th User
+      %th Stars
+      %th Date
+    - @user.upcoming_work_jobs.each do |job|
+      %tr
+        %td= link_to job.job_type, job_path(job)
+        %td= job.user
+        %td= job.stars
+        %td= job.date
+
+%p
   %b People in my circle
   %table
     %tr
