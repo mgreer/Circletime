@@ -10,30 +10,31 @@
   #{
     Array[@job_types.map { |r| "$job_types[#{r.id}] = {'name':'#{r.name}','stars':'#{r.stars}','unit':'#{r.work_unit.name}','hours':'#{r.work_unit.hours}'};" }].join ' '
   }
-  
-= simple_form_for @job do |f|
-  = f.error_notification
-  .madlibs
-    I want a    
-    = f.association :job_type, :include_blank => false
-    \ on
-    = f.input :date, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => Time.now.localtime.strftime("%b %d, %Y")}, :placeholder => "a date"
-    %span#time{ :class => "#{@time_class}" }
-      \ at
-      = f.input :time, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :ignore_date => true, :minute_step => 15,:time_separator => ":",:start_hour => 9,:end_hour => 24
-    \ for
-    = f.input :duration, :collection => @num_collection, :include_blank => false
+
+%section  
+  = simple_form_for @job do |f|
+    = f.error_notification
+    .madlibs
+      I want a    
+      = f.association :job_type, :include_blank => false
+      \ on
+      = f.input :date, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => Time.now.localtime.strftime("%b %d, %Y")}, :placeholder => "a date"
+      %span#time{ :class => "#{@time_class}" }
+        \ at
+        = f.input :time, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :ignore_date => true, :minute_step => 15,:time_separator => ":",:start_hour => 9,:end_hour => 24
+      \ for
+      = f.input :duration, :collection => @num_collection, :include_blank => false
 
 
-    \ 
-    %span#units 
-      #{@job.job_type.work_unit.name}s,
-    \ worth
-    = f.input :stars, :collection => @star_collection, :include_blank => false
-    \.
-    %p.more 
-      = f.input :description, :as => :string, :input_html => { :size => :auto }
+      \ 
+      %span#units 
+        #{@job.job_type.work_unit.name}s,
+      \ worth
+      = f.input :stars, :collection => @star_collection, :include_blank => false
+      \.
+      %p.more 
+        = f.input :description, :as => :string, :input_html => { :size => :auto }
 
-  .actions
-    = f.button :submit
+    .actions
+      = f.button :submit
         

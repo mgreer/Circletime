@@ -37,6 +37,8 @@ $.fn.madlib = function(options) {
   if( !$is_mobile ){
     /*wire up selects first*/
     $(this).find("select:parent").each(function() {
+      if(this.is_madlibbed) return this;
+      this.is_madlibbed = true;
       var $el, $this, $ul, madlib;
       $this = $(this);
       $madlib = $this;

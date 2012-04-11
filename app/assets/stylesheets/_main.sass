@@ -2,36 +2,17 @@
 @import "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css"
 @import mixins
   
-body
-  margin: 0 auto
-
 body, p, ol, ul, td 
   font-family: $font_text
-  
-header, footer
-  background: rgba(230,230,230,.8)
-  padding: 15px
-  margin: 10px 0
-  overflow: auto
 
-header h1
+h1
   font-family: $font_title
-  font-size: 2em
-  float: left
-  font-size-adjust: 0.516
-  font-weight: 200
-  font-style: normal
-
-section h1
-  font-family: $font_title
-  font-size: 2em
-  font-size-adjust: 0.516
-  font-weight: 200
+  font-size: 200%
   font-style: normal
   font-weight: normal
 
 p,td
-  font-size: 15px
+  font-size: 120%
 
 table
   width: auto
@@ -42,18 +23,30 @@ table
     background-color: lighten($color_cool,70%)  
   tr:nth-child(odd) td
   background-color: lighten($color_cool,60%)  
-nav
-  &#user_nav
-    float: right
-    width: 60%
-    text-align: right
-  a
-    font-size: 1.5em
-    display: inline-block
-    margin-right: .2px
-    text-transform: uppercase
-    white-space: nowrap
 
-
-
+.no_aside #main article
+  width: 100%
            
+/* ===================
+ *  Theme
+ * ===================
+
+#header-container
+  border-bottom: 20px solid darken($color_cool,10%)
+
+#footer-container, #main aside
+  border-top: 20px solid darken($color_cool,10%)
+
+#header-container, #footer-container, #main aside
+  background: lighten($color_cool,50%)
+
+nav li a
+  background: $color_cool
+
+#title
+  color: white
+
+::-moz-selection,::selection
+  background: darken($color_cool,100%)
+  color: #fff
+  text-shadow: none

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :circle_memberships, :through => :memberships, :source => :circle
 
   has_many :jobs
-  has_many :work_jobs, :foreign_key => "worker_id"
+  has_many :work_jobs, :class_name => "Job", :foreign_key => "worker_id"
   has_many :circle_jobs, :through => :circle_memberships, :source => :jobs
   
   validates :name, :email, :presence => true
