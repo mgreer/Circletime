@@ -15,14 +15,13 @@ p,td
   font-size: 120%
 
 table
-  width: auto
-  box-shadow: 0 0 2px 2px rgb(200,200,200)
+  width: 100%
   th
     border-bottom: 1px dashed #aaa
-  tr:nth-child(even) td
-    background-color: lighten($color_cool,70%)  
-  tr:nth-child(odd) td
-  background-color: lighten($color_cool,60%)  
+
+aside 
+  li, h3
+    color: darken($color_cool,20%)
 
 .no_aside #main article
   width: 100%
@@ -50,3 +49,7 @@ nav li a
   background: darken($color_cool,100%)
   color: #fff
   text-shadow: none
+
+.questions
+  font-family: $font_title
+  font-size: 100%  

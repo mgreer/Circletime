@@ -1,14 +1,30 @@
 %h1 Your circles
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
+
+%section
+  %h3 People in my circle
+  %table
     %tr
-      %td= @circle.name
-      %td= link_to 'Show', @circle
-      %td= link_to 'Edit', edit_circle_path(@circle)
-      %td= link_to 'Destroy', @circle, :confirm => 'Are you sure?', :method => :delete
+      %th Name
+      %th Action
+    - @user.circle.users.each do |friend|
+      %tr
+        %td= friend
+        %td X
+    %tr
+      %td= link_to "invite another", new_user_invitation_path()
+      %td
+
+%section
+  %h3 Circles I Am In:
+  %table
+    %tr
+      %th Friend
+      %th Action
+    - @user.circle_memberships.each do |circle|
+      %tr
+        %td= circle    
+        - if !circle.users.include?( @user )
+          %td= link_to "Add to my circle", new_user_invitation_path()
+
 %br
 = link_to 'New Circle', new_circle_path

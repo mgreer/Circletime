@@ -1,12 +1,10 @@
-%p#notice= notice
-
-%h2=@user.name
-
-%p
+- content_for:title, @user.name
+%section
   %b Stars:
   = @user.stars
-%p
-  %b I need a
+  
+%section
+  %h3 I need a
   %table
     %tr
       %th Type
@@ -25,66 +23,37 @@
       %td
       %td
 
-%p
-  %b Do I want to do this?
-  %table
-    %tr
-      %th Type
-      %th User
-      %th Stars
-      %th Date
-      %th Action
+%section
+  %h3 Do I want to...
+  %ul.questions
     - @user.potential_jobs.each do |job|
-      %tr
-        %td= link_to job.job_type, job_path(job)
-        %td= job.user
-        %td= job.stars
-        %td= job.date
-        %td
+      %li
+        be a
+        =link_to job.job_type, job_path(job)
+        for 
+        =job.user
+        on
+        %b=job.date.strftime("%b %d")
+        for
+        = job.stars
+        star?
+        %p
           %button Take It
-          %button Sorry
-
-%p
-  %b I'm signed up for:
-  %table
-    %tr
-      %th Type
-      %th User
-      %th Stars
-      %th Date
-    - @user.upcoming_work_jobs.each do |job|
-      %tr
-        %td= link_to job.job_type, job_path(job)
-        %td= job.user
-        %td= job.stars
-        %td= job.date
-
-%p
-  %b People in my circle
-  %table
-    %tr
-      %th Name
-      %th Action
-    - @user.circle.users.each do |friend|
-      %tr
-        %td= friend
-        %td X
-    %tr
-      %td= link_to "invite another", new_user_invitation_path()
-      %td
-
-%p
-  %b Circles I Am In:
-  %table
-    %tr
-      %th Friend
-      %th Action
-    - @user.circle_memberships.each do |circle|
-      %tr
-        %td= circle    
-        - if !circle.users.include?( @user )
-          %td= link_to "Add to my circle", new_user_invitation_path()    
+          %button Sorry  
+          
+- if @user.upcoming_work_jobs.size > 0
+  - content_for:aside do
+    %h3 I'm signed up to...
+    %ul.questions    
+      - @user.upcoming_work_jobs.each do |job|
+        %li
+          be a
+          = link_to job.job_type, job_path(job)
+          for 
+          =job.user
+          on
+          %b=job.date.strftime("%b %d")
+          for
+          = job.stars
+          star
         
-= link_to 'Edit', edit_user_path(@user)
-|
-\#{link_to 'Back', users_path}

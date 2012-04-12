@@ -4,7 +4,7 @@
 /[if IE 8] <html class="no-js lt-ie9" lang="en">
 / [if gt IE 8]><!
 
-- @main_class = yield(:aside) ? "no_aside" : "has_aside"
+- @main_class = content_for?(:aside) ? "has_aside" : "no_aside"
 
 %html.no-js{:lang => "en"}
   / <![endif]
@@ -51,8 +51,7 @@
               %h1= yield :title
           = yield
         - if content_for?(:aside)
-          %aside
-            = yield :aside
+          %aside= yield :aside
       / #main
     / #main-container
     #footer-container
