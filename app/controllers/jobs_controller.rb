@@ -47,7 +47,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
-#    params[:job].parse_time_select! :time
+    params[:job].parse_time_select! :time
 
     @job = Job.new(params[:job])
     @job.user = current_user
@@ -68,7 +68,7 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.json
   def update
-    #params[:job].parse_time_select! :time
+    params[:job].parse_time_select! :time
     @job = Job.find(params[:id])
 
     respond_to do |format|
@@ -125,7 +125,10 @@ module ActiveSupport
       Rails.logger.info("---------PARSING DATE FOR JOB----------!!!")
       Rails.logger.info( @date_string )
       Rails.logger.info("---------------------------------------!!!")
-      self[attribute] = Time.zone.parse(@date_string)
+      @new_time = Time.zone.parse(@date_string)
+      Rails.logger.info( @new_time )
+      Rails.logger.info("---------------------------------------!!!")
+      self[attribute] = @new_time
       (1..6).each { |i| self.delete "#{attribute}(#{i}i)" }
     end
   end

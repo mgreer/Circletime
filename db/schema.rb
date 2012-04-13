@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411045325) do
+ActiveRecord::Schema.define(:version => 20120413173529) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(:version => 20120411045325) do
     t.integer  "user_id"
     t.integer  "circle_id"
     t.date     "date"
-    t.time     "time"
     t.integer  "duration"
     t.integer  "job_type_id"
     t.integer  "worker_id"
+    t.datetime "time"
   end
 
   create_table "memberships", :force => true do |t|
