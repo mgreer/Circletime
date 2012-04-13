@@ -1,4 +1,3 @@
-%h1 Your circles
 
 %section
   %h3 People in my circle
@@ -14,6 +13,8 @@
       %td= link_to "invite another", new_user_invitation_path()
       %td
 
+= link_to 'Edit Circle', edit_circle_path(@circle)
+
 %section
   %h3 Circles I Am In:
   %table
@@ -26,5 +27,3 @@
         - if !circle.users.include?( @user )
           %td= link_to "Add to my circle", new_user_invitation_path()
 
-%br
-= link_to 'New Circle', new_circle_path
