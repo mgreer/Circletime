@@ -6,7 +6,7 @@
     %tr
       %th Name
       %th Action
-    - @user.circle.users.each do |friend|
+    - @circle.users.each do |friend|
       %tr
         %td= friend
         %td X
@@ -20,7 +20,7 @@
     %tr
       %th Friend
       %th Action
-    - @user.circle_memberships.each do |circle|
+    - current_user.circle_memberships.each do |circle|
       %tr
         %td= circle    
         - if !circle.users.include?( @user )
