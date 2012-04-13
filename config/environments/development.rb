@@ -32,6 +32,6 @@ Circletime::Application.configure do
   config.assets.debug = true
   
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
     
 end

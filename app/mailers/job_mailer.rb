@@ -5,7 +5,8 @@ class JobMailer < ActionMailer::Base
     @job = new_job
     @creator = @job.user
     @emails = @job.circle.users(:select => :email).map(&:email)
-    @url  = "http://circletime.heroku.com"+sign_up_for_job_path(@job)
+    
+    @url  = sign_up_for_job_path(@job)
     Rails.logger.info("---------MAILING A NEW JOB OUT TO CIRCLE---------!!!")
     mail(:to => @emails, :subject => "#{@creator.name} needs a #{@job.job_type.name}")
   end  
