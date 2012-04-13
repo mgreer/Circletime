@@ -100,7 +100,7 @@ $(function() {
 
   $(".madlibs").madlib();
   if( !$is_mobile ){  
-    $('input.ui-date-picker').datepicker();
+    $('input.ui-date-picker').datepicker({ dateFormat: 'M d, yy' });
   }
 });
 
