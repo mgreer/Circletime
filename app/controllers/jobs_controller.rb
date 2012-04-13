@@ -47,7 +47,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
-    params[:job].parse_time_select! :time
+#    params[:job].parse_time_select! :time
 
     @job = Job.new(params[:job])
     @job.user = current_user
