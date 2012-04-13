@@ -26,6 +26,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     @job = Job.new
+    @job.time = Time.new()
     @job_types = JobType.all
     #set type to default
     @job.job_type = @job_types[0]
@@ -121,7 +122,7 @@ end
 module ActiveSupport
   class HashWithIndifferentAccess < Hash
     def parse_time_select!(attribute)
-      @date_string = "#{self["date"]} #{self["#{attribute}(4i)"]}:#{self["#{attribute}(5i)"]}#{self["#{attribute}(6i)"]}"
+      @date_string = "#{self["time"]} #{self["#{attribute}(4i)"]}:#{self["#{attribute}(5i)"]}#{self["#{attribute}(6i)"]}"
       Rails.logger.info("---------PARSING DATE FOR JOB----------!!!")
       Rails.logger.info( @date_string )
       Rails.logger.info("---------------------------------------!!!")
