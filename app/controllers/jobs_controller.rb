@@ -68,7 +68,7 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.json
   def update
-    params[:job].parse_time_select! :time
+    #params[:job].parse_time_select! :time
     @job = Job.find(params[:id])
 
     respond_to do |format|
