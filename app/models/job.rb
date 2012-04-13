@@ -8,6 +8,10 @@ class Job < ActiveRecord::Base
     job_type.work_unit
   end
   
+  def date
+    time.to_date
+  end
+  
   def status
     if worker
       return worker.name + " will do it"
