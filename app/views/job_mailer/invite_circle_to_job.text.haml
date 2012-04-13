@@ -1,0 +1,16 @@
+Heya,
+I need a #{@job.job_type.name} on 
+#{@job.date.strftime("%b %d")} 
+- if @job.work_unit.hours < 23
+  starting at #{@job.time.strftime("%I:%M%P")} 
+for #{pluralize(@job.duration,@job.work_unit.name)} 
+and I thought of you.
+
+Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
+
+=link_to "Could you help me out?", job_path(@job, :host => "circletime.heroku.com")
+
+thanks!
+
+= @creator.name
+      

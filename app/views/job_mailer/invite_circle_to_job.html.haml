@@ -1,0 +1,23 @@
+%html
+  %head
+  %body
+    %p Heya,
+    %p 
+      I need a #{@job.job_type.name} on 
+      %b
+        #{@job.date.strftime("%b %d")} 
+        - if @job.work_unit.hours < 23
+          starting at #{@job.time.strftime("%I:%M%P")} 
+        for #{pluralize(@job.duration,@job.work_unit.name)} 
+      and I thought of you.
+
+    %p
+    Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
+    %p 
+      =link_to "Could you help me out?", @url
+    %p
+      thanks!
+      %br
+      = @creator.name
+      
+      
