@@ -9,6 +9,7 @@ gem 'rails', '3.2.0'
 gem "pg"
 
 gem 'dalli'
+gem 'ri_cal'
 
 gem 'json'
 

@@ -11,14 +11,22 @@ class JobMailer < ActionMailer::Base
     mail(:to => @emails, :subject => "#{@creator.name} needs a #{@job.job_type.name}")
   end  
 
-  def thanks_for_taking_job(job)
+  def thanks_for_taking_job(job,event)
     @job = job
+    attachments['event.ics'] = { 
+       :mime_type => 'text/calendar', 
+       :content => event.export()
+     }
     @email = "#{@job.worker.name} <#{@job.worker.email}>"
     mail(:to => @email, :subject => "Thanks for being my #{@job.job_type.name}!")
   end
   
-  def notify_job_taken(job)
+  def notify_job_taken(job,event)
     @job = job
+    attachments['event.ics'] = { 
+       :mime_type => 'text/calendar', 
+       :content => event.export()
+     }
     @email = "#{@job.user.name} <#{@job.user.email}>"
     mail(:to => @email, :subject => "#{@job.worker.name} will be your #{@job.job_type.name}")
   end  

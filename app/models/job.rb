@@ -3,6 +3,7 @@ class Job < ActiveRecord::Base
   belongs_to :circle
   belongs_to :job_type, :include => :work_unit
   belongs_to :worker, :class_name => User
+  @event
 
   def work_unit
     job_type.work_unit
@@ -12,12 +13,20 @@ class Job < ActiveRecord::Base
     time.to_date
   end
   
+  def hours
+    duration * work_unit.hours
+  end
+  
   def status
     if worker
-      return worker.name + " will do it"
+      worker.name + " will do it"
     else
-      return "Open"
+      "Open"
     end
+  end
+  
+  def to_s
+    "#{job_type.name} for #{user.name}"
   end
   
   before_save :default_values

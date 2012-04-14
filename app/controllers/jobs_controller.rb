@@ -55,7 +55,7 @@ class JobsController < ApplicationController
     @job.circle = current_user.circle
 
     respond_to do |format|
-      if @job.save
+      if @job.save  
         JobMailer.invite_circle_to_job(@job).deliver
         format.html { redirect_to @job, :notice => 'Job was successfully created.' }
         format.json { render :json => @job, :status => :created, :location => @job }
@@ -104,10 +104,23 @@ class JobsController < ApplicationController
       @job.worker = current_user
     end
     Rails.logger.info("   worker now = #{@job.worker}")
+    @event = RiCal.Calendar do |cal|
+      cal.event do |event|      
+        event.add_x_property 'X-GOOGLE-CALENDAR-CONTENT-TITLE', @job.to_s
+        event.description = @job.to_s
+        event.summary =     @job.to_s
+        event.dtstart =     @job.time
+        event.dtend =       @job.time.advance(:hours => @job.hours)
+        event.location =    @job.user.location
+        event.add_attendee  @job.worker.email
+        event.organizer =   @job.user.email
+      end
+    end
     respond_to do |format|
       if @job.save
-        JobMailer.thanks_for_taking_job(@job).deliver
-        JobMailer.notify_job_taken(@job).deliver
+
+        JobMailer.thanks_for_taking_job(@job,@event).deliver
+        JobMailer.notify_job_taken(@job,@event).deliver
         format.html { redirect_to @job, :notice => 'You have been assigned to the job.' }
         format.json { render :json => @job, :status => :created, :location => @job }
       else
