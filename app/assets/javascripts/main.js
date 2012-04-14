@@ -37,8 +37,6 @@ $.fn.madlib = function(options) {
   if( !$is_mobile ){
     /*wire up selects first*/
     $(this).find("select:parent").each(function() {
-      if(this.is_madlibbed) return this;
-      this.is_madlibbed = true;
       var $el, $this, $ul, madlib;
       $this = $(this);
       $madlib = $this;
@@ -94,14 +92,19 @@ $.fn.madlib = function(options) {
 
 
 $(function() {
+  if(this.is_madlibbed){
+    return this;
+  }  
+  this.is_madlibbed = true;
+  alert(1);
   /*
-    Form elements setup
-    */  
-
+  Form elements setup
+  */  
   $(".madlibs").madlib();
   if( !$is_mobile ){  
     $('input.ui-date-picker').datepicker({ dateFormat: 'M d, yy', minDate: new Date() });
   }
+
 });
 
 

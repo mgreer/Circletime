@@ -113,6 +113,7 @@ class JobsController < ApplicationController
         event.dtend =       @job.time.advance(:hours => @job.hours)
         event.location =    @job.user.location
         event.add_attendee  @job.worker.email
+        event.add_attendee  @job.user.email
         event.organizer =   @job.user.email
       end
     end
