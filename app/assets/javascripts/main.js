@@ -96,7 +96,6 @@ $(function() {
     return this;
   }  
   this.is_madlibbed = true;
-  alert(1);
   /*
   Form elements setup
   */  
