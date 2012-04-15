@@ -24,6 +24,7 @@ function test_size(content, object){
 
 $.fn.resizeable = function(options) {
   this.resize = function(){
+    if( $(this).val() == "" ){return;}
     $dim = test_size( $(this).val(), $(this) );
     $(this).width($dim.width+40);    
   }
@@ -34,6 +35,7 @@ $.fn.resizeable = function(options) {
 }
 
 $.fn.madlib = function(options) {
+  $uls = [];
   if( !$is_mobile ){
     /*wire up selects first*/
     $(this).find("select:parent").each(function() {
@@ -77,16 +79,37 @@ $.fn.madlib = function(options) {
         }
         $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
         $ul.toggleClass("lit");
-      });
+      });  
       /*kill open ones on doc click*/
       $(document).click(function() {
         return $("ul.lit li.option",this).filter(".current").click();
-      });    
+      });
+/*          
+      window.setTimeout(function(){
+        $ul.parent().width( $("li.current a", $ul).width() );    
+      },200);
+*/      
+      $uls.push( $ul );
     });
+  }else{
+    //TODO: resize selects on change
+    //$(this).find("select").resizeable();
   }
 
-  /*wire up text inputs first*/
-//  $(this).find("input").resizeable(); 
+  /*wire up text inputs next*/
+  $(this).find("input").resizeable(); 
+  
+  //show it
+  $(this).fadeTo( 200, 1, "linear", function(){
+    $uls.forEach( function(ul){
+      window.setTimeout(function(){
+        ul.parent().width( $("li.current a", ul).width() );          
+      },0)
+    })
+    //  $ul.parent().width( $("li.current a", $ul).width() );    
+    
+  });
+  
   return this; 
 };
 
@@ -102,6 +125,8 @@ $(function() {
   $(".madlibs").madlib();
   if( !$is_mobile ){  
     $('input.ui-date-picker').datepicker({ dateFormat: 'M d, yy', minDate: new Date() });
+  }else{
+    //TODO: wire up Android picker    
   }
 
 });

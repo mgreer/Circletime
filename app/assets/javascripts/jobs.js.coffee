@@ -3,9 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  try
-    $(".madlibs").fadeTo( 500, 1, "linear" )
-  
+  try    
     #on job_type select change
     $(".madlibs select#job_job_type_id").change ->
       $el = $(this).parents(".madlibs")
