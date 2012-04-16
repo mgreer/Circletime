@@ -15,7 +15,7 @@ function test_size(content, object){
   $test = $("#tester");
   $test.css("font-size", $(object).css("font-size"));
   $test.css("font-family", $(object).css("font-family"));
-  $test.html(content);
+  $test.html(content+"W");
   $height = $test.height();
   $width = $test.width();
   $test.remove();
@@ -26,7 +26,7 @@ $.fn.resizeable = function(options) {
   this.resize = function(){
     if( $(this).val() == "" ){return;}
     $dim = test_size( $(this).val(), $(this) );
-    $(this).width($dim.width+40);    
+    $(this).width($dim.width);    
   }
   $(this).keydown(this.resize);
   $(this).change(this.resize);
@@ -92,6 +92,11 @@ $.fn.madlib = function(options) {
       $uls.push( $ul );
     });
   }else{
+    //resize the selects on load
+    $(this).find("select").each(function(){
+      $dim = test_size( $("option:selected",$(this)).text(), $(this) );
+      $(this).width( $dim.width );
+    });
     //TODO: resize selects on change
     //$(this).find("select").resizeable();
   }
@@ -106,10 +111,7 @@ $.fn.madlib = function(options) {
         ul.parent().width( $("li.current a", ul).width() );          
       },0)
     })
-    //  $ul.parent().width( $("li.current a", $ul).width() );    
-    
   });
-  
   return this; 
 };
 

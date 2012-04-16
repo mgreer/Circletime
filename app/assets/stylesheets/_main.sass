@@ -7,12 +7,27 @@ body, p, ol, ul, td
 
 h1
   font-family: $font_title
-  font-size: 200%
   font-style: normal
   font-weight: normal
 
+header 
+  h1
+    font-size: 150%
+    margin: .4em 0
+    text-align: left!important
+    a
+      text-decoration:none
+nav li
+  float: left
+  padding: 0
+  margin: 0 .3em 0 0
+  a
+    padding: .2em .3em
+    font-weight: normal
+    color: $color_link!important
+
 article h1
-  font-size: 100%!important
+  font-size: 100%
   font-weight: bold
   text-transform: uppercase
 
@@ -45,7 +60,8 @@ aside
   background: lighten($color_cool,50%)
 
 nav li a
-  background: $color_cool
+  background: none
+  font-color: $color_link
 
 #title
   color: white
