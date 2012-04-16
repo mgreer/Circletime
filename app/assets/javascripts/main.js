@@ -22,6 +22,7 @@ function test_size(content, object){
   return {"height":$height, "width":$width};
 }
 
+//TODO: CONSOLIDATE THIS SHIT!!!
 $.fn.resizeable = function(options) {
   this.resize = function(){
     if( $(this).val() == "" ){return;}
@@ -92,10 +93,17 @@ $.fn.madlib = function(options) {
       $uls.push( $ul );
     });
   }else{
+    //TODO: CONSOLIDATE THIS SHIT!!!
     //resize the selects on load
     $(this).find("select").each(function(){
-      $dim = test_size( $("option:selected",$(this)).text(), $(this) );
-      $(this).width( $dim.width );
+      this.resize = function(){
+        $content = $("option:selected",$(this)).text();
+        if( $content == "" ){return;}
+        $dim = test_size( $content, $(this) );
+        $(this).width( $dim.width );
+      }
+      $(this).change(this.resize);
+      this.resize();
     });
     //TODO: resize selects on change
     //$(this).find("select").resizeable();

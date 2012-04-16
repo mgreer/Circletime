@@ -27,7 +27,10 @@
   %body
     #header-container
       %header.wrapper.clearfix
-        %h1#title= link_to "Circletime", :root
+        %h1#title
+          = link_to "Circletime", :root
+          - if content_for?(:title)
+            %span= yield :title
 
         %nav
           %ul
@@ -46,9 +49,6 @@
     #main-container{:class => @main_class}
       #main.wrapper.clearfix
         %article
-          - if content_for?(:title)
-            %header
-              %h1= yield :title
           = yield
         - if content_for?(:aside)
           %aside= yield :aside
