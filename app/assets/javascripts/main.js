@@ -11,11 +11,15 @@ function slugify(text) {
 }
 
 function test_size(content, object){
-  $test = $("body").append("<div class='tester' id='tester'></div>");
+  $test = $("body").append("<div class='tester' id='tester'>&nbsp;</div>");
   $test = $("#tester");
-  $test.css("font-size", $(object).css("font-size"));
-  $test.css("font-family", $(object).css("font-family"));
-  $test.html(content+"W");
+  $test.css({
+      "font-size": $(object).css("font-size"),
+      "font-family": $(object).css("font-family"),
+      "font-weight": $(object).css("font-weight"),
+      "letter-spacing": $(object).css("letter-spacing")
+    });
+  $test.html(content);
   $height = $test.height();
   $width = $test.width();
   $test.remove();
