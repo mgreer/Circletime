@@ -113,6 +113,13 @@ $.fn.madlib = function(options) {
   /*wire up text inputs next*/
   $(this).find("input").resizeable(); 
   
+  /*and then textareas*/
+  $(this).find("textarea").keyup(function(e) {
+    while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+      $(this).height($(this).height()+30);
+    };
+  }).triggerHandler("keyup");  
+  
   //show it
   $(this).fadeTo( 200, 1, "linear", function(){
     $uls.forEach( function(ul){
