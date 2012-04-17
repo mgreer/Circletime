@@ -113,6 +113,7 @@ class JobsController < ApplicationController
           event.dtstart =   @job.time.to_date
           unless @job.job_type.is_misc
             event.dtend =   @job.time.advance(:hours => @job.hours)
+          end
         else
           event.dtstart =   @job.time
         end
