@@ -13,22 +13,26 @@ class JobMailer < ActionMailer::Base
 
   def thanks_for_taking_job(job,event)
     @job = job
-    attachments['event.ics'] = { 
-       :mime_type => 'text/calendar', 
-       :content => event.export()
-     }
+    unless @job.job_type.is_misc
+      attachments['event.ics'] = { 
+         :mime_type => 'text/calendar', 
+         :content => event.export()
+       }
+    end
     @email = "#{@job.worker.name} <#{@job.worker.email}>"
-    mail(:to => @email, :subject => "Thanks for being my #{@job.job_type.name}!")
+    mail(:to => @email, :subject => "Thanks for handling my #{@job.job_type.name} job!")
   end
   
   def notify_job_taken(job,event)
     @job = job
-    attachments['event.ics'] = { 
-       :mime_type => 'text/calendar', 
-       :content => event.export()
-     }
+    unless @job.job_type.is_misc
+      attachments['event.ics'] = { 
+         :mime_type => 'text/calendar', 
+         :content => event.export()
+       }
+    end
     @email = "#{@job.user.name} <#{@job.user.email}>"
-    mail(:to => @email, :subject => "#{@job.worker.name} will be your #{@job.job_type.name}")
+    mail(:to => @email, :subject => "#{@job.worker.name} will do your #{@job.job_type.name} job")
   end  
   
   

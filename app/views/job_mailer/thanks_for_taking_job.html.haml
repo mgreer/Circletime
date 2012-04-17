@@ -3,15 +3,19 @@
   %body
     %p Hiya,
     %p 
-      Thanks for being my #{@job.job_type.name}!
-    %p  
-      I'll see you on
-      %b
-        #{@job.date.strftime("%b %d")} 
-        - if @job.work_unit.hours < 23
-          at #{@job.time.strftime("%I:%M%P")} 
-    %p
-      See you then!
-      %br
-      = @job.user.name
+      Thanks for doing it! 
+    - unless @job.job_type.is_misc
+      Thanks for being my #{@job.job_type.name}.
+      %p    
+        I'll see you on
+        %b
+          #{@job.date.strftime("%b %d")} 
+          - if @job.work_unit.hours < 23
+            at #{@job.time.strftime("%I:%M%P")} 
+
+        see you then!
+    - else
+      Keep me updated on my #{@job.job_type.name}. Thanks!
+    %br
+    = @job.user.name
       

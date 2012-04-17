@@ -119,7 +119,6 @@ class JobsController < ApplicationController
     end
     respond_to do |format|
       if @job.save
-
         JobMailer.thanks_for_taking_job(@job,@event).deliver
         JobMailer.notify_job_taken(@job,@event).deliver
         format.html { redirect_to @job, :notice => 'You have been assigned to the job.' }

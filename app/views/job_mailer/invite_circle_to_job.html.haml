@@ -3,16 +3,21 @@
   %body
     %p Hiya,
     %p 
-      I need a #{@job.job_type.name} on 
-      %b
-        #{@job.date.strftime("%b %d")} 
-        - if @job.work_unit.hours < 23
-          starting at #{@job.time.strftime("%I:%M%P")} 
-        for #{pluralize(@job.duration,@job.work_unit.name)} 
+      I need a #{@job.job_type.name}
+      - unless @job.job_type.is_misc
+        on 
+        %b
+          #{@job.date.strftime("%b %d")} 
+          - if @job.work_unit.hours < 23
+            starting at #{@job.time.strftime("%I:%M%P")} 
+          for #{pluralize(@job.duration,@job.work_unit.name)} 
       and I thought of you.
+      - unless @job.description.nil?
+        %h4 more details:
+        %p= @job.description
 
     %p
-    Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
+      Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
     %p 
       %a{:href => sign_up_for_job_url( :id => @job.id,:only_path => false )} Could you help me out?
      
