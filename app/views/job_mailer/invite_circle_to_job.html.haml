@@ -13,14 +13,14 @@
           for #{pluralize(@job.duration,@job.work_unit.name)} 
       and I thought of you.
       - unless @job.description.nil?
-        %h4 more details:
-        %p= @job.description
-
+        %p 
+          %b more details:
+          %br
+          = @job.description
     %p
       Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
-    %p 
-      %a{:href => sign_up_for_job_url( :id => @job.id,:only_path => false )} Could you help me out?
-     
+      %br
+      %a{:href => sign_up_for_job_url( :id => @job.id,:only_path => false )} Could you help me out?     
     %p
       thanks!
       %br
