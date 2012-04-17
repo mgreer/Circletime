@@ -19,11 +19,11 @@ $ ->
     
     #remove time if work_unit hours > 12
     if $job_type.is_misc
-      $("#time,#date,#duration",$el).addClass("hide")       
+      $("#time,#duration",$el).addClass("hide")       
     else if $job_type.hours < 24    
-      $("#time,#date,#duration",$el).removeClass("hide")      
+      $("#time,#duration",$el).removeClass("hide")      
     else
-      $("#date,#duration",$el).removeClass("hide")       
+      $("#duration",$el).removeClass("hide")       
       $("#time",$el).addClass("hide")       
   #on stars and duration change
     #correct unit plural

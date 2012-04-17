@@ -4,11 +4,9 @@
 - @star_collection = [["one star",1],["two stars",2],["three stars",3],["four stars",4],["five stars",5]]
 - @time_class = ""
 - @duration_class = ""
-- @date_class = ""
 - if @job.job_type.work_unit.hours > 23
   - @time_class = "hide"
 - if @is_misc
-  - @date_class = "hide"
   - @time_class = "hide"
   - @duration_class = "hide"
 
@@ -24,7 +22,7 @@
     .madlibs
       I want a    
       = f.association :job_type, :include_blank => false
-      %span#date{ :class => "#{@date_class}" }
+      %span#date
         \ on
         = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => "auto" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }

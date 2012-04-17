@@ -109,8 +109,13 @@ class JobsController < ApplicationController
         event.add_x_property 'X-GOOGLE-CALENDAR-CONTENT-TITLE', @job.to_s
         event.description = @job.to_s
         event.summary =     @job.to_s
-        event.dtstart =     @job.time
-        event.dtend =       @job.time.advance(:hours => @job.hours)
+        if @job.job_type.work_unit.hours > 23
+          event.dtstart =   @job.time.to_date
+          unless @job.job_type.is_misc
+            event.dtend =   @job.time.advance(:hours => @job.hours)
+        else
+          event.dtstart =   @job.time
+        end
         event.location =    @job.user.location
         event.add_attendee  @job.worker.email
         event.add_attendee  @job.user.email

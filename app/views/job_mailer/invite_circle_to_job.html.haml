@@ -4,19 +4,20 @@
     %p Hiya,
     %p 
       I need a #{@job.job_type.name}
+      on 
+      %b
+        #{@job.date.strftime("%b %d")} 
       - unless @job.job_type.is_misc
-        on 
-        %b
-          #{@job.date.strftime("%b %d")} 
-          - if @job.work_unit.hours < 23
-            starting at #{@job.time.strftime("%I:%M%P")} 
-          for #{pluralize(@job.duration,@job.work_unit.name)} 
+        - if @job.work_unit.hours < 23
+          starting at #{@job.time.strftime("%I:%M%P")} 
+        for #{pluralize(@job.duration,@job.work_unit.name)} 
       and I thought of you.
       - unless @job.description.nil?
         %p 
           %b more details:
           %br
-          = @job.description
+          %pre
+            = @job.description
     %p
       Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.
       %br

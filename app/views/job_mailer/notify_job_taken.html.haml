@@ -6,16 +6,16 @@
       I can do it! 
     - unless @job.job_type.is_misc
       I'll be your #{@job.job_type.name}.
-      %p    
-        I'll see you on
-        %b
-          #{@job.date.strftime("%b %d")} 
-          - if @job.work_unit.hours < 23
-            at #{@job.time.strftime("%I:%M%P")} 
-
-        see you then!
     - else
       I'll take care of your #{@job.job_type.name}.
+    %p    
+      I'll see you on
+      %b
+        #{@job.date.strftime("%b %d")} 
+        - if @job.work_unit.hours < 23
+          at #{@job.time.strftime("%I:%M%P")} 
+
+      see you then!
     %br
     = @job.worker.name
       
