@@ -15,7 +15,6 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "author"}/
     %meta{:name=>"viewport",:content=>"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"}
-    = javascript_include_tag  "application"
     - if (ENV['RAILS_ENV']=='development')
       = stylesheet_link_tag     "http://f.fontdeck.com/s/css/Ejh9NZvG+vyk1dvMsJtcSfagWLs/localhost/9017.css"
     - elsif (ENV['RAILS_ENV']=='production')
@@ -62,4 +61,4 @@
             %li= link_to "Logout", destroy_user_session_path, :method => :delete
           %h3= link_to "Welcome "+current_user.name, dashboard_path(current_user)       
         
-  = javascript_include_tag  "application"
+  = javascript_include_tag  "application"    

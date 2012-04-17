@@ -18,7 +18,9 @@
       text-transform: capitalize
       color: red
   .hide
-    display: none
+    position: absolute
+    visibility: hidden
+    
   input[type=submit]
     @include rounded(.2em)
     @include gradient-bg(lighten($color_hot,25%),$color_hot)

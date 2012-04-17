@@ -3,6 +3,7 @@
   .inputs
     = f.input :name
     = f.input :stars, :collection => 1..10  
+    = f.input :is_misc
     = f.association :work_unit, :include_blank => false
   .actions
     = f.button :submit

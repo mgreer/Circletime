@@ -1,14 +1,21 @@
 - require "json"
+- @is_misc = @job.job_type.is_misc
 - @num_collection = [["one",1],["two",2],["three",3],["four",4],["five",5],["six",6],["seven",7],["eight",8],["nine",9],["ten",10],["eleven",11],["twelve",12]]
 - @star_collection = [["one star",1],["two stars",2],["three stars",3],["four stars",4],["five stars",5]]
-- @time_class = "hide"
-- if @job.job_type.work_unit.hours < 24
-  - @time_class = "show"
+- @time_class = ""
+- @duration_class = ""
+- @date_class = ""
+- if @job.job_type.work_unit.hours > 23
+  - @time_class = "hide"
+- if @is_misc
+  - @date_class = "hide"
+  - @time_class = "hide"
+  - @duration_class = "hide"
 
 :javascript
   var $job_types = [];
   #{
-    Array[@job_types.map { |r| "$job_types[#{r.id}] = {'name':'#{r.name}','stars':'#{r.stars}','unit':'#{r.work_unit.name}','hours':'#{r.work_unit.hours}'};" }].join ' '
+    Array[@job_types.map { |r| "$job_types[#{r.id}] = {'name':'#{r.name}','stars':'#{r.stars}','unit':'#{r.work_unit.name}','hours':'#{r.work_unit.hours}','is_misc':#{r.is_misc}};" }].join ' '
   }
 
 %section  
@@ -17,18 +24,18 @@
     .madlibs
       I want a    
       = f.association :job_type, :include_blank => false
-      \ on
-      = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
+      %span#date{ :class => "#{@date_class}" }
+        \ on
+        = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => 9 ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }
         \ at
         = f.input :time, :as => :time, :ignore_date => true, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :minute_step => 15,:time_separator => ":",:datetime_separator => "", :start_hour => 9,:end_hour => 24
-      \ for
-      = f.input :duration, :collection => @num_collection, :include_blank => false
-
-
-      \ 
-      %span#units 
-        #{@job.job_type.work_unit.name}s,
+      %span#duration{ :class => "#{@duration_class}" }
+        \ for
+        = f.input :duration, :collection => @num_collection, :include_blank => false
+        \ 
+        %span#units{ :class => "#{@units_class}" }
+          #{@job.job_type.work_unit.name}s,
       \ worth
       = f.input :stars, :collection => @star_collection, :include_blank => false
       \.

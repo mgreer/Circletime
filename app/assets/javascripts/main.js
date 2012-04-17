@@ -19,7 +19,7 @@ function test_size(content, object){
       "font-weight": $(object).css("font-weight"),
       "letter-spacing": $(object).css("letter-spacing")
     });
-  $test.html(content);
+  $test.html(content+"W");
   $height = $test.height();
   $width = $test.width();
   $test.remove();
@@ -76,24 +76,21 @@ $.fn.madlib = function(options) {
           $el.find("select option:selected").removeAttr("selected");
           $option = $el.find("select option[value="+$(this).attr("data-value")+"]");
           $option.attr("selected","selected");
-          $option.change();
           $(this).addClass("current");
+          $real_width = $("li.current a", $ul).width();
           $ul.parent().animate(
-            {width: $("li.current a", $ul).width()}
-          ,200);
+            {width: $real_width}
+          ,200,'linear');
+          $option.trigger("change");
         }
         $ul.css("top" ,($("li.current", $ul).position().top*-1) );      
         $ul.toggleClass("lit");
-      });  
+      });    
       /*kill open ones on doc click*/
       $(document).click(function() {
         return $("ul.lit li.option",this).filter(".current").click();
       });
-/*          
-      window.setTimeout(function(){
-        $ul.parent().width( $("li.current a", $ul).width() );    
-      },200);
-*/      
+      //resize them all when we load later
       $uls.push( $ul );
     });
   }else{
@@ -129,10 +126,6 @@ $.fn.madlib = function(options) {
 
 
 $(function() {
-  if(this.is_madlibbed){
-    return this;
-  }  
-  this.is_madlibbed = true;
   /*
   Form elements setup
   */  

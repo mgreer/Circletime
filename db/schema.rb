@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413211903) do
+ActiveRecord::Schema.define(:version => 20120416195840) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(:version => 20120413211903) do
   create_table "job_types", :force => true do |t|
     t.string   "name"
     t.integer  "stars"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "work_unit_id"
+    t.boolean  "is_misc",      :default => false
   end
 
   create_table "jobs", :force => true do |t|
