@@ -31,5 +31,11 @@ class JobMailer < ActionMailer::Base
     mail(:to => @email, :subject => "#{@job.worker.name} will do your #{@job.job_type.name} job")
   end  
   
+  def notify_job_cancelled(job,worker)
+    @job = job
+    @worker = worker
+    @email = "#{@job.user.name} <#{@job.user.email}>"
+    mail(:to => @email, :subject => "#{worker.name} cancelled your #{@job.job_type.name} job")
+  end
   
 end

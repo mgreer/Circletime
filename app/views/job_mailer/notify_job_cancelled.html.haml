@@ -1,0 +1,14 @@
+%html
+  %head
+  %body
+    %p Hiya,
+    %p 
+      Sorry, turns out I can't do it! 
+      
+      You might need to 
+      %a{:href => send_job_invites_url( :id => @job.id,:only_path => false )} send your invites out again. 
+    %br
+      Sorry about that,
+    %br
+    = @worker.name
+      

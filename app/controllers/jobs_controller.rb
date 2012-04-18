@@ -68,6 +68,18 @@ class JobsController < ApplicationController
       end
     end
   end
+  
+  #GET /jobs/1/invite
+  def send_invites
+    @job = Job.find(params[:id])
+    unless current_user == @job.user
+      return
+    end
+    JobMailer.invite_circle_to_job(@job).deliver
+    Rails.logger.info("--------invites sent out again")
+    @invites = @job.circle.users.map{ |r| "#{r.name}" }.join ', '
+    redirect_to :dashboard, :notice => 'We sent out invites again to '+@invites
+  end
 
   # PUT /jobs/1
   # PUT /jobs/1.json
@@ -91,12 +103,41 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    #TODO: Notify worker if there is one
     @job = Job.find(params[:id])
     @job.destroy
 
     respond_to do |format|
       format.html { redirect_to jobs_url }
       format.json { head :ok }
+    end
+  end
+
+
+  # GET /jobs/1/cancel
+  def cancel_assignment
+    @job = Job.find(params[:id])
+    #make sure user can do this
+    if @job.status != Job::ASSIGNED || @job.worker.nil? || @job.worker != current_user
+      Rails.logger.info("--------not entitled to cancel this job")
+      redirect_to :dashboard, :notice => 'You are not assigned to this job.'
+      return
+    end
+    #remove worker from job
+    @job.worker = nil
+    @job.status = Job::WAITING
+    #Cancel event?
+    #Send out again?
+    respond_to do |format|
+      if @job.save
+        #Notify owner if there is one
+        JobMailer.notify_job_cancelled(@job,current_user).deliver
+        format.html { redirect_to :dashboard, :notice => 'You have cancelled the job. Thanks for nothin.' }
+        format.json { render :json => @job, :status => :created, :location => @job }
+      else
+        format.html { redirect_to :dashboard, :notice => 'There was an error in cancelling this job.' }
+        format.json { render :json => @job.errors, :status => :unprocessable_entity }
+      end
     end
   end
 

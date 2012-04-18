@@ -25,6 +25,10 @@ Circletime::Application.routes.draw do
 
   match '/jobs/open/close' => 'jobs#close_open_jobs' , :as => :close_open_jobs
   
+  match '/jobs/:id/cancel' => 'jobs#cancel_assignment', :as => :cancel_job_assignment
+
+  match '/jobs/:id/invite' => 'jobs#send_invites', :as => :send_job_invites
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
