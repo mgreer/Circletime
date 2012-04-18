@@ -45,8 +45,8 @@ class User < ActiveRecord::Base
 
   before_save :default_values
   def default_values
-    #give 0 stars to start
-    self.stars = 0 unless self.stars
+    #give 3 stars to start
+    self.stars = 3 unless self.stars
     #create default circle on creation
     self.circle = Circle.new(:name => "Default Circle") unless self.circle
   end

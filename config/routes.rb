@@ -19,9 +19,11 @@ Circletime::Application.routes.draw do
   
   match '/auth/:provider/callback' => 'authentications#create'
 
-  match '/users/:id/dashboard' => 'users#dashboard' , :as => :dashboard
+  match '/dashboard' => 'users#dashboard' , :as => :dashboard
 
   match '/jobs/:id/sign_up' => 'jobs#sign_up' , :as => :sign_up_for_job
+
+  match '/jobs/open/close' => 'jobs#close_open_jobs' , :as => :close_open_jobs
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

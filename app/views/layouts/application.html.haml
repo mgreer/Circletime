@@ -22,7 +22,7 @@
     = stylesheet_link_tag    "application"
     = csrf_meta_tags
     /[if lt IE 9]
-      <script src="js/libs/html5-3.4-respond-1.1.0.min.js"></script>
+      %script{ :src => "js/libs/html5-3.4-respond-1.1.0.min.js" }
   %body
     #header-container
       %header.wrapper.clearfix

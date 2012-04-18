@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/dashboard
-  # GET /users/1/dashboard.json
+  # GET /dashboard
+  # GET //dashboard.json
   def dashboard
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       format.html # dashboard.html.erb

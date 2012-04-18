@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416195840) do
+ActiveRecord::Schema.define(:version => 20120418064907) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20120416195840) do
     t.integer  "job_type_id"
     t.integer  "worker_id"
     t.datetime "time"
+    t.integer  "status",      :default => 0
+    t.datetime "endtime"
   end
 
   create_table "memberships", :force => true do |t|

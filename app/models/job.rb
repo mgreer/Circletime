@@ -5,6 +5,10 @@ class Job < ActiveRecord::Base
   belongs_to :worker, :class_name => User
   @event
 
+  WAITING = 0
+  ASSIGNED = 1
+  CLOSED = 2
+
   def work_unit
     job_type.work_unit
   end
@@ -17,11 +21,13 @@ class Job < ActiveRecord::Base
     duration * work_unit.hours
   end
   
-  def status
+  def status_msg
     if worker
       worker.name + " will do it"
+    elsif status == Job::CLOSED
+      "Job completed"
     else
-      "Open"
+      "Sent out and waiting"
     end
   end
   
@@ -33,6 +39,7 @@ class Job < ActiveRecord::Base
   def default_values
     #attach to default circle
     self.circle = self.user.circle unless self.circle
+    
   end
 
 end

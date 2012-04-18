@@ -28,6 +28,7 @@ class JobsController < ApplicationController
     @job = Job.new
     @job.time = Time.new()
     @job_types = JobType.all
+    @job.circle = current_user.circle
     #set type to default
     @job.job_type = @job_types[0]
     #set default stars to job_type default
@@ -53,6 +54,8 @@ class JobsController < ApplicationController
     @job = Job.new(params[:job])
     @job.user = current_user
     @job.circle = current_user.circle
+    @job.status = Job::WAITING
+    @job.endtime =  @job.time.advance(:hours => @job.hours)
 
     respond_to do |format|
       if @job.save  
@@ -71,7 +74,9 @@ class JobsController < ApplicationController
   def update
     params[:job].parse_time_select! :time
     @job = Job.find(params[:id])
-
+    @job.endtime = @job.time.advance(:hours => @job.hours)
+    Rails.logger.info("---------Updating job #{@job.time}->#{@job.endtime}")    
+ 
     respond_to do |format|
       if @job.update_attributes(params[:job])
         format.html { redirect_to @job, :notice => 'Job was successfully updated.' }
@@ -112,7 +117,7 @@ class JobsController < ApplicationController
         if @job.job_type.work_unit.hours > 23
           event.dtstart =   @job.time.to_date
           unless @job.job_type.is_misc
-            event.dtend =   @job.time.advance(:hours => @job.hours)
+            event.dtend =   @job.endtime
           end
         else
           event.dtstart =   @job.time
@@ -123,6 +128,7 @@ class JobsController < ApplicationController
         event.organizer =   @job.user.email
       end
     end
+    @job.status = Job::ASSIGNED
     respond_to do |format|
       if @job.save
         JobMailer.thanks_for_taking_job(@job,@event).deliver
@@ -134,6 +140,34 @@ class JobsController < ApplicationController
         format.json { render :json => @job.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  #TODO: Should be post
+  # GET /jobs/open/close
+  def close_open_jobs
+    #find open but completed jobs
+    Rails.logger.info("---------LOOKING FOR ASSIGNED JOBS TO CLOSE----------!!!")
+    @jobs = Job.where("jobs.status = ? AND jobs.endtime < ?", Job::ASSIGNED, Time.now.localtime )
+    @jobs.each do |job|
+      Rails.logger.info("-------closing #{job}")
+      Rails.logger.info("---------moving #{job.stars} stars from #{job.user.name} to #{job.worker.name}")
+      job.user.stars += job.stars
+      job.worker.stars -= job.stars      
+      Rails.logger.info("---------sending email to #{job.user.email}")
+      Rails.logger.info("---------sending email to #{job.worker.email}")
+      Rails.logger.info("---------setting to CLOSED")      
+      job.status = Job::CLOSED
+      Rails.logger.info("---------saving...")
+      begin
+        job.user.save
+        job.worker.save
+        job.save        
+      rescue Exception => e
+        Rails.logger.error("---------PROBLEM SAVING: #{e}")              
+      end
+      Rails.logger.info("---------DONE")    
+    end  
+    render :json => @jobs
   end
 
 end
