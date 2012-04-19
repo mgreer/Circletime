@@ -32,5 +32,5 @@
   - elsif @job.worker.nil?
     = link_to 'Take job', sign_up_for_job_path(@job)
   - elsif current_user == @job.worker  
-    = link_to 'Cancel', cancel_job_assignment(@job)
+    = link_to 'Cancel', cancel_job_assignment_path(@job)
     
