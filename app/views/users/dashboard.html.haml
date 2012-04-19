@@ -4,24 +4,12 @@
   = @user.stars
   
 %section
-  %h3 I need a
-  %table
-    %tr
-      %th Type
-      %th Stars
-      %th Date
-      %th Status
+  %h3 I need a...
+  %ul
     - @user.jobs.each do |job|
-      %tr
-        %td= link_to job.job_type, job_path(job)
-        %td= job.stars
-        %td= job.date
-        %td= job.status_msg
-    %tr
-      %td= link_to "I need something else", new_job_path()
-      %td
-      %td
-      %td
+      %li
+        #{ link_to job.job_type, job_path(job) } on #{ job.date }
+        ( #{ job.status_msg } )
 
 %section
   %h3 Do I want to...
@@ -37,9 +25,8 @@
         for
         = job.stars
         star?
-        %p
-          %button Take It
-          %button Sorry  
+        %p.action
+          %span.button=link_to "Take It", sign_up_for_job_path(job) 
           
 - if @user.upcoming_work_jobs.size > 0
   - content_for:aside do

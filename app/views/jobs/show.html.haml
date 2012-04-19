@@ -1,20 +1,36 @@
 - content_for:title, "#{@job.job_type} for #{@job.user} on #{@job.date}"
 
-%p
-  %b Type:
-  = @job.job_type
-%p
-  %b Stars:
-  = @job.stars
-%p
-  %b Date:
-  = @job.date
-%p
-  %b Time:
-  = @job.time
-%p
-  %b Description:
-  = @job.description
-= link_to 'Edit', edit_job_path(@job)
-|
-\#{link_to 'Back', jobs_path}
+- unless @job.worker.nil?
+  - if current_user == @job.user
+    #{@job.worker.name} will be doing this job.
+  - elsif current_user == @job.worker
+    You are signed up for this job
+
+%section
+  %p.madlibs
+    I need a #{@job.job_type.name}
+    on 
+    %b
+      #{@job.date.strftime("%b %d")} 
+    - unless @job.job_type.is_misc
+      - if @job.work_unit.hours < 23
+        starting at #{@job.time.strftime("%I:%M%P")} 
+      for #{pluralize(@job.duration,@job.work_unit.name)} 
+      \.
+    - unless @job.description.nil?
+      %p 
+        %b more details:
+        %br
+        %pre
+          = @job.description
+  %p
+    Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.  
+
+%section
+  - if current_user == @job.user
+    = link_to 'Edit', edit_job_path(@job)
+  - elsif @job.worker.nil?
+    = link_to 'Take job', sign_up_for_job_path(@job)
+  - elsif current_user == @job.worker  
+    = link_to 'Cancel', cancel_job_assignment(@job)
+    

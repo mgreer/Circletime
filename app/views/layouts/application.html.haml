@@ -38,12 +38,12 @@
               %li= link_to 'Create a Job', new_job_path
             - else
               %li= link_to 'Login with Facebook', '/auth/facebook/'
+    / #header-container
 
     #messaging
       - [:notice, :error, :message].each do |key| 
         - unless flash[key].blank? 
           %p{ :class => "flash flash_#{key}" }= flash[key]
-
 
     #main-container{:class => @main_class}
       #main.wrapper.clearfix
@@ -60,5 +60,6 @@
             %li= link_to "Your Circle", circles_path
             %li= link_to "Logout", destroy_user_session_path, :method => :delete
           %h3= link_to "Welcome "+current_user.name, dashboard_path(current_user)       
+    / #main-container
         
   = javascript_include_tag  "application"    
