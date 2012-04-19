@@ -101,7 +101,7 @@ $.fn.madlib = function(options) {
         $content = $("option:selected",$(this)).text();
         if( $content == "" ){return;}
         $dim = test_size( $content, $(this) );
-        $(this).width( $dim.width );
+        $(this).width( $dim.width+20 );
       }
       $(this).change(this.resize);
       this.resize();
