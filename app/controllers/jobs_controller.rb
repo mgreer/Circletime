@@ -196,6 +196,7 @@ class JobsController < ApplicationController
       job.worker.stars -= job.stars      
       Rails.logger.info("---------sending email to #{job.user.email}")
       Rails.logger.info("---------sending email to #{job.worker.email}")
+      JobMailer.notify_job_closed(job).deliver
       Rails.logger.info("---------setting to CLOSED")      
       job.status = Job::CLOSED
       Rails.logger.info("---------saving...")
