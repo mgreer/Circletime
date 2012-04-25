@@ -24,7 +24,7 @@
       = f.association :job_type, :include_blank => false
       %span#date
         \ on
-        = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => "auto" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
+        = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'ui-date-picker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }
         \ at
         = f.input :time, :as => :time, :ignore_date => true, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :minute_step => 15,:time_separator => ":",:datetime_separator => "", :start_hour => 9,:end_hour => 24
