@@ -38,8 +38,8 @@ class UsersController < ApplicationController
   # GET /facebook_friends
   # GET /facebook_friends.json
   def facebook_friends
-    @friends = current_user.fb_user.friends
-    #@friends = FbGraph::Query.new("SELECT uid, first_name, last_name, pic_square, installed FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1='#{current_user.fb_user.identifier}')").fetch(current_user.fb_user.access_token)
+    @friends = current_user.fb_user.friends(:fields => "installed,name,id,picture")
+    @friends.sort! { |a,b| "#{!a.installed} #{a.name.downcase}" <=> "#{!b.installed} #{b.name.downcase}" }
     
     respond_to do |format|
       format.html # facebook_friends.html.haml
