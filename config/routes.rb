@@ -17,9 +17,11 @@ Circletime::Application.routes.draw do
   
   root :to => "pages#home"
   
-  match '/auth/:provider/callback' => 'authentications#create'
+  match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/dashboard' => 'users#dashboard' , :as => :dashboard
+
+  match '/facebook_friends' => 'users#facebook_friends', :as => :facebook_friends
 
   match '/jobs/:id/sign_up' => 'jobs#sign_up' , :as => :sign_up_for_job
 

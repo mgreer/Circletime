@@ -35,6 +35,18 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /facebook_friends
+  # GET /facebook_friends.json
+  def facebook_friends
+    @friends = current_user.fb_user.friends
+    #@friends = FbGraph::Query.new("SELECT uid, first_name, last_name, pic_square, installed FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1='#{current_user.fb_user.identifier}')").fetch(current_user.fb_user.access_token)
+    
+    respond_to do |format|
+      format.html # facebook_friends.html.haml
+      format.json { render :json => @friends }
+    end
+  end
+  
   # GET /users/new
   # GET /users/new.json
   def new

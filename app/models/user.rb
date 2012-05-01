@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise:invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     name
   end
   
+  def future_jobs
+    self.jobs.where('jobs.time > ?', Time.now.localtime )
+  end
+  
   def potential_jobs
     self.circle_jobs.where('jobs.time > ? AND jobs.worker_id IS NULL', Time.now.localtime )
   end
@@ -49,6 +53,11 @@ class User < ActiveRecord::Base
     self.stars = 3 unless self.stars
     #create default circle on creation
     self.circle = Circle.new(:name => "Default Circle") unless self.circle
+  end
+
+  def fb_user
+    facebook = authentications.where(:provider => :facebook).first
+    ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
   end
   
 end

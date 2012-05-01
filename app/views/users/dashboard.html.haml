@@ -6,7 +6,7 @@
 %section
   %h3 I need a...
   %ul
-    - @user.jobs.each do |job|
+    - @user.future_jobs.each do |job|
       %li
         #{ link_to job.job_type, job_path(job) } on #{ job.date }
         ( #{ job.status_msg } )

@@ -49,8 +49,10 @@ gem 'ui_datepicker-rails3'
 gem 'devise'
 gem 'devise_invitable'
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'oauth2'
+gem 'fb_graph'
+gem 'omniauth-facebook'
+
 #gem "combined_time_select", "~> 0.0.1"
 
 gem 'newrelic_rpm'

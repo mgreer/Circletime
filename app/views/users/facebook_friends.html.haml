@@ -1,0 +1,12 @@
+- content_for:title, "Facebook friends"
+
+%section
+  %h2 Facebook friends
+  %ul
+  - @friends.each do |friend|
+    %li 
+      #{friend.installed}
+      - if friend.installed
+        !!!!!!!
+      #{friend.name}
+      %img{:src => "#{friend.picture}"}
