@@ -5,11 +5,16 @@
   %ul
   - @friends.each do |friend|
     %li 
-      #{friend.installed}
       - if friend.installed
         - local_user = find_user_from_facebook( :uid => friend.identifier )
         - if local_user
-          =link_to local_user.name, local_user
+          - if !current_user.circle.users.include?( local_user )
+            Add
+            =link_to local_user.name, local_user
+            to your circle
+          - else
+            =link_to local_user.name, local_user
+            is in your circle already
       - else
-        #{friend.name}
+        Invite #{friend.name} to your circle
       %img{:src => "#{friend.picture}"}
