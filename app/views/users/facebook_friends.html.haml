@@ -7,6 +7,9 @@
     %li 
       #{friend.installed}
       - if friend.installed
-        !!!!!!!
-      #{friend.name}
+        - local_user = find_user_from_facebook( :uid => friend.identifier )
+        - if local_user
+          =link_to local_user.name, local_user
+      - else
+        #{friend.name}
       %img{:src => "#{friend.picture}"}
