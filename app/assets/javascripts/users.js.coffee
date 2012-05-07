@@ -14,8 +14,7 @@ sendRequestViaMultiFriendSelector = ->
     message: "My Great Request"
   , requestCallback
 requestCallback = (response) ->
-  alert "I requested it and was told"
-  
+  alert "testing"+response
 FB.init
   appId: FACEBOOK_APP_ID
   frictionlessRequests: false
@@ -23,4 +22,4 @@ FB.init
 $(document).ready ->
   $(".facepile .facebook_invite").click ->
     $uid = $(this).attr("id")
-    sendRequestToRecipients $uid "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
+    sendRequestToRecipients $uid, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
