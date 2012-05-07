@@ -14,9 +14,11 @@ sendRequestViaMultiFriendSelector = ->
     message: "My Great Request"
   , requestCallback
 requestCallback = (response) ->
+  alert "I requested "+user_ids+" and was told: "+response
+  
 FB.init
   appId: FACEBOOK_APP_ID
-  frictionlessRequests: true
+  frictionlessRequests: false
   
 $(document).ready ->
   $(".facepile .facebook_invite").click ->
