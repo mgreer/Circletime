@@ -14,7 +14,7 @@ sendRequestViaMultiFriendSelector = ->
     message: "My Great Request"
   , requestCallback
 requestCallback = (response) ->
-  alert "I requested "+user_ids+" and was told: "+response
+  alert "I requested it and was told"
   
 FB.init
   appId: FACEBOOK_APP_ID
