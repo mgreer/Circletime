@@ -2,19 +2,28 @@
 
 %section
   %h2 Facebook friends
-  %ul
-  - @friends.each do |friend|
-    %li 
-      - if friend.installed
-        - local_user = find_user_from_facebook( :uid => friend.identifier )
-        - if local_user
-          - if !current_user.circle.users.include?( local_user )
-            Add
-            =link_to local_user.name, local_user
-            to your circle
-          - else
-            =link_to local_user.name, local_user
-            is in your circle already
-      - else
-        Invite #{friend.name} to your circle
-      %img{:src => "#{friend.picture}"}
+  %ul.facepile
+    - @friends.each do |friend|
+      %li 
+        %img{:src => "#{friend.picture}"}
+        - if friend.installed
+          - local_user = find_user_from_facebook( :uid => friend.identifier )
+          - if local_user
+
+            - if !current_user.circle.users.include?( local_user )
+              =link_to local_user.name, local_user
+              Add #{get_pronoun_from_user(friend)} to your circle
+            - else
+              =link_to local_user.name, local_user
+              is in your circle already
+        - else
+          %span= friend.name
+        %a.facebook_invite{:id=>friend.identifier} Invite
+        #{get_pronoun_from_user(friend)} to your circle
+
+%section
+  %div#fb-root
+  %script{:src=>"http://connect.facebook.net/en_US/all.js"}
+  :javascript
+    FACEBOOK_APP_ID = "#{FACEBOOK_APP_ID}";
+    

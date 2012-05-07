@@ -33,5 +33,8 @@ Circletime::Application.configure do
   
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
+
+  FACEBOOK_APP_ID = "188343644605595"
+  FACEBOOK_TOKEN = "a79e0b110812c55237c8b4d608c76428"
     
 end

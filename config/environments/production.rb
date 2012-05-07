@@ -60,5 +60,8 @@ Circletime::Application.configure do
   config.active_support.deprecation = :notify
   
   config.action_mailer.default_url_options = { :host => "circletime.herokuapp.com" }
-  
+
+  FACEBOOK_APP_ID = "329040470488973"
+  FACEBOOK_TOKEN = "e44f23502404b62547bb0a7b798615c9"  
+
 end
