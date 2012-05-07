@@ -6,7 +6,7 @@ sendInvite = (user_id, msg) ->
   FB.ui
     method: "send"
     name: "Circletime"
-    link: "https://apps.facebook.com/circletime-sandbox"
+    link: "http://circletime.herokuapp.com/?test=1"
     to: user_id
     description: msg
   , (response) ->
