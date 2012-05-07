@@ -2,19 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-sendRequestToRecipients = (user_ids, msg) ->
+sendInvite = (user_id, msg) ->
   FB.ui
-    method: "apprequests"
-    message: msg
-    to: user_ids
-  , requestCallback
-sendRequestViaMultiFriendSelector = ->
-  FB.ui
-    method: "apprequests"
-    message: "My Great Request"
-  , requestCallback
-requestCallback = (response) ->
-  alert "testing"+response
+    method: "send"
+    name: msg
+    link: "https://apps.facebook.com/circletime-sandbox"
+    to: user_id
+    description: "A Description"
+  , (response) ->
+    if response is undefined
+      return
+    $(".facepile .facebook_invite#"+user_id).text "invited"
+    alert "testing :"+response
+
 FB.init
   appId: FACEBOOK_APP_ID
   frictionlessRequests: false
@@ -22,4 +22,4 @@ FB.init
 $(document).ready ->
   $(".facepile .facebook_invite").click ->
     $uid = $(this).attr("id")
-    sendRequestToRecipients $uid, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
+    sendInvite $uid, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
