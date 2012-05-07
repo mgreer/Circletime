@@ -5,10 +5,10 @@
 sendInvite = (user_id, msg) ->
   FB.ui
     method: "send"
-    name: msg
+    name: "Circletime"
     link: "https://apps.facebook.com/circletime-sandbox"
     to: user_id
-    description: "A Description"
+    description: msg
   , (response) ->
     if response is undefined
       return
@@ -17,7 +17,8 @@ sendInvite = (user_id, msg) ->
 
 FB.init
   appId: FACEBOOK_APP_ID
-  frictionlessRequests: false
+  xfbml: true
+  cookie: true
   
 $(document).ready ->
   $(".facepile .facebook_invite").click ->
