@@ -4,6 +4,8 @@ Circletime::Application.routes.draw do
   resources :circles
 
   devise_for :users, :controllers => { :invitations => 'users/invitations' }
+
+  match '/users/invitation/create/fb' => 'invitations#fb_create' , :via => :push
   
   resources :users
   

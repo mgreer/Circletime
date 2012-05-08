@@ -1,0 +1,11 @@
+- if @page_name == "email"
+  - @email_class = "on"
+- else
+  - @facebook_class = "on"
+
+%nav.tabs
+  %ul
+    %li{:class=>@email_class}
+      =link_to "Email", :new_user_invitation
+    %li{:class=>@facebook_class}
+      =link_to "Facebook", :facebook_friends    

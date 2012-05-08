@@ -1,4 +1,6 @@
 - content_for:title, "Invite Friend"
+- @page_name = 'email'
+= render 'tabs'
 
 %section
   = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
