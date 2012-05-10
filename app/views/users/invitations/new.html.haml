@@ -2,11 +2,21 @@
 - @page_name = 'email'
 = render 'tabs'
 
-%section
-  = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+%section{:id => "invite_users" }
+  = simple_form_for :user, :url => invitation_path(:user), :html => {:method => :post} do |f|
     .madlibs
       Invite 
-      =f.input :email, :input_html => { :size => 8 }, :placeholder => "a friend"
+      %input{ :type => :email, :name => "user_email[]", :size => 8, :class => "user_email", :placeholder => "a friend" }
       to join your circle.
     .actions
       = f.submit "Invite"
+
+
+/
+  %form{:action => url_for(:user_invitation), :method => :post, :id => "invite_users" }
+    .madlibs
+      Invite 
+      %input{ :type => :email, :name => "user_email", :size => 8, :class => "user_email", :placeholder => "a friend" }
+      to join your circle.
+    .actions
+      %input{ :type => :submit, :value => "Invite" } 

@@ -2,31 +2,33 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # POST /resource/invitation
   def create
-    #create the user, with invite info
-    self.resource = resource_class.invite!(params[resource_name], current_inviter)
-    #add to the inviter's circle
-    @membership = self.resource.memberships.create(:circle => current_inviter.circle)
-
-    if resource.errors.empty? and @membership.errors.empty?
-      set_flash_message :notice, :send_instructions, :email => self.resource.email
-      respond_with resource, :location => after_invite_path_for(resource)
-    else
-      respond_with_navigational(resource) { render :new }
+    #for each email
+    Rails.logger.info("-------emails: #{params[:user_email]}")
+    params[:user_email].each do |email|
+      Rails.logger.info("---------invite #{email}")
+      #find if there is a current user
+      @invitee = User.where(:email => :user_email).first
+      if @invitee
+        Rails.logger.info("------------#{email} exists already: #{@invitee}")
+      else @invitee        
+        #if not, create them with invite info
+        Rails.logger.info("------------creating #{email}")
+        @invitee = User.invite!({:email => email}, current_inviter)
+        if @invitee.errors.empty?
+          set_flash_message :notice, :send_instructions, :email => @invitee.email
+          Rails.logger.info("------------created #{@invitee}")
+        end
+      end
+      #add to the inviter's circle
+      @invitee.memberships.create(:circle => current_inviter.circle)
     end
+    
+    flash[:notice] = "You successfully invited friends to your circle."
+    respond_with_navigational(resource) { render :new }
   end
   
   def fb_create
-    #create the user, with invite info
-    self.resource = resource_class.invite!(params[resource_name], current_inviter)
-    #add to the inviter's circle
-    @membership = self.resource.memberships.create(:circle => current_inviter.circle)
-
-    if resource.errors.empty? and @membership.errors.empty?
-      set_flash_message :notice, :send_instructions, :email => self.resource.email
-      respond_with resource, :location => after_invite_path_for(resource)
-    else
-      respond_with_navigational(resource) { render :new }
-    end    
+    
   end
 
   # PUT /resource/invitation
