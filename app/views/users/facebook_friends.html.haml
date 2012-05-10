@@ -1,7 +1,8 @@
 - content_for:title, "Facebook friends"
+- @page_name = 'facebook'
+= render 'users/invitations/tabs'
 
 %section
-  %h2 Facebook friends
   %ul.facepile
     - @friends.each do |friend|
       %li 
