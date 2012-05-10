@@ -35,6 +35,22 @@ class User < ActiveRecord::Base
     name
   end
   
+  def first_name
+    return self.name.split(' ', 2)[0]
+  end
+  
+  #add a member to the circle
+  def add_member(member)
+    Rails.logger.info("------------adding #{member} to circle")
+    if !self.circle.users.include?( member )
+      member.memberships.create(:circle => self.circle)
+      UserMailer.notify_added_to_circle(self,member).deliver
+      #send email
+    else
+      Rails.logger.info("--------------already a member!")      
+    end
+  end
+  
   def future_jobs
     self.jobs.where('jobs.time > ?', Time.now.localtime )
   end

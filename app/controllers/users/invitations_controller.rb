@@ -4,18 +4,20 @@ class Users::InvitationsController < Devise::InvitationsController
   def create
     #for each email
     Rails.logger.info("-------emails: #{params[:user_email]}")
+    @inviter = current_inviter
     params[:user_email].each do |email|
       Rails.logger.info("---------invite #{email}")
       #find if there is a current user
-      @invitee = User.where(:email => :user_email).first
-      if @invitee
-        Rails.logger.info("------------#{email} exists already: #{@invitee}")
+      @invitee = User.where(:email => email).first
+      if @invitee 
+        Rails.logger.info("------------#{email} exists already, adding #{@invitee} to circle")
+        current_inviter.add_member(@invitee)
       else @invitee        
         #if not, create them with invite info
         Rails.logger.info("------------creating #{email}")
         @invitee = User.invite!({:email => email}, current_inviter)
         if @invitee.errors.empty?
-          set_flash_message :notice, :send_instructions, :email => @invitee.email
+          @invitee.memberships.create(:circle => current_inviter.circle)
           Rails.logger.info("------------created #{@invitee}")
         end
       end
@@ -23,7 +25,7 @@ class Users::InvitationsController < Devise::InvitationsController
       @invitee.memberships.create(:circle => current_inviter.circle)
     end
     
-    flash[:notice] = "You successfully invited friends to your circle."
+    flash[:notice] = "You successfully invited #{params[:user_email].size} friends to your circle."
     respond_with_navigational(resource) { render :new }
   end
   
