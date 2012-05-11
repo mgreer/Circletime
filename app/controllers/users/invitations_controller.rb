@@ -28,10 +28,6 @@ class Users::InvitationsController < Devise::InvitationsController
     flash[:notice] = "You successfully invited #{params[:user_email].size} friends to your circle."
     respond_with_navigational(resource) { render :new }
   end
-  
-  def fb_create
-    
-  end
 
   # PUT /resource/invitation
   def update

@@ -4,8 +4,6 @@ Circletime::Application.routes.draw do
   resources :circles
 
   devise_for :users, :controllers => { :invitations => 'users/invitations' }
-
-  match '/users/invitation/create/fb' => 'invitations#fb_create' , :via => :push
   
   resources :users
   
@@ -24,6 +22,8 @@ Circletime::Application.routes.draw do
   match '/dashboard' => 'users#dashboard' , :as => :dashboard
 
   match '/facebook_friends' => 'users#facebook_friends', :as => :facebook_friends
+
+  match '/facebook_friends/invite' => 'users#fb_create' , :via => :post
 
   match '/jobs/:id/sign_up' => 'jobs#sign_up' , :as => :sign_up_for_job
 

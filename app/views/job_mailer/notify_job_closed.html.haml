@@ -1,0 +1,15 @@
+%html
+  %head
+  %body
+    %p Hiya,
+    %p 
+      The #{@job.job_type.name} job is done! 
+      
+      #{@job.worker} did it on #{@job.date.strftime("%b %d")}, so we have transferred #{@job.stars} stars from 
+      #{@job.user}'s account to #{@job.worker.first_name}'s.
+    %p
+      If this was canceled or not completed, <click here> for a star-re-fund.  [link goes to a page that says "Hey, Stars have been returned! For the record, what happened: <form - record this in the cancelled job notes or somewhere like that>
+    %p
+      Happy days!
+    %p
+      Circle time

@@ -2,18 +2,20 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 if $("#fb-root").get(0)
-  sendInvite = (user_id, msg) ->
-    FB.ui
-      method: "send"
-      name: "Circletime"
-      link: "http://circletime.herokuapp.com/?test=1"
-      to: user_id
-      description: msg
-    , (response) ->
-      if response is undefined
-        return
-      $(".facepile .facebook_invite#"+user_id).text "invited"
-      alert "setup invite"
+  sendInvite = (user_id, user_name, msg) ->
+    $.post "/facebook_friends/invite",
+      name: user_name
+    , (data) ->
+      FB.ui
+        method: "send"
+        name: "Circletime"
+        link: "http://circletime.herokuapp.com/users/invitation/accept?invitation_token="+data.invitation_token
+        to: user_id
+        description: msg
+      , (response) ->
+        if response is undefined
+          return
+        $(".facepile .facebook_invite#"+user_id).text "invited"
 
   FB.init
     appId: FACEBOOK_APP_ID
@@ -23,7 +25,8 @@ if $("#fb-root").get(0)
   $(document).ready ->
     $(".facepile .facebook_invite").click ->
       $uid = $(this).attr("id")
-      sendInvite $uid, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
+      $name = $(this).attr("name")
+      sendInvite $uid, $name, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
       
 $(document).ready ->
   $("#invite_users .user_email").bind "keydown", (event) ->

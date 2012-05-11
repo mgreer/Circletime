@@ -35,7 +35,7 @@ class JobMailer < ActionMailer::Base
     @job = job
     Rails.logger.info("---------#{@job}")
     @email = "#{@job.user.name} <#{@job.user.email}>,#{@job.worker.name} <#{@job.worker.email}>"
-    mail(:to => @email, :subject => "#{@job.job_type.name} job is completed!")
+    mail(:to => @email, :subject => "#{@job.job_type.name} for <first name of job creater> completed on #{@job.endtime.to_date}")
   end
   
   def notify_job_cancelled(job,worker)

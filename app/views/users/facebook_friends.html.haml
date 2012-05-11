@@ -19,7 +19,7 @@
               is in your circle already
         - else
           %span= friend.name
-        %a.facebook_invite{:id=>friend.identifier} Invite
+        %a.facebook_invite{:id => friend.identifier,:name => friend.name} Invite
         #{get_pronoun_from_user(friend)} to your circle
 
 %section

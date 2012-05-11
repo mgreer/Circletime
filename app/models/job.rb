@@ -17,6 +17,10 @@ class Job < ActiveRecord::Base
     time.to_date
   end
   
+  def end_date
+    
+  end
+  
   def hours
     duration * work_unit.hours
   end

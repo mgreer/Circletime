@@ -34,7 +34,17 @@ class UsersController < ApplicationController
       format.json { render :json => @user }
     end
   end
-
+  
+  # PUSH /facebook_friends/invite
+  def fb_create
+    @invitee = User.invite!({:email => params[:name].parameterize+"@test.com", :name => params[:name]}, current_user)
+    if @invitee.errors.empty?
+      @invitee.memberships.create(:circle => current_user.circle)
+      Rails.logger.info("------------created #{@invitee}")
+    end
+    render :json => @invitee 
+  end
+  
   # GET /facebook_friends
   # GET /facebook_friends.json
   def facebook_friends
