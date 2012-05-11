@@ -192,8 +192,8 @@ class JobsController < ApplicationController
     @jobs.each do |job|
       Rails.logger.info("-------closing #{job}")
       Rails.logger.info("---------moving #{job.stars} stars from #{job.user.name} to #{job.worker.name}")
-      job.user.stars += job.stars
-      job.worker.stars -= job.stars      
+      job.user.stars -= job.stars
+      job.worker.stars += job.stars      
       Rails.logger.info("---------sending email to #{job.user.email}")
       Rails.logger.info("---------sending email to #{job.worker.email}")
       JobMailer.notify_job_closed(job).deliver
