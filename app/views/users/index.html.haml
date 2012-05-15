@@ -2,6 +2,7 @@
 %table
   %tr
     %th Name
+    %th Status
     %th Stars
     %th Location
     %th Email
@@ -11,6 +12,7 @@
   - @users.each do |user|
     %tr
       %td= user.name
+      %td= user.status
       %td= user.stars
       %td= user.location
       %td= user.email

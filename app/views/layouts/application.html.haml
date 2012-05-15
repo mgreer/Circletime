@@ -23,21 +23,13 @@
     = csrf_meta_tags
     /[if lt IE 9]
       %script{ :src => "js/libs/html5-3.4-respond-1.1.0.min.js" }
-  %body
+  %body{ :id => to_slug( "#{controller.controller_path}-#{controller.action_name}" ), :class => to_slug( "#{controller.controller_path}" ) }
     #header-container
       %header.wrapper.clearfix
         %h1#title
           = link_to "Circletime", :root
           - if content_for?(:title)
             %span= yield :title
-
-        %nav
-          %ul
-            - if user_signed_in?
-              %li= link_to 'Invite a Friend', new_user_invitation_path
-              %li= link_to 'Create a Job', new_job_path
-            - else
-              %li= link_to 'Login with Facebook', '/users/auth/facebook/'
     / #header-container
 
     #messaging
@@ -57,9 +49,11 @@
       %footer.wrapper
         - if user_signed_in?
           %nav
-            %li= link_to "Your Circle", circles_path
-            %li= link_to "Logout", destroy_user_session_path, :method => :delete
-          %h3= link_to "Welcome "+current_user.name, dashboard_path(current_user)       
+            %ul
+              %li= link_to 'Invite a Friend', new_user_invitation_path
+              %li= link_to 'Create a Job', new_job_path
+              %li= link_to "Your Circle", circles_path
+              %li= link_to "Logout", destroy_user_session_path, :method => :delete       
     / #main-container
         
   = javascript_include_tag  "application"    

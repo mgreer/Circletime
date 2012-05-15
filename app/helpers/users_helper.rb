@@ -19,5 +19,9 @@ module UsersHelper
       "her"
     end
   end
+  
+  def to_slug( text )
+    text.downcase.gsub(/[^a-z1-9]+/, '-')
+  end
 
 end

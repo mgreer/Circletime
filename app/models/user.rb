@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   
   validates :name, :email, :presence => true
 
+  INVITED = 0
+  AUTHORIZED = 1
+
   def apply_omniauth(auth)
     # In previous omniauth, 'user_info' was used in place of 'raw_info'
     self.name = auth['extra']['raw_info']['name']
@@ -33,6 +36,14 @@ class User < ActiveRecord::Base
 
   def to_s
     name
+  end
+  
+  def status
+    if self.invitation_token
+      INVITED
+    else 
+      AUTHORIZED
+    end
   end
   
   def first_name
