@@ -15,7 +15,7 @@ Circletime::Application.routes.draw do
 
   resources :job_types
   
-  root :to => "pages#home"
+  root :to => 'users#dashboard'
   
   match '/users/auth/:provider/callback' => 'authentications#create'
 
