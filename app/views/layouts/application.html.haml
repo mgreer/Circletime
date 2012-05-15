@@ -31,11 +31,12 @@
           - if content_for?(:title)
             %span= yield :title
     / #header-container
-
-    #messaging
-      - [:notice, :error, :message].each do |key| 
-        - unless flash[key].blank? 
-          %p{ :class => "flash flash_#{key}" }= flash[key]
+    
+    - unless flash.empty?  
+      #messaging
+        - [:notice, :error, :message].each do |key| 
+          - unless flash[key].blank? 
+            %p{ :class => "flash flash_#{key}" }= flash[key]
 
     #main-container{:class => @main_class}
       #main.wrapper.clearfix
