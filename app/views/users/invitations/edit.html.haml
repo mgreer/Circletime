@@ -1,14 +1,17 @@
 %section
-  %h2 Welcome to Circletime! 
-
-  = link_to 'Login with Facebook', '/users/auth/facebook/', :html => { :class => "button facebook"}
-
+  %h2 Welcome! 
+  %p Circletime is a place where you can create a network of people you know who will exchange favors such as babysitting and petsitting
+  
+%section
   = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| 
+    .facebook
+      = link_to 'Login with Facebook', '/users/auth/facebook/', :class => "button"
+    
     .inputs
       = f.hidden_field :invitation_token
-      = f.input :name
-      = f.input :email
-      = f.input :password
-      = f.input :password_confirmation
+      = f.input :name, :placeholder => "First and Last Name"
+      = f.input :email, :placeholder => "Email"
+      = f.input :password, :placeholder => "Password"
+      = f.input :password_confirmation, :placeholder => "Password Confirmation"
     .actions
-      = f.submit "Set my password"
+      = f.submit "Join"

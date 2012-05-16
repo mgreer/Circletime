@@ -3,8 +3,8 @@
     = link_to 'Login with Facebook', '/users/auth/facebook/', :class => "button"
     
   .inputs
-    = f.input :email, :required => true, :autofocus => true, :placeholder => "Email", :as=> :string
-    = f.input :password, :required => true, :placeholder => "Password", :as=> :string
+    = f.input :email, :required => true, :autofocus => true, :placeholder => "Email"
+    = f.input :password, :required => true, :placeholder => "Password"
     = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
   .actions
     = f.button :submit, "Sign in"

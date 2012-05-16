@@ -36,7 +36,7 @@ class Users::InvitationsController < Devise::InvitationsController
     self.resource = resource_class.accept_invitation!(params[resource_name])
 
     if resource.errors.empty?
-      set_flash_message :notice, :updated
+      set_flash_message :notice, "Congratulations! You started your network and have 1 person in it. #{url_for( new_user_invitation_path )} people to start your network of favors."
       sign_in(resource_name, resource)
       respond_with resource, :location => after_accept_path_for(resource)
     else
