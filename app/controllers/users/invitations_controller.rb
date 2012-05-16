@@ -23,6 +23,8 @@ class Users::InvitationsController < Devise::InvitationsController
       end
       #add to the inviter's circle
       @invitee.memberships.create(:circle => current_inviter.circle)
+      #and inverse
+      current_inviter.memberships.create(:circle => @invitee.circle)
     end
     
     flash[:notice] = "You successfully invited #{params[:user_email].size} friends to your circle."

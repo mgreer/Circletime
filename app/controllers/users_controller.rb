@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   # GET //dashboard.json
   def dashboard
     @user = current_user
+    @job_types = JobType.all()
 
     respond_to do |format|
       format.html # dashboard.html.erb

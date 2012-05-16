@@ -73,6 +73,7 @@
         $selected_value = $this.find("option:selected").val();
         $ul.find("li[data-value=\"" + $selected_value + "\"]").addClass("current");
         $el.width($("li.current *", $ul).width());
+        //TODO: Capture scrolling in select
         //  $(window).scroll(function($ev){
         //    console.log($this.scrollTop());
         //  });

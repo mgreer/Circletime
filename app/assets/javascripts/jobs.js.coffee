@@ -27,3 +27,15 @@ $ ->
       $("#time",$el).addClass("hide")       
   #on stars and duration change
     #correct unit plural
+    
+  #if URL checks one, click it
+  if window.location.hash != ""
+    $split = window.location.hash.slice(1).split("=")
+    $type = $split[0]
+    $id = $split[1]
+    if $type == "job_type_id"
+      setTimeout ->
+        $("select#job_job_type_id option[value="+$id+"]").click()
+      100
+    
+    

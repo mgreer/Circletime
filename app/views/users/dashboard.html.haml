@@ -4,12 +4,20 @@
   = @user.stars
   
 %section
-  %h3 I need a...
+  %h3 I need a... 
   %ul
-    - @user.future_jobs.each do |job|
+    - @job_types.each do |job_type|
       %li
-        #{ link_to job.job_type, job_path(job) } on #{ job.date }
-        ( #{ job.status_msg } )
+        #{ link_to job_type, "#{new_job_path}\#job_type_id=#{job_type.id}" }
+
+- unless @user.future_jobs.empty?
+  %section
+    %h3 I have asked for a...        
+    %ul
+      - @user.future_jobs.each do |job|
+        %li
+          #{ link_to job.job_type, job_path(job) } on #{ job.date }
+          ( #{ job.status_msg } )
 
 %section
   %h3 Do I want to...
