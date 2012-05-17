@@ -32,7 +32,7 @@
             %span= yield :title
     / #header-container
     
-    - unless flash.empty?  
+    - unless flash.empty? || flash[:error].blank? 
       #messaging
         - [:notice, :error, :message].each do |key| 
           - unless flash[key].blank? 
