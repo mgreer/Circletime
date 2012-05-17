@@ -8,12 +8,10 @@
     - @circle.users.each do |friend|
       %tr
         %td= friend
-        %td X
+        %td= link_to "X", remove_member_from_circle_path(friend.id), :method=>:delete
     %tr
       %td= link_to "invite another", new_user_invitation_path()
       %td
-
-= link_to 'Edit Circle', edit_circle_path(@circle)
 
 %section
   %h3 Circles I Am In:
@@ -24,6 +22,6 @@
     - current_user.circle_memberships.each do |circle|
       %tr
         %td= circle    
-        - if !circle.users.include?( @user )
-          %td= link_to "Add to my circle", new_user_invitation_path()
+        - unless current_user.circle.users.include?( circle.user )
+          %td= link_to "Add to my circle", add_member_to_circle_path( circle.user ), :method=>:post
 

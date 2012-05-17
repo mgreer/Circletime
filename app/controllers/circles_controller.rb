@@ -83,4 +83,27 @@ class CirclesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # POST /circles/member/1
+  def add_member
+    @member = User.find(params[:id])
+    current_user.add_member( @member )
+    if current_user.circle.save
+      redirect_to :back, :notice => 'Successfully added #{@member} to your circle.'
+    else
+      redirect_to :back, :error => 'Error adding them to circle.'
+    end   
+  end
+
+  # DELETE /circles/member/1
+  def remove_member
+    @member = User.find(params[:id])
+    current_user.circle.users.delete( @member )
+    if current_user.circle.save
+      redirect_to :back, :notice => 'Successfully removed #{@member} from your circle.'
+    else
+      redirect_to :back, :error => 'Error removing them from your circle.'
+    end   
+  end
+
 end
