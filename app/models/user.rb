@@ -87,4 +87,9 @@ class User < ActiveRecord::Base
     ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
   end
   
+  protected  
+    def deliver_invitation
+      UserMailer.invitation_instructions(self).deliver
+    end
+  
 end

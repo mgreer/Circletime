@@ -16,7 +16,7 @@ class Users::InvitationsController < Devise::InvitationsController
       Rails.logger.info("---------invite #{email}")
       #find if there is a current user
       @invitee = User.where(:email => email).first
-      if @invitee 
+      if @invitee && @invitee.invitation_token.nil?
         Rails.logger.info("------------#{email} exists already, adding #{@invitee} to circle")
         current_inviter.add_member(@invitee)
       else @invitee        
