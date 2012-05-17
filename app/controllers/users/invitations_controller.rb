@@ -27,8 +27,8 @@ class Users::InvitationsController < Devise::InvitationsController
       current_inviter.memberships.create(:circle => @invitee.circle)
     end
     
-    flash[:notice] = "You successfully invited #{params[:user_email].size} friends to your circle."
-    respond_with_navigational(resource) { render :new }
+    flash.now[:notice] = "Your invitation has been sent to #{params[:user_email].size} friends."
+    respond_with_navigational(resource) { render :create }
   end
 
   # PUT /resource/invitation

@@ -27,23 +27,7 @@
     display: block
     width: auto
     clear: left
-
-  input[type=submit], .button
-    @include rounded(.2em)
-    @include gradient-bg(lighten($color_hot,10%),$color_hot)
-    text-align: center
-    font-family: $font_title
-    font-weight: 300
-    font-size: 2em
-    padding: .5em
-    border: 1px solid $color_cool
-    color: #fff
-    text-shadow: rgba(56, 101, 112,.8) 0 1px 0
-    &:active
-      box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 1), inset 0 0px 2px rgba(0, 0, 0, 0.9)
-    &:hover
-      opacity: .9
-
+    
   .inputs 
     label
       display: none
@@ -53,6 +37,27 @@
       @include rounded(.3em)
       padding: 1em
       border: 1px solid $color_cool
+      
+input[type=submit], .button
+  @include rounded(.2em)
+  @include gradient-bg(lighten($color_hot,10%),$color_hot)
+  text-align: center
+  font-family: $font_title
+  font-weight: 300
+  font-size: 2em
+  padding: .5em
+  border: 1px solid $color_cool
+  color: #fff
+  text-shadow: rgba(56, 101, 112,.8) 0 1px 0
+  &:active
+    box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 1), inset 0 0px 2px rgba(0, 0, 0, 0.9)
+  &:hover
+    opacity: .9
+
+.button, a.button
+  color: #fff
+  text-decoration: none
+  
   
 .madlibs      
   opacity: 0
