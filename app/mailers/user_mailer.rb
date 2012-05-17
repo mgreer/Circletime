@@ -5,6 +5,6 @@ class UserMailer < ActionMailer::Base
     @user = user
     @new_user = new_user
     Rails.logger.info("---------informing #{new_user} that #{user} added them to their circle")
-    mail(:to => new_user.email, :subject => "#{user} added you to their circle")
+    mail(:to => new_user.email, :subject => "#{user} has added you on Circletime.")
   end
 end

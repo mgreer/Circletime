@@ -89,7 +89,7 @@ class CirclesController < ApplicationController
     @member = User.find(params[:id])
     current_user.add_member( @member )
     if current_user.circle.save
-      redirect_to :back, :notice => 'Successfully added #{@member} to your circle.'
+      redirect_to :back, :notice => 'Successfully added your friend to your circle.'.html_safe
     else
       redirect_to :back, :error => 'Error adding them to circle.'
     end   
@@ -100,7 +100,7 @@ class CirclesController < ApplicationController
     @member = User.find(params[:id])
     current_user.circle.users.delete( @member )
     if current_user.circle.save
-      redirect_to :back, :notice => 'Successfully removed #{@member} from your circle.'
+      redirect_to :back, :notice => 'Successfully removed your friend from your circle.'.html_safe
     else
       redirect_to :back, :error => 'Error removing them from your circle.'
     end   

@@ -1,0 +1,12 @@
+%html
+  %head
+  %body
+    %p 
+      #{@new_user.first_name},
+    %p
+      #{@user} added you on circletime. 
+      %a{:href => new_user_invitation_path( :user_email => @user.email, :only_path => false ), :method=>:post } Add #{@user} to your circle
+    %p
+      Thanks! 
+    %p
+      Circletime Team

@@ -1,5 +1,12 @@
 class Users::InvitationsController < Devise::InvitationsController
 
+  # GET /resource/invitation/new
+  def new
+    build_resource
+    @email = params[:user_email]
+    render :new
+  end
+
   # POST /resource/invitation
   def create
     #for each email
