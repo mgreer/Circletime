@@ -86,10 +86,24 @@ class User < ActiveRecord::Base
     facebook = authentications.where(:provider => :facebook).first
     ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
   end
-  
+
+  #overriding from devise:invitable
+  def accept_invitation!    
+    super
+    #add to the inviter's circle
+    @inviter = self.invited_by
+    Rails.logger.info("---------adding invitee to #{@inviter.circle} ")
+#    @inviter.circle.users.create( self )
+#    @inviter.circle.save()
+    self.memberships.create(:circle => self.invited_by.circle)
+    #and inverse
+    Rails.logger.info("---------adding inviter to new circle")
+    self.invited_by.memberships.create(:circle => self.circle)    
+#    self.circle.users.create( @inviter ) 
+#    self.circle.save() 
+  end  
   protected  
     def deliver_invitation
       UserMailer.invitation_instructions(self).deliver
     end
-  
 end

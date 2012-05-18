@@ -24,14 +24,9 @@ class Users::InvitationsController < Devise::InvitationsController
         Rails.logger.info("------------creating #{email}")
         @invitee = User.invite!({:email => email}, current_inviter)
         if @invitee.errors.empty?
-          @invitee.memberships.create(:circle => current_inviter.circle)
           Rails.logger.info("------------created #{@invitee}")
         end
       end
-      #add to the inviter's circle
-      @invitee.memberships.create(:circle => current_inviter.circle)
-      #and inverse
-      current_inviter.memberships.create(:circle => @invitee.circle)
     end
     
     flash.now[:notice] = "Your invitation has been sent to #{params[:user_email].size} friends."
