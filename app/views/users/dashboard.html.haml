@@ -8,7 +8,7 @@
   %ul
     - @job_types.each do |job_type|
       %li
-        #{ link_to job_type, "#{new_job_path}\#job_type_id=#{job_type.id}" }
+        #{ link_to job_type, "#{new_job_path}\?job_type_id=#{job_type.id}" }
 
 - unless @user.future_jobs.empty?
   %section

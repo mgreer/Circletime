@@ -30,7 +30,11 @@ class JobsController < ApplicationController
     @job_types = JobType.all
     @job.circle = current_user.circle
     #set type to default
-    @job.job_type = @job_types[0]
+    if params[ :job_type_id ].nil?
+      @job.job_type = @job_types[0]
+    else
+      @job.job_type = JobType.find( params[ :job_type_id ] )
+    end
     #set default stars to job_type default
     @job.stars = @job.job_type.stars
 
