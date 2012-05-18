@@ -25,7 +25,8 @@ class AuthenticationsController < ApplicationController
       end
       if user.save(:validate => false)
         flash[:notice] = "Welcome to Circletime! <a href='#{url_for( new_user_invitation_path )}'>Add people</a> to start your network of favors.".html_safe
-        sign_in_and_redirect(:user, user)
+        sign_in(:user, user)
+        redirect_to :welcome
       else
         flash[:error] = "Error while creating a user account. Please try again."
         redirect_to root_url

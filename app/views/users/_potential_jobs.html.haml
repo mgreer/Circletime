@@ -1,0 +1,19 @@
+
+- unless @user.potential_jobs.empty?
+  %section
+    %h3 Looks like someone you know is looking for...
+    %ul
+      - @user.potential_jobs.each do |job|
+        %li
+          %p.description
+            A #{ link_to job.job_type, job_path(job) } on
+            %b=job.date.strftime("%b %d")
+            - unless job.job_type.is_misc
+              - if job.work_unit.hours < 23
+                starting at #{ job.time.strftime("%I:%M%P") } 
+              for #{ pluralize( job.duration, job.work_unit.name ) } 
+          %p.detail
+            #{job.user} is offering #{ pluralize( job.stars, "star" ) }
+          %p.action
+            =link_to "I can do it", sign_up_for_job_path(job) , :class => "button small"
+            =link_to "Sorry, I can't do it", "#" , :class => "link"

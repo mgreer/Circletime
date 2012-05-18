@@ -1,0 +1,38 @@
+%h3
+  Welcome! As an introductory gift, we're giving you 3 stars to get started. 
+
+%section
+
+  %p
+    %h4
+      What are stars?
+    %p
+      Stars are the credits you give and earn when giving and receiving babysitting and petsitting jobs. 
+      We recommend one star per hour regardless of the number of kids and one star per day for petsitting. 
+      Keep it simple! 
+
+    %h4
+      How does this work?
+    %p
+      It's easy. You create a petsitting or babysitting request and submit it. 
+      It will only go to the people you add to your personal network. 
+      When someone accepts the job is taken and stars are transferred the day after the date of the sit. 
+      When a friend creates a request, you can accept it and earn your own stars.
+      
+    %h4
+      Why do this?
+    %p
+      You only want people you trust for babysitting and petsitting. 
+      This allows you to create your own network of trusted sitters and let's be frank, it's expensive. 
+      Exchanging services let's you save money. 
+      For instance, have a neighbor you trust? A friend down the street?
+
+    %h4
+      Get started...
+    %ul
+      %li= link_to "Invite people", new_user_invitation_path
+      %li= link_to "See if anyone you know is already here", facebook_friends_path
+      %li= link_to "Send out a sit request", new_job_path
+
+= render "potential_jobs"
+  

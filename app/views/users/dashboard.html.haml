@@ -1,7 +1,6 @@
 - content_for:title, @user.name
 %section
-  %b Stars:
-  = @user.stars
+  %b You have #{ pluralize( @user.stars, "star" ) } available.
   
 %section
   %h3 I need a... 
@@ -19,27 +18,12 @@
           #{ link_to job.job_type, job_path(job) } on #{ job.date }
           ( #{ job.status_msg } )
 
-%section
-  %h3 Do I want to...
-  %ul.questions
-    - @user.potential_jobs.each do |job|
-      %li
-        be a
-        =link_to job.job_type, job_path(job)
-        for 
-        =job.user
-        on
-        %b=job.date.strftime("%b %d")
-        for
-        = job.stars
-        star?
-        %p.action
-          %span.button=link_to "Take It", sign_up_for_job_path(job) 
+= render "potential_jobs"
           
-- if @user.upcoming_work_jobs.size > 0
+- unless @user.upcoming_work_jobs.empty?
   - content_for:aside do
     %h3 I'm signed up to...
-    %ul.questions    
+    %ul    
       - @user.upcoming_work_jobs.each do |job|
         %li
           be a

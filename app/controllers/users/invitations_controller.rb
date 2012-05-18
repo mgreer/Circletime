@@ -40,7 +40,7 @@ class Users::InvitationsController < Devise::InvitationsController
     if resource.errors.empty?
       flash[:notice] = "Congratulations! You started your network and have 1 person in it. <a href='#{url_for( new_user_invitation_path )}'>Add people</a> to start your network of favors.".html_safe
       sign_in(resource_name, resource)
-      respond_with resource, :location => :dashboard
+      respond_with resource, :location => :welcome
     else
       respond_with_navigational(resource){ render :edit }
     end

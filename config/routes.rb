@@ -20,6 +20,7 @@ Circletime::Application.routes.draw do
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/dashboard' => 'users#dashboard' , :as => :dashboard
+  match '/welcome' => 'users#welcome' , :as => :welcome
 
   match '/facebook_friends' => 'users#facebook_friends', :as => :facebook_friends
   match '/facebook_friends/invite' => 'users#fb_create' , :via => :post

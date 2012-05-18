@@ -12,7 +12,16 @@ class UsersController < ApplicationController
       format.json { render :json => @users }
     end
   end
+  
+  def welcome
+    @user = current_user
 
+    respond_to do |format|
+      format.html # dashboard.html.erb
+      format.json { render :json => @user }
+    end
+  end
+  
   # GET /dashboard
   # GET //dashboard.json
   def dashboard
