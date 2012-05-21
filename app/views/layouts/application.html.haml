@@ -56,5 +56,12 @@
               %li= link_to "Your Circle", circles_path
               %li= link_to "Logout", destroy_user_session_path, :method => :delete       
     / #main-container
-        
+
+  :javascript
+    var _gaq=[["_setAccount","#{ GOOGLE_ACCOUNT_ID }"],["_trackPageview"],["_trackPageLoadTime"]];
+    //since we're in not production, set the domainName to none
+    #{Rails.env.production? ? '': "_gaq.push(['_setDomainName', 'none']);"}
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));        
   = javascript_include_tag  "application"    

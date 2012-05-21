@@ -63,5 +63,7 @@ Circletime::Application.configure do
 
   FACEBOOK_APP_ID = "329040470488973"
   FACEBOOK_TOKEN = "e44f23502404b62547bb0a7b798615c9"  
+  
+  GOOGLE_ACCOUNT_ID = "UA-31924754-1"
 
 end
