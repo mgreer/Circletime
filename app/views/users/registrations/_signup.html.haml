@@ -1,0 +1,13 @@
+%section.signin
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = f.error_notification
+    .facebook
+      = link_to 'Signup with Facebook', '/users/auth/facebook/', :class => "button"
+    
+    .inputs
+      = f.input :name, :placeholder => "First and Last Name", :required => true
+      = f.input :email, :placeholder => "Email", :required => true
+      = f.input :password, :placeholder => "Password", :required => true
+      = f.input :password_confirmation, :placeholder => "Password Confirmation", :required => true
+    .actions
+      = f.submit "Join"

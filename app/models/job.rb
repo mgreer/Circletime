@@ -43,7 +43,8 @@ class Job < ActiveRecord::Base
   def default_values
     #attach to default circle
     self.circle = self.user.circle unless self.circle
-    
+    #waiting at the beginning
+    self.status = Job::WAITING unless self.status
   end
 
 end
