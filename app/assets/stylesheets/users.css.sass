@@ -22,25 +22,26 @@
       font-size: .8em
       padding: .2em
 
-.signin form
+.signin 
   width: 20em
   margin: 0 auto
-  input[type=text],input[type=email],input[type=password]
-    width: 91%
-  .facebook
-    overflow: auto
-    margin: 1em
-    margin-bottom: 1em
-    padding-bottom: 1em
-    border-bottom: 1px solid #ddd
-    .button
-      @include gradient-bg(lighten($color_facebook,10%),$color_facebook)
-      color: #fff 
-      float: left
-      font-size: 1.8em
-      line-height: 1em
-      text-decoration: none
-      font-family: $font_text
+  form
+    input[type=text],input[type=email],input[type=password]
+      width: 91%
+    .facebook
+      overflow: auto
+      margin: 1em
+      margin-bottom: 1em
+      padding-bottom: 1em
+      border-bottom: 1px solid #ddd
+      .button
+        @include gradient-bg(lighten($color_facebook,10%),$color_facebook)
+        color: #fff 
+        float: left
+        font-size: 1.8em
+        line-height: 1em
+        text-decoration: none
+        font-family: $font_text
       
 #users-dashboard
   ul li
