@@ -1,6 +1,6 @@
 (function($) {
 
-  $is_mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+  $is_mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
   //$is_mobile = true;
   function slugify(text) {
     text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
