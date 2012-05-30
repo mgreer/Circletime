@@ -33,7 +33,7 @@
         = f.input :duration, :collection => @num_collection, :include_blank => false
         \ 
         %span#units{ :class => "#{@units_class}" }
-          #{@job.job_type.work_unit.name}s,
+          #{ @job.job_type.work_unit.name },
       \ worth
       = f.input :stars, :collection => @star_collection, :include_blank => false
       \.
