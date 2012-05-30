@@ -11,6 +11,10 @@ class Global.MadLib
     $(@form).fadeTo 200, 1, ->
       for $input in $inputs
         $input.resize()
+        if $input instanceof MadLibSelectInput
+          $("li.current a", $input.ul).each =>
+            $real_width = $("li.current a", $input.el).width()
+            $input.el.width($real_width)          
     if !Global.is_tablet && !Global.is_mobile 
       $(@form).find("input.datepicker").datepicker
         dateFormat: "M d, yy"
@@ -62,6 +66,7 @@ class Global.MadLib
       @modifying = false
       $el.append "<ul class=\"display\"></ul>"
       $ul = $("ul", $el)
+      @el = $el
       $("option", $input).each ->
         $option = $(this)
         $ul.append "<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>"
