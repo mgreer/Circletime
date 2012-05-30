@@ -8,7 +8,11 @@ class Global.MadLib
       new MadLibSelectInput( this )
     $(@form).find("textarea").each ->
       new MadLibTextareaInput( this )    
-    $(@form).fadeTo 200, 1, "linear"    
+    $(@form).fadeTo 200, 1, "linear"  
+    if !Global.is_tablet && !Global.is_mobile 
+      $(@form).find("input.datepicker").datepicker
+        dateFormat: "M d, yy"
+        minDate: new Date()
       
   class MadLibInput
     constructor: (@input) ->
@@ -36,7 +40,6 @@ class Global.MadLib
 
   class MadLibTextInput extends MadLibInput
     constructor: (@input) ->
-      super
       $( @input ).keydown =>
         @resize()
 
@@ -68,13 +71,15 @@ class Global.MadLib
         new MadLibOption( this )
       $(document).click ->
         $("ul.lit li.option", this).filter(".current").click()
-      $("li",@ul).hover ->
-        $window = $(window).height()
-        $top = $(this).offset()["top"]
-        if $top < 0
-          this.madlib.turn()
-        else if $top+$(this).height() > $(window).height() 
-          this.madlib.turn(false)
+      #allow it to scroll up and down to show a long list
+      if !Global.is_tablet && !Global.is_mobile 
+        $("li",@ul).hover ->
+          $window = $(window).height()
+          $top = $(this).offset()["top"]
+          if $top < 0
+            this.madlib.turn()
+          else if $top+$(this).height() > $(window).height() 
+            this.madlib.turn(false)
       
     class MadLibOption
       constructor: (@listItem) ->
@@ -88,6 +93,7 @@ class Global.MadLib
       select: ( $ev ) =>
         $ev.stopPropagation()
         $(@listItem).siblings().toggle().removeClass "current"
+        #if choosing an option
         if @ul.hasClass("lit")
           @el.find("select option:selected").removeAttr "selected"
           @option.attr "selected", "selected"
@@ -95,6 +101,8 @@ class Global.MadLib
           @resize()
           @option.trigger "change"
           $(document).unbind "keydown"
+          
+        #if opening the option list
         else
           #capture keys
           $(document).keydown (event) =>
