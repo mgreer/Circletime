@@ -1,5 +1,5 @@
 
-class App.MadLib  
+class Global.MadLib  
   constructor: (@form) ->
     console.log @form
     $(@form).find("input").each ->
@@ -68,24 +68,32 @@ class App.MadLib
         new MadLibOption( this )
       $(document).click ->
         $("ul.lit li.option", this).filter(".current").click()
+      $("li",@ul).hover ->
+        $window = $(window).height()
+        $top = $(this).offset()["top"]
+        if $top < 0
+          this.madlib.turn()
+        else if $top+$(this).height() > $(window).height() 
+          this.madlib.turn(false)
       
     class MadLibOption
-      constructor: (@input) ->
-        @el = $(@input).parents(".custom_select")
+      constructor: (@listItem) ->
+        @el = $(@listItem).parents(".custom_select")
         @ul = $("ul", @el)
-        $(@input).click ($ev) =>
+        @option = @el.find("select option[value=" + $(@listItem).attr("data-value") + "]")
+        @listItem.madlib = this
+        $(@listItem).click ($ev) =>
           @select( $ev )
       
       select: ( $ev ) =>
         $ev.stopPropagation()
-        $(@input).siblings().toggle().removeClass "current"
+        $(@listItem).siblings().toggle().removeClass "current"
         if @ul.hasClass("lit")
           @el.find("select option:selected").removeAttr "selected"
-          $option = @el.find("select option[value=" + $(@input).attr("data-value") + "]")
-          $option.attr "selected", "selected"
-          $(@input).addClass "current"
+          @option.attr "selected", "selected"
+          $(@listItem).addClass "current"
           @resize()
-          $option.trigger "change"
+          @option.trigger "change"
           $(document).unbind "keydown"
         else
           #capture keys
@@ -114,13 +122,13 @@ class App.MadLib
         $newTop = parseInt(@ul.css("top")) + $moveAmount
         @ul.animate
           top: $newTop
-        , 200, "linear"
+        , 100, "linear"
        
       resize: =>
         $real_width = $("li.current a", @ul).width()
         @ul.parent().animate
           width: $real_width
-        , 200, "linear"                               
+        , 100, "linear"                               
 
     resize: =>
       $content = $("option:selected", $(@input)).text()
