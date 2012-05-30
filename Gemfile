@@ -12,6 +12,7 @@ gem 'thin'
 
 gem 'dalli'
 gem 'ri_cal'
+gem "sourceninja", "~> 0.0.6"
 
 gem 'json'
 

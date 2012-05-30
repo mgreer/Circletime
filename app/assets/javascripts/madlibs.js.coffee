@@ -1,14 +1,16 @@
 
 class Global.MadLib  
   constructor: (@form) ->
-    console.log @form
+    $inputs = []
     $(@form).find("input").each ->
-      new MadLibTextInput( this )
+      $inputs.push new MadLibTextInput( this )
     $(@form).find("select").each ->
-      new MadLibSelectInput( this )
+      $inputs.push new MadLibSelectInput( this )
     $(@form).find("textarea").each ->
-      new MadLibTextareaInput( this )    
-    $(@form).fadeTo 200, 1, "linear"  
+      $inputs.push new MadLibTextareaInput( this )    
+    $(@form).fadeTo 200, 1, ->
+      for $input in $inputs
+        $input.resize()
     if !Global.is_tablet && !Global.is_mobile 
       $(@form).find("input.datepicker").datepicker
         dateFormat: "M d, yy"
@@ -19,6 +21,7 @@ class Global.MadLib
       $( @input ).change =>
         @resize
       @resize
+      this
     test_size: (content, object) ->
       $test = $("body").append("<div class='tester' id='tester'>&nbsp;</div>")
       $test = $("#tester")
@@ -42,12 +45,13 @@ class Global.MadLib
     constructor: (@input) ->
       $( @input ).keydown =>
         @resize()
+      super
 
   class MadLibTextareaInput extends MadLibInput
     constructor: (@input) ->
-      super
       $( @input ).keyup ->
         $(this).height $(this).height() + 30  while $(this).outerHeight() < @scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))
+      super
 
   class MadLibSelectInput extends MadLibInput
     constructor: (@input) ->
@@ -80,7 +84,14 @@ class Global.MadLib
             this.madlib.turn()
           else if $top+$(this).height() > $(window).height() 
             this.madlib.turn(false)
-      
+      super
+ 
+    resize: =>
+      $content = $("option:selected", $(@input)).text()
+      return  if $content is ""
+      $dim = @test_size($content, $(@input))
+      $(@input).width $dim.width + 10
+           
     class MadLibOption
       constructor: (@listItem) ->
         @el = $(@listItem).parents(".custom_select")
@@ -138,8 +149,3 @@ class Global.MadLib
           width: $real_width
         , 100, "linear"                               
 
-    resize: =>
-      $content = $("option:selected", $(@input)).text()
-      return  if $content is ""
-      $dim = @test_size($content, $(@input))
-      $(@input).width $dim.width + 10
