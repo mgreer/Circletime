@@ -73,7 +73,7 @@ class Global.MadLib
         $("ul.lit li.option", this).filter(".current").click()
       #allow it to scroll up and down to show a long list
       if !Global.is_tablet && !Global.is_mobile 
-        $("li",@ul).hover ->
+        $("li",@ul).mouseover ->
           $window = $(window).height()
           $top = $(this).offset()["top"]
           if $top < 0
@@ -124,7 +124,7 @@ class Global.MadLib
         @ul.toggleClass "lit"
 
       turn: ($isUp = true) =>
-        $moveAmount = $("li",@ul).height()
+        $moveAmount = $("li",@ul).height()+2
         if !$isUp
           $moveAmount = $moveAmount * -1
         $newTop = parseInt(@ul.css("top")) + $moveAmount
