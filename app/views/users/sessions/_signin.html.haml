@@ -1,5 +1,7 @@
 %section.signin
   = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .error
+      = f.error_notification
     .facebook
       = link_to 'Login with Facebook', '/users/auth/facebook/', :class => "button"
     
