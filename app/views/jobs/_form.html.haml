@@ -27,10 +27,10 @@
         = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'datepicker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }
         \ at
-        = f.input :time, :as => :string, :input_html => { :value => @job.time.strftime("%H"), :size => "1" }
+        = f.input :time, :collection => 1..12, :selected => @job.time.strftime("%H").to_i
         \:
-        = f.input :time, :as => :string, :input_html => { :value => @job.time.strftime("%M"), :size => "1" }
-        = f.input :time, :as => :string, :input_html => { :value => @job.time.strftime("%p"), :size => "1" }
+        = f.input :time, :collection => 0..60, :label_method => lambda { |obj| "#{obj.to_s.rjust(2, '0')}" }, :selected => @job.time.strftime("%M").to_i
+        = f.input :time, :collection => ["am","pm"], :selected => @job.time.strftime("%p").downcase
         
       %span#duration{ :class => "#{@duration_class}" }
         \ for

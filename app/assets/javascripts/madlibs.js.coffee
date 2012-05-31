@@ -11,7 +11,10 @@ class Global.MadLib
     $(@form).fadeTo 200, 1, ->
       for $input in $inputs
         $input.resize()
-        $("li.current a",$input.ul).click()
+        if $input instanceof MadLibSelectInput
+          $("li.current a", $input.ul).each =>
+            $real_width = $("li.current a", $input.el).width()
+            $input.el.width($real_width)          
     if !Global.is_tablet && !Global.is_mobile 
       $(@form).find("input.datepicker").datepicker
         dateFormat: "M d, yy"
@@ -31,7 +34,7 @@ class Global.MadLib
         "font-family": $(object).css("font-family")
         "font-weight": $(object).css("font-weight")
         "letter-spacing": $(object).css("letter-spacing")
-      $test.html content + "W"
+      $test.html content
       $height = $test.height()
       $width = $test.width()
       $test.remove()
@@ -56,6 +59,8 @@ class Global.MadLib
 
   class MadLibSelectInput extends MadLibInput
     constructor: (@input) ->
+      if Global.is_mobile
+        return
       $input = $(@input)
       $input.wrap "<div class=\"custom_select\"></div>"
       $input.val $input.find("option:selected").val()
@@ -63,6 +68,7 @@ class Global.MadLib
       @modifying = false
       $el.append "<ul class=\"display\"></ul>"
       $ul = $("ul", $el)
+      @el = $el
       $("option", $input).each ->
         $option = $(this)
         $ul.append "<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>"
@@ -86,7 +92,13 @@ class Global.MadLib
           else if $top+$(this).height() > $(window).height() 
             this.madlib.turn(false)
       super
-      
+ 
+    resize: =>
+      $content = $("option:selected", $(@input)).text()
+      return  if $content is ""
+      $dim = @test_size($content, $(@input))
+      $(@input).width $dim.width + 10
+           
     class MadLibOption
       constructor: (@listItem) ->
         @el = $(@listItem).parents(".custom_select")
@@ -144,8 +156,3 @@ class Global.MadLib
           width: $real_width
         , 100, "linear"                               
 
-    resize: =>
-      $content = $("option:selected", $(@input)).text()
-      return  if $content is ""
-      $dim = @test_size($content, $(@input))
-      $(@input).width $dim.width + 10
