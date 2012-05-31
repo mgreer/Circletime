@@ -24,10 +24,14 @@
       = f.association :job_type, :include_blank => false
       %span#date
         \ on
-        = f.input :time, :as => :string, :input_html => { :type => "date", :class => 'datepicker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
+        = f.input :time, :as => :string, :input_html => { :name => "job[time(1i)]", :type => "date", :class => 'datepicker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }
         \ at
-        = f.input :time, :as => :time, :ignore_date => true, :ampm => true, :default => Time.now.change(:hour => 19, :min => 00), :minute_step => 15,:time_separator => ":",:datetime_separator => "", :start_hour => 9,:end_hour => 24
+        = f.input :time, :input_html => { :name => "job[time(2i)]" }, :collection => 1..12, :selected => @job.time.strftime("%H").to_i
+        \:
+        = f.input :time, :input_html => { :name => "job[time(3i)]" }, :collection => [0,15,30,45], :label_method => lambda { |obj| "#{obj.to_s.rjust(2, '0')}" }, :selected => @job.time.strftime("%M").to_i
+        = f.input :time, :input_html => { :name => "job[time(4i)]" }, :collection => ["am","pm"], :selected => @job.time.strftime("%p").downcase
+        
       %span#duration{ :class => "#{@duration_class}" }
         \ for
         = f.input :duration, :collection => @num_collection, :include_blank => false

@@ -34,7 +34,7 @@ class Global.MadLib
         "font-family": $(object).css("font-family")
         "font-weight": $(object).css("font-weight")
         "letter-spacing": $(object).css("letter-spacing")
-      $test.html content + "W"
+      $test.html content
       $height = $test.height()
       $width = $test.width()
       $test.remove()
@@ -59,6 +59,8 @@ class Global.MadLib
 
   class MadLibSelectInput extends MadLibInput
     constructor: (@input) ->
+      if Global.is_mobile
+        return
       $input = $(@input)
       $input.wrap "<div class=\"custom_select\"></div>"
       $input.val $input.find("option:selected").val()
