@@ -145,10 +145,8 @@ class Global.MadLib
         $moveAmount = $("li",@ul).height()+2
         if !$isUp
           $moveAmount = $moveAmount * -1
-        $newTop = parseInt(@ul.css("top")) + $moveAmount
-        @ul.css "top", $newTop
+        @ul.css "top", parseInt(@ul.css("top")) + $moveAmount
        
       resize: =>
-        $real_width = $("li.current a", @ul).width()
-        @ul.parent().width $real_width              
+        @ul.parent().width $("li.current a", @ul).width()              
 
