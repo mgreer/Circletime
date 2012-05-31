@@ -14,7 +14,7 @@
       #{@job.date.strftime("%b %d")} 
     - unless @job.job_type.is_misc
       - if @job.work_unit.hours < 23
-        starting at #{@job.time.strftime("%I:%M%P")} 
+        starting at #{@job.time.strftime("%I:%M%p")} 
       for #{pluralize(@job.duration,@job.work_unit.name)} 
       \.
     - unless @job.description.nil?
