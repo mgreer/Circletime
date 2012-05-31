@@ -27,10 +27,11 @@ $width_container: 960px
   background-image: -ms-linear-gradient(top, $start, $end)
   background-image: -o-linear-gradient(top, $start, $end)
 
-@mixin transition($sec, $type:opacity)
-  -webkit-transition: $type $sec+s
-  -moz-transition:$type $sec+s
-  -o-transition:$type $sec+s
+@mixin transition($type:opacity, $ms:200)
+  transition: $type $ms+ms
+  -webkit-transition: $type $ms+ms
+  -moz-transition: $type $ms+ms
+  -o-transition: $type $ms+ms
 
 @mixin edged($width:10)
   box-shadow: 0 0 0 $width+px rgb(0,0,0)

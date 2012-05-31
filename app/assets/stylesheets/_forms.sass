@@ -114,11 +114,13 @@ a.button.small
     white-space: nowrap
 
   .custom_select
+    @include transition(width,200)
     height: 40px
     display: inline-block
     position: relative
     ul    
       position: absolute
+      @include transition(top,200)
       padding: 0
       margin: 0
       top: 0
