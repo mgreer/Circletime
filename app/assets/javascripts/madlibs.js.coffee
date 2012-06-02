@@ -84,13 +84,17 @@ class Global.MadLib
         $("ul.lit li.option", this).filter(".current").click()
       #allow it to scroll up and down to show a long list
       if !Global.is_tablet && !Global.is_mobile 
-        $("li",@ul).mouseover ->
+        $("li",$ul).mouseover ->
           $window = $(window).height()
           $top = $(this).offset()["top"]
           if $top < 0
             this.madlib.turn()
           else if $top+$(this).height() > $(window).height() 
             this.madlib.turn(false)
+      else
+        $ul.addClass "touchable" 
+        $ul.draggable( { axis: "y", grid: [50, $("li",$ul).height()] } )
+          
       super
  
     resize: =>
