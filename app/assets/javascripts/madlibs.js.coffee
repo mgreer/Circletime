@@ -93,7 +93,7 @@ class Global.MadLib
             this.madlib.turn(false)
       else
         $ul.addClass "touchable" 
-        $ul.draggable( { axis: "y", grid: [50, $("li",$ul).height()] } )
+        $ul.draggable( { axis: "y", grid: [50, $("li",$ul).first().height()] } )
           
       super
  
