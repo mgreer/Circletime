@@ -30,10 +30,15 @@ class JobsController < ApplicationController
     @job_types = JobType.all
     @job.circle = current_user.circle
     #set type to default
-    if params[ :job_type_id ].nil?
-      @job.job_type = @job_types[0]
-    else
+    unless params[ :job_type_id ].nil?
       @job.job_type = JobType.find( params[ :job_type_id ] )
+    else
+      #choose same type as last job if there is one
+      unless current_user.latest_job.nil?
+        @job.job_type = current_user.latest_job.job_type
+      else
+        @job.job_type = @job_types[0]
+      end
     end
     #set default stars to job_type default
     @job.stars = @job.job_type.stars

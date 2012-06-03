@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     self.circle_jobs.where('jobs.time > ? AND jobs.worker_id IS NULL', Time.now.localtime )
   end
   
+  def latest_job
+    self.jobs.last
+  end
+  
   def upcoming_work_jobs
     self.work_jobs.where('jobs.time > ?', Time.now.localtime )
   end

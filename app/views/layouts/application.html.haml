@@ -30,6 +30,13 @@
           = link_to "Circletime", :root
           - if content_for?(:title)
             %span= yield :title
+        - if user_signed_in?
+          %nav
+            %ul
+              %li= link_to 'Invite a Friend', new_user_invitation_path
+              %li= link_to 'Create a Job', new_job_path
+              %li= link_to "Your Circle", circles_path
+              %li= link_to "Logout", destroy_user_session_path, :method => :delete       
     / #header-container
     
     - unless flash.empty? || ( flash[:notice].blank? && flash[:error].blank? && flash[:message].blank? )
@@ -48,13 +55,6 @@
     / #main-container
     #footer-container
       %footer.wrapper
-        - if user_signed_in?
-          %nav
-            %ul
-              %li= link_to 'Invite a Friend', new_user_invitation_path
-              %li= link_to 'Create a Job', new_job_path
-              %li= link_to "Your Circle", circles_path
-              %li= link_to "Logout", destroy_user_session_path, :method => :delete       
     / #main-container
 
   :javascript
