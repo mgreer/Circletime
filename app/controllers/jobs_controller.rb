@@ -26,7 +26,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     @job = Job.new
-    @job.time = Time.new().advance(:hours => 1)
+    @job.time = Time.new().advance(:hours => 1,:days => 1)
     @job_types = JobType.all
     @job.circle = current_user.circle
     #set type to default
