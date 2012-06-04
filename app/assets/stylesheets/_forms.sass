@@ -130,9 +130,11 @@ a.button.small
       &.touchable
         @include transition(top,200)
       &.lit
-        @include transition(top,0)
+        @include transition(top,200)
         box-shadow: 0 0 2px 2px rgb(200,200,200)
         z-index: 2
+      &.touchable.lit
+        @include transition(top,0)      
       li
         list-style-type: none
         cursor: pointer
