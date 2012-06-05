@@ -23,8 +23,8 @@ class Global.MadLib
   class MadLibInput
     constructor: (@input) ->
       $( @input ).change =>
-        @resize
-      @resize
+        @resize()
+      @resize()
       this
     test_size: (content, object) ->
       $test = $("body").append("<div class='tester' id='tester'>&nbsp;</div>")
@@ -60,6 +60,7 @@ class Global.MadLib
   class MadLibSelectInput extends MadLibInput
     constructor: (@input) ->
       if Global.is_mobile
+        super
         return
       $input = $(@input)
       $input.wrap "<div class=\"custom_select\"></div>"
@@ -98,6 +99,8 @@ class Global.MadLib
  
     resize: =>
       $content = $("option:selected", $(@input)).text()
+      console.log $content
+      console.log "---"
       return  if $content is ""
       $dim = @test_size($content, $(@input))
       $(@input).width $dim.width + 10

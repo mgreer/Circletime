@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def timezone
+    ActiveSupport::TimeZone.new(self.time_zone)
+  end
+  
   def future_jobs
     self.jobs.where('jobs.time > ?', Time.now.localtime )
   end

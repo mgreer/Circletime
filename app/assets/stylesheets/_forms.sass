@@ -98,12 +98,13 @@ a.button.small
     font-family: $font_title
     font-size: 1em
     color: #21759B
-    border-bottom: 1px dashed #c2c2c2    
-  option  
-    font-family: $font_title
-    font-size: inherit
-    border: none
-    background: none
+    border-bottom: 1px dashed #c2c2c2  
+    @include transition(width,200)      
+    option  
+      font-family: $font_title
+      font-size: inherit
+      border: none
+      background: none
   .input
     position: relative
   .hint
@@ -165,10 +166,12 @@ a.button.small
         &.option a
           
       &.lit li 
-        background-color: #eee
+        background-color: lighten($color_cool,20%)
         border: none
         &:hover 
-          background-color: #ccc
+          background-color: lighten($color_cool,40%)
+        a
+          color: $color_hot
 
 /* Smartphones (portrait and landscape) -----------
 @media only screen and (min-width : 320px) and (max-width : 569px)
@@ -182,6 +185,7 @@ a.button.small
       margin: 0
       padding: 0
       overflow: hidden
+      color: $color_link
     .custom_select ul
       margin-top: 8px
       left: -5px

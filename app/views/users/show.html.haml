@@ -15,6 +15,9 @@
   %b Worked Jobs:
   = @user.work_jobs
 %p
+  %b Timezone:
+  = @user.timezone
+%p
   %b Jobs:
   - @user.jobs.each do |job|
     = link_to job, job_path(job)

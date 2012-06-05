@@ -32,11 +32,13 @@ $ ->
       $("#time,#duration",$el).removeClass("hide")      
     else
       $("#duration",$el).removeClass("hide")       
-      $("#time",$el).addClass("hide")       
+      $("#time",$el).addClass("hide")     
+    true  
 
   #on stars and duration change
     #correct unit plural
   $el.find("select#job_duration").change ->
     fixUnits()
+    true
     
     
