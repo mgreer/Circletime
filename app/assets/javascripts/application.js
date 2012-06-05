@@ -8,3 +8,5 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require_tree .
+//= require detect_timezone
+//= require jquery.detect_timezone

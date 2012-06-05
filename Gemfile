@@ -13,6 +13,7 @@ gem 'thin'
 gem 'dalli'
 gem 'ri_cal'
 gem "sourceninja", "~> 0.0.6"
+gem 'detect_timezone_rails'
 
 gem 'json'
 
@@ -38,12 +39,10 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
-#gem 'therubyracer'
 gem "haml"
 gem "will_paginate"
 gem "mocha"
 
-#gem "formtastic", "~> 2.0.2"
 gem "simple_form"
 gem 'ui_datepicker-rails3'
 
@@ -53,7 +52,5 @@ gem 'omniauth'
 gem 'oauth2'
 gem 'fb_graph'
 gem 'omniauth-facebook'
-
-#gem "combined_time_select", "~> 0.0.1"
 
 gem 'newrelic_rpm'

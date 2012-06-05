@@ -4,7 +4,8 @@
   
 body, p, ol, ul, td 
   font-family: $font_text
-
+body #main-container a
+  color: $color_link!important
 h1
   font-family: $font_title
   font-style: normal
@@ -30,11 +31,11 @@ section
 nav li
   float: left
   padding: 0
-  margin: 0 .3em 0 0
+  margin: .3em .3em 0 0
   a
-    padding: .2em .3em
+    padding: .3em
     font-weight: normal
-    color: $color_link!important
+    color: $color_link
 
 article h1
   font-size: 100%
@@ -57,8 +58,7 @@ aside
   width: 100%
 
 #messaging
-  width: 70%
-  margin: 0 auto
+  margin: 0 10em
   @include gradient-bg($color_special,lighten($color_special,10%))
   box-shadow: 0 5px 10px #aaa
   padding: .2em 1em
@@ -90,22 +90,36 @@ nav.tabs
  * ===================
 
 #header-container
-  border-bottom: 20px solid darken($color_cool,10%)
+  border-bottom: 2px solid darken($color_cool,10%)
 
 #footer-container, #main aside
-  border-top: 20px solid darken($color_cool,10%)
+  border-top: 2px solid darken($color_cool,10%)
 
 #header-container, #footer-container, #main aside
-  background: lighten($color_cool,50%)
+  background: darken($color_cool,0%)
 
-nav li a
-  background: none
-  font-color: $color_link
+#header-container 
+  header a
+    background: none
+    color: lighten($color_cool,40%)
+    &:hover
+      color: lighten($color_cool,70%)
+  #title 
+    span
+      color: lighten($color_cool,70%)
+    a
+      color: lighten($color_hot,0%)
+      text-decoration: none
 
-#title
-  color: white
+body
+  background-color: lighten($color_cool,40%)  
+  background-image: url("https://wishbonestatic.s3.amazonaws.com/img/bg.jpg")
 
-::-moz-selection,::selection
+::-moz-selection
+  background: darken($color_cool,100%)
+  color: #fff
+  text-shadow: none 
+::selection
   background: darken($color_cool,100%)
   color: #fff
   text-shadow: none 
