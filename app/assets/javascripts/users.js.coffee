@@ -47,5 +47,5 @@ $(document).ready ->
         $input.remove()
       false
 
-  #if $("#devise-registrations-new")?
-  #  $("#user_time_zone").set_timezone()
+  if $("#devise-registrations-new #new_user")?
+    $("#user_time_zone").set_timezone()

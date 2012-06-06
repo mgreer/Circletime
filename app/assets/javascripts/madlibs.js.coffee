@@ -99,9 +99,7 @@ class Global.MadLib
  
     resize: =>
       $content = $("option:selected", $(@input)).text()
-      console.log $content
-      console.log "---"
-      return  if $content is ""
+      return if $content is ""
       $dim = @test_size($content, $(@input))
       $(@input).width $dim.width + 10
            

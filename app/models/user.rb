@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :location, :time_zone
+  attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :location, :timezone_offset
   
   has_many :authentications, :dependent => :delete_all  
 
@@ -23,6 +23,15 @@ class User < ActiveRecord::Base
 
   INVITED = 0
   AUTHORIZED = 1
+  
+  TZ_MAPPING = {
+    -10=> "Hawaii",
+    -9=> "Alaska",
+    -8=> "Pacific Time (US & Canada)",
+    -7=> "Mountain Time (US & Canada)",
+    -6=> "Central Time (US & Canada)",
+    -5=> "Eastern Time (US & Canada)"
+  }
 
   def apply_omniauth(auth)
     # In previous omniauth, 'user_info' was used in place of 'raw_info'
@@ -50,6 +59,10 @@ class User < ActiveRecord::Base
     return self.name.split(' ', 2)[0]
   end
   
+  def last_name
+    return self.name.split(' ', 2)[1]
+  end
+  
   #add a member to the circle
   def add_member(member)
     Rails.logger.info("------------adding #{member} to circle")
@@ -63,7 +76,11 @@ class User < ActiveRecord::Base
   end
   
   def timezone
-    ActiveSupport::TimeZone.new(self.time_zone)
+    unless self.timezone_offset.nil? || !TZ_MAPPING.key?( self.timezone_offset )
+      TZ_MAPPING.fetch( self.timezone_offset )
+    else
+      TZ_MAPPING.fetch( -8 )
+    end
   end
   
   def future_jobs

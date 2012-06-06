@@ -26,7 +26,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     @job = Job.new
-    @job.time = Time.new().advance(:hours => 1,:days => 1)
+    @job.time = Time.zone.now().advance(:hours => 1,:days => 1)
     @job_types = JobType.all
     @job.circle = current_user.circle
     #set type to default
@@ -197,7 +197,7 @@ class JobsController < ApplicationController
   def close_open_jobs
     #find open but completed jobs
     Rails.logger.info("---------LOOKING FOR ASSIGNED JOBS TO CLOSE----------!!!")
-    @jobs = Job.where("jobs.status = ? AND jobs.endtime < ?", Job::ASSIGNED, Time.now.localtime )
+    @jobs = Job.where("jobs.status = ? AND jobs.endtime < ?", Job::ASSIGNED, Time.zone.now.localtime )
     @jobs.each do |job|
       Rails.logger.info("-------closing #{job}")
       Rails.logger.info("---------moving #{job.stars} stars from #{job.user.name} to #{job.worker.name}")
