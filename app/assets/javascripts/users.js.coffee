@@ -47,5 +47,6 @@ $(document).ready ->
         $input.remove()
       false
 
-  if $("#devise-registrations-new #new_user")?
-    $("#user_time_zone").set_timezone()
+  if $("#devise-registrations-new #new_user")? || $("#users-invitations-edit")?
+    $tz = ((new Date().getTimezoneOffset()/60)+1)*-1
+    $("#user_timezone_offset").val( $tz )

@@ -3,7 +3,7 @@
     = f.input :name
     = f.input :stars
     = f.input :location
-    = f.input :time_zone, :priority => /US/
+    = f.input :timezone_offset, :collection => User::TZ_MAPPING.invert()
     = f.input :email
   .actions
     = f.button :submit

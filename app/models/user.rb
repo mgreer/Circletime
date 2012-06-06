@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
   AUTHORIZED = 1
   
   TZ_MAPPING = {
-    -10=> "Hawaii",
-    -9=> "Alaska",
-    -8=> "Pacific Time (US & Canada)",
-    -7=> "Mountain Time (US & Canada)",
+    -5=> "Eastern Time (US & Canada)",
     -6=> "Central Time (US & Canada)",
-    -5=> "Eastern Time (US & Canada)"
+    -7=> "Mountain Time (US & Canada)",
+    -8=> "Pacific Time (US & Canada)",
+    -9=> "Alaska",
+    -10=> "Hawaii"
   }
 
   def apply_omniauth(auth)
