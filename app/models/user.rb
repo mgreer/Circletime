@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
     self.name = auth['extra']['raw_info']['name']
     self.email = auth['extra']['raw_info']['email']
     self.location = auth['extra']['raw_info']['location']['name']
+    self.timezone_offset = auth['extra']['raw_info']['timezone']
     
     # Again, saving token is optional. If you haven't created the column in authentications table, this will fail
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'])

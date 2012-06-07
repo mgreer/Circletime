@@ -33,9 +33,8 @@
         - if user_signed_in?
           %nav
             %ul
-              %li= link_to 'Invite a Friend', new_user_invitation_path
-              %li= link_to 'Create a Job', new_job_path
-              %li= link_to "Your Circle", circles_path
+              %li= link_to 'Invite a friend', new_user_invitation_path
+              %li= link_to 'Ask a favor', new_job_path
               %li= link_to "Logout", destroy_user_session_path, :method => :delete       
     / #header-container
     

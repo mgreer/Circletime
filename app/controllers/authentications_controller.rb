@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
         user = test_user
       end
       if user.save(:validate => false)
-        flash[:notice] = "Welcome to Circletime! <a href='#{url_for( new_user_invitation_path )}'>Add people</a> to start your network of favors.".html_safe
+        flash[:notice] = "Welcome to Poppy! <a href='#{url_for( new_user_invitation_path )}'>Add people</a> to start your network of favors.".html_safe
         sign_in(:user, user)
         redirect_to :welcome
       else
