@@ -13,6 +13,10 @@ class Job < ActiveRecord::Base
     job_type.work_unit
   end
   
+  def time_in_zone
+    time.in_time_zone( self.user.timezone )
+  end
+  
   def date
     time.to_date
   end

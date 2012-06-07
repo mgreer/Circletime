@@ -10,7 +10,7 @@
             %b=job.date.strftime("%b %d")
             - unless job.job_type.is_misc
               - if job.work_unit.hours < 23
-                starting at #{ job.time.strftime("%I:%M%P") } 
+                starting at #{ job.time_in_zone.strftime("%I:%M%p (%Z)") } 
               for #{ pluralize( job.duration, job.work_unit.name ) } 
           %p.detail
             #{job.user} is offering #{ pluralize( job.stars, "star" ) }

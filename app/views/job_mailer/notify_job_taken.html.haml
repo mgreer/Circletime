@@ -13,7 +13,7 @@
       %b
         #{@job.date.strftime("%b %d")} 
         - if @job.work_unit.hours < 23
-          at #{@job.time.strftime("%I:%M%P")} 
+          at #{@job.time_in_zone.strftime("%I:%M%p (%Z)")} 
 
       see you then!
     %br
