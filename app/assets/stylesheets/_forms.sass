@@ -93,17 +93,20 @@ a.button.small
     width: 100%
   /* ----- good defaults for non-JS or mobile    
   select
+    -webkit-appearance: listbox
     border: none
     background: none
     font-family: $font_title
     font-size: 1em
     color: #21759B
-    border-bottom: 1px dashed #c2c2c2  
+    border-bottom: 1px dashed #c2c2c2
+    padding: 0 
     @include transition(width,200)      
     option  
       font-family: $font_title
       font-size: inherit
       border: none
+      padding: 0
       background: none
   .input
     position: relative
@@ -154,7 +157,7 @@ a.button.small
           font-size: 100%
           font-family: $font_title
           line-height: 100%
-          padding: .15em .2em                    
+          padding: .15em .2em        
           white-space: nowrap
           color: $color_link
           min-height: 40px
