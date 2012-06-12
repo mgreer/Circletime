@@ -66,5 +66,7 @@ Circletime::Application.configure do
   FACEBOOK_TOKEN = "e44f23502404b62547bb0a7b798615c9"  
   
   GOOGLE_ACCOUNT_ID = "UA-31924754-1"
+  
+  FONTDECK_URL = "http://f.fontdeck.com/s/css/J8lPZ2Tmm95McLfprLcxXpR+LtE/www.poppygo.com/18062.css"
 
 end

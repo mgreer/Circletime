@@ -15,10 +15,7 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "author"}/
     %meta{:name=>"viewport",:content=>"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"}
-    - if (ENV['RAILS_ENV']=='development')
-      = stylesheet_link_tag     "http://f.fontdeck.com/s/css/Ejh9NZvG+vyk1dvMsJtcSfagWLs/localhost/9017.css"
-    - elsif (ENV['RAILS_ENV']=='production')
-      = stylesheet_link_tag     "http://f.fontdeck.com/s/css/J8lPZ2Tmm95McLfprLcxXpR+LtE/www.poppygo.com/18062.css"
+    = stylesheet_link_tag     FONTDECK_URL
     = stylesheet_link_tag    "application"
     = csrf_meta_tags
     /[if lt IE 9]
