@@ -6,21 +6,25 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(auth['provider'], auth['uid'])
 
     if authentication
-      # Authentication found, sign the user in.
+      Rails.logger.info("--------Authentication found, sign the user in.")
       flash[:notice] = "Welcome back, #{authentication.user.first_name}"
       sign_in_and_redirect(:user, authentication.user)
     else
-      # Authentication not found, thus a new user.
+      Rails.logger.info("--------Authentication not found, maybe a new user.")
       test_user = User.new
       test_user.apply_omniauth(auth)
-      # See if they got another form of invitation
+      Rails.logger.info("----------See if we know this user already...")
+      Rails.logger.info("---------- Does their email exist?")
       user = User.find_by_email( test_user.email )
-      #if so use the invitation up
       if user && user.invitation_token
+        Rails.logger.info("----------Yes, they were invited, use the invitation up.")
         user = User.accept_invitation!( :invitation_token => user.invitation_token, :name => test_user.name, :location => test_user.location )
         user.apply_omniauth(auth)
-      #else just use the same user, and attach the authentication
+      elsif user
+        Rails.logger.info("------------ Yes, attach auth to that user for future signin")
+        user.apply_omniauth(auth)        
       else
+        Rails.logger.info("------------ No, it is a new user entirely")
         user = test_user
       end
       if user.save(:validate => false)
