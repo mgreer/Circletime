@@ -37,6 +37,7 @@ nav li
   padding: 0
   margin: .3em .3em 0 0
   a
+    background: none
     padding: .3em
     font-weight: normal
     color: $color_link
@@ -100,6 +101,9 @@ nav.tabs
 
 #footer-container, #main aside
   border-top: 2px solid darken($color_cool,10%)
+  overflow: auto
+  nav li a
+    padding: 0
 
 #header-container, #footer-container, #main aside
   background: darken($color_cool,0%)
