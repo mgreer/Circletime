@@ -35,12 +35,16 @@ section
 nav li
   float: left
   padding: 0
-  margin: .3em .3em 0 0
+  margin: .3em 0 0 0
   a
     background: none
-    padding: .3em
+    padding: .2em
+    margin: 0
     font-weight: normal
     color: $color_link
+    &:hover
+      text-decoration: underline
+      color: lighten( $color_link, 20% )
 
 article h1
   font-size: 100%
@@ -136,6 +140,8 @@ body
   
 /* Smartphones (portrait and landscape) -----------
 @media only screen and (min-width : 320px) and (max-width : 569px)
+  body
+    width: 320px
   #messaging
     margin: 0 2em
     box-shadow: none
