@@ -2,37 +2,31 @@
 %section
   %b You have #{ pluralize( @user.stars, "star" ) } available.
   
-%section
-  %h3 I need a... 
-  %ul
-    - @job_types.each do |job_type|
-      %li
-        #{ link_to job_type, "#{new_job_path}\?job_type_id=#{job_type.id}" }
+%section.actions
+  = link_to 'Ask a favor', new_job_path, :class => "button"
+  = link_to 'Invite friend', new_user_invitation_path, :class => "button"
 
-- unless @user.future_jobs.empty?
+- content_for:aside do
+  = render "potential_jobs"
+
+- unless @user.upcoming_jobs.empty?
   %section
-    %h3 I have asked for a...        
+    %h3 Upcoming favors        
     %ul
-      - @user.future_jobs.each do |job|
+      - @user.upcoming_jobs.each do |job|
         %li
-          #{ link_to job.job_type, job_path(job) } on #{ job.date }
-          ( #{ job.status_msg } )
+          - if job.user == current_user
+            #{ link_to "#{job.worker} is #{job.job_type} for you on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
+          -else
+            #{ link_to "You are #{job.job_type} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
+            
+- unless @user.future_open_jobs.empty?
+  %section
+    %h3 Waiting for a favor       
+    %ul
+      - @user.future_open_jobs.each do |job|
+        %li
+          #{ link_to "On #{ job.created_at.strftime("%B %d") } you asked for a #{job.job_type} for #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax"  }
+            
 
-= render "potential_jobs"
-          
-- unless @user.upcoming_work_jobs.empty?
-  - content_for:aside do
-    %h3 I'm signed up to...
-    %ul    
-      - @user.upcoming_work_jobs.each do |job|
-        %li
-          be a
-          = link_to job.job_type, job_path(job)
-          for 
-          =job.user
-          on
-          %b=job.date.strftime("%b %d")
-          for
-          = job.stars
-          star
         

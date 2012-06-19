@@ -29,6 +29,7 @@ Circletime::Application.routes.draw do
   match '/jobs/open/close' => 'jobs#close_open_jobs' , :as => :close_open_jobs
   match '/jobs/:id/cancel' => 'jobs#cancel_assignment', :as => :cancel_job_assignment
   match '/jobs/:id/invite' => 'jobs#send_invites', :as => :send_job_invites
+  match '/jobs/:id/details' => 'jobs#details' , :as => :job_details
 
   match '/circles/member/:id' => 'circles#add_member', :as => :add_member_to_circle, :via => :post
   match '/circles/member/:id' => 'circles#remove_member', :as => :remove_member_from_circle, :via => :delete

@@ -84,8 +84,12 @@ class User < ActiveRecord::Base
     end
   end
   
-  def future_jobs
-    self.jobs.where('jobs.time > ?', Time.now.localtime )
+  def future_taken_jobs
+    self.jobs.where('jobs.time > ? AND worker_id IS NOT NULL', Time.now.localtime )
+  end
+
+  def future_open_jobs
+    self.jobs.where('jobs.time > ? AND worker_id IS NULL', Time.now.localtime )
   end
   
   def potential_jobs
@@ -98,6 +102,11 @@ class User < ActiveRecord::Base
   
   def upcoming_work_jobs
     self.work_jobs.where('jobs.time > ?', Time.now.localtime )
+  end
+
+  def upcoming_jobs
+    @jobs = future_taken_jobs + upcoming_work_jobs
+    @jobs.sort! { |a,b| a.time <=> b.time }
   end
 
   before_save :default_values

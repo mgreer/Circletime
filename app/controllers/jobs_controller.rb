@@ -22,6 +22,12 @@ class JobsController < ApplicationController
     end
   end
 
+  # GET /jobs/1/details
+  def details
+    @job = Job.find(params[:id])
+    render :partial => "detail", :layout => false
+  end
+
   # GET /jobs/new
   # GET /jobs/new.json
   def new

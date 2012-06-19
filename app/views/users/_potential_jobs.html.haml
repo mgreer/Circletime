@@ -1,12 +1,12 @@
 
 - unless @user.potential_jobs.empty?
   %section
-    %h3 Looks like someone you know is looking for...
+    %h3 Can you help?
     %ul
       - @user.potential_jobs.each do |job|
         %li
           %p.description
-            A #{ link_to job.job_type, job_path(job) } on
+            #{ link_to "#{job.user} needs a #{job.job_type}", job_details_path(job), :class => "fancybox fancybox.ajax"  } on
             %b=job.date.strftime("%b %d")
             - unless job.job_type.is_misc
               - if job.work_unit.hours < 23

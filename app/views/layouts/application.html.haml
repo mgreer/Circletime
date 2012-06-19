@@ -31,7 +31,7 @@
           %nav
             %ul
               %li= link_to 'Ask a favor', new_job_path
-              %li= link_to 'Invite a friend', new_user_invitation_path
+              %li= link_to 'Invite friend', new_user_invitation_path
               %li= link_to 'Your friends', circles_path     
     / #header-container
     
@@ -43,10 +43,10 @@
 
     #main-container{:class => @main_class}
       #main.wrapper.clearfix
-        %article
-          = yield
         - if content_for?(:aside)
           %aside= yield :aside
+        %article
+          = yield
       / #main
     / #main-container
     #footer-container

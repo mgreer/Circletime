@@ -1,0 +1,44 @@
+You are babysitting for Linda
+
+Tuesday, 6/19
+6PM
+3 hours
+
+Details:
+Oskar will need to eat at 7PM and be in bed by 8PM
+
+For 
+Linda Shipley
+phone: 231242423
+[call] [text]
+email: lkerlf@kjhlkjhk
+[email]
+
+Need to cancel this?
+[Why? form and cancel button]
+
+
+- unless @job.worker.nil?
+  - if current_user == @job.user
+    #{@job.worker.name} will be doing this job.
+  - elsif current_user == @job.worker
+    You are signed up for this job
+
+%p
+  I need a #{@job.job_type.name}
+  on 
+  %b
+    #{@job.date.strftime("%b %d")} 
+  - unless @job.job_type.is_misc
+    - if @job.work_unit.hours < 23
+      starting at #{@job.time_in_zone.strftime("%I:%M%p (%Z)")} 
+    for #{pluralize(@job.duration,@job.work_unit.name)} 
+    \.
+  - unless @job.description.nil?
+    %p 
+      %b more details:
+      %br
+      %pre
+        = @job.description
+  %p
+    Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.  
