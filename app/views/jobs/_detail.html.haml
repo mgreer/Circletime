@@ -27,7 +27,7 @@
 
 %p
   For: #{@job.user}<br/>
-  - unless @job.user.phone.empty?
+  - unless @job.user.phone.nil?
     phone: 
     %a{ :target => "_self", :href => "tel:#{@job.user.phone}" }
       #{number_to_phone(@job.user.phone)}<br/>
