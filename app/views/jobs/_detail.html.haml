@@ -24,11 +24,14 @@
 
 %p
   For: #{@job.user}<br/>
-  phone: 231242423
-  [call] [text]<br/>
-  email: #{@job.user.email}
-  [email]<br/>
+  - unless @job.user.phone.empty?
+    phone: 
+    %a{ :target => "_self", :href => "tel:#{@job.user.phone}" }
+      #{number_to_phone(@job.user.phone)}<br/>
+  email:
+  %a{ :target => "_new", :href => "mailto:#{@job.user.email}" }
+    #{@job.user.email}
 
-%p
-  Need to cancel this?
-  [Why? form and cancel button]
+- if current_user == @job.user || current_user == @job.worker
+  %p
+    #{ link_to 'Need to cancel this?', cancel_job_assignment_path(@job) }

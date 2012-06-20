@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606183643) do
+ActiveRecord::Schema.define(:version => 20120620043120) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20120606183643) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "timezone_offset",                      :default => -8
+    t.string   "phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
