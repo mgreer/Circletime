@@ -16,9 +16,9 @@
       - @user.upcoming_jobs.each do |job|
         %li
           - if job.user == current_user
-            #{ link_to "#{job.worker} is #{job.job_type} for you on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
+            #{ link_to "#{job.worker} #{job.job_type.future} for you on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
           -else
-            #{ link_to "You are #{job.job_type} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
+            #{ link_to "You #{job.job_type.future} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
             
 - unless @user.future_open_jobs.empty?
   %section

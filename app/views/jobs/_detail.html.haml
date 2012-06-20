@@ -1,13 +1,16 @@
 %p
   - if @job.worker.nil?
-    #{@job.user} needs a babysitter.
+    - if current_user == @job.user
+      You need a #{@job.job_type.name}.
+    - else 
+      #{@job.user} needs a #{@job.job_type.name}.
   - else
     - if current_user == @job.user
-      #{@job.worker.name} will be your #{@job.job_type.name}.
+      #{@job.worker.name} #{@job.job_type.future} for you.
     - elsif current_user == @job.worker
-      You will be #{@job.user}'s #{@job.job_type.name}.
+      You will #{@job.job_type.future} for #{@job.user}.
     - else
-      #{@job.worker.name} will be #{@job.user}'s #{@job.job_type.name}.
+      #{@job.worker.name} will #{@job.job_type.future} for #{@job.user}.
 
 
 %p

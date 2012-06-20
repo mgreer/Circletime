@@ -4,4 +4,6 @@ $ ->
   $('.fancybox').fancybox({
     openSpeed: "fast",
     closeSpeed: "fast",
+    openMethod: "zoomIn",
+    closeMethod: "zoomOut"
   })

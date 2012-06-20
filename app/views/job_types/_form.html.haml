@@ -1,7 +1,9 @@
 = simple_form_for(@job_type) do |f|
   = f.error_notification
   .inputs
-    = f.input :name
+    = f.input :name, :input_html => { :placeholder => "[name]" }
+    = f.input :past, :input_html => { :placeholder => "[past tense]" }
+    = f.input :future, :input_html => { :placeholder => "[future tense]" }
     = f.input :stars, :collection => 1..10  
     = f.input :is_misc
     = f.association :work_unit, :include_blank => false
