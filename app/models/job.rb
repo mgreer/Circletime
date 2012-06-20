@@ -51,4 +51,31 @@ class Job < ActiveRecord::Base
     self.status = Job::WAITING unless self.status
   end
 
+  def self.close_open_jobs
+    #find open but completed jobs
+    Rails.logger.info("---------LOOKING FOR ASSIGNED JOBS TO CLOSE----------!!!")
+    @jobs = Job.where("jobs.status = ? AND jobs.endtime < ?", Job::ASSIGNED, Time.zone.now.localtime )
+    @jobs.each do |job|
+      Rails.logger.info("-------closing #{job}")
+      Rails.logger.info("---------moving #{job.stars} stars from #{job.user.name} to #{job.worker.name}")
+      job.user.stars -= job.stars
+      job.worker.stars += job.stars      
+      Rails.logger.info("---------sending email to #{job.user.email}")
+      Rails.logger.info("---------sending email to #{job.worker.email}")
+      JobMailer.notify_job_closed(job).deliver
+      Rails.logger.info("---------setting to CLOSED")      
+      job.status = Job::CLOSED
+      Rails.logger.info("---------saving...")
+      begin
+        job.user.save
+        job.worker.save
+        job.save        
+      rescue Exception => e
+        Rails.logger.error("---------PROBLEM SAVING: #{e}")              
+      end
+      Rails.logger.info("---------DONE")    
+    end
+    @jobs
+  end
+  
 end
