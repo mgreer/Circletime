@@ -4,6 +4,7 @@
     = f.input :stars
     = f.input :location
     = f.input :timezone_offset, :collection => User::TZ_MAPPING.invert()
+    = f.input :phone
     = f.input :email
   .actions
     = f.button :submit
