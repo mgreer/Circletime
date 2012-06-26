@@ -3,6 +3,8 @@ class Circle < ActiveRecord::Base
   has_many :jobs
   has_many :memberships
   has_many :users, :through => :memberships
+
+  audited :associated_with => :user
   
   def to_s
     user.name + "'s circle"

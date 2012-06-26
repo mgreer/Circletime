@@ -5,6 +5,8 @@ class Job < ActiveRecord::Base
   belongs_to :worker, :class_name => User
   @event
 
+  audited :associated_with => :user
+
   WAITING = 0
   ASSIGNED = 1
   CLOSED = 2

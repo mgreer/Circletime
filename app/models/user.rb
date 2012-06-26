@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise:invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  audited :protect => false
+  has_associated_audits
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :location, :timezone_offset
   

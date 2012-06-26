@@ -30,6 +30,10 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     attr_required (0.0.5)
+    audited (3.0.0.rc1)
+    audited-activerecord (3.0.0.rc1)
+      activerecord (~> 3.0)
+      audited (= 3.0.0.rc1)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     coffee-rails (3.2.2)
@@ -172,6 +176,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  audited-activerecord
   coffee-rails
   dalli
   detect_timezone_rails
