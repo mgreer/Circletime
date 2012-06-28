@@ -7,6 +7,8 @@ class Job < ActiveRecord::Base
 
   audited :associated_with => :user
 
+  has_many :transactions
+
   WAITING = 0
   ASSIGNED = 1
   CLOSED = 2
@@ -61,7 +63,9 @@ class Job < ActiveRecord::Base
       Rails.logger.info("-------closing #{job}")
       Rails.logger.info("---------moving #{job.stars} stars from #{job.user.name} to #{job.worker.name}")
       job.user.stars -= job.stars
-      job.worker.stars += job.stars      
+      job.mark_paid()
+      job.worker.stars += job.stars  
+      job.mark_waspaid()    
       Rails.logger.info("---------sending email to #{job.user.email}")
       Rails.logger.info("---------sending email to #{job.worker.email}")
       JobMailer.notify_job_closed(job).deliver
@@ -80,4 +84,52 @@ class Job < ActiveRecord::Base
     @jobs
   end
   
+  def get_user_transactions(user)
+    self.transactions.where( :user_id => user.id )
+  end
+  
+  def turned_down_by(user)
+    self.transactions.where( :user_id => user.id, :action_id => Transaction::TURNEDDOWN ).exists?
+  end
+
+  def get_transaction(action)
+    @transaction = Transaction.new
+    @transaction.action_id = action
+    @transaction.user = user
+    @transaction.job = self
+    @transaction
+  end
+  
+  def mark_created
+    get_transaction(Transaction::CREATED).save
+  end
+  
+  def mark_accepted
+    @transaction = get_transaction(Transaction::ACCEPTED)
+    @transaction.user = worker
+    @transaction.save
+  end
+  
+  def mark_turneddown(current_user)
+    @transaction = get_transaction(Transaction::TURNEDDOWN)
+    @transaction.user = current_user
+    @transaction.save
+  end
+  
+  def mark_cancelled
+    @transaction = get_transaction(Transaction::CANCELED)
+    @transaction.user = worker
+    @transaction.save
+  end
+  
+  def mark_paid
+    get_transaction(Transaction::PAID).save
+  end
+  
+  def mark_waspaid
+    @transaction = get_transaction(Transaction::WAS_PAID)
+    @transaction.user = worker
+    @transaction.save
+  end
+      
 end

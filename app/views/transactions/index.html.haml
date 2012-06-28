@@ -1,0 +1,10 @@
+%h1 Listing transactions
+%ul
+  - @transactions.each do |transaction|
+    %li
+      %p= transaction
+      = link_to 'Show', transaction
+      = link_to 'Edit', edit_transaction_path(transaction)
+      = link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Transaction', new_transaction_path

@@ -75,6 +75,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save  
+        @job.mark_created()        
         JobMailer.invite_circle_to_job(@job).deliver
         format.html { redirect_to @job, :notice => 'Job was successfully created.' }
         format.json { render :json => @job, :status => :created, :location => @job }
@@ -129,6 +130,13 @@ class JobsController < ApplicationController
     end
   end
 
+  # GET /jobs/1/turndown
+  def turndown
+    @job = Job.find(params[:id])
+    @job.mark_turneddown(current_user)
+    redirect_to :dashboard, :notice => "You turned down #{@job.user}'s job."
+  end
+
 
   # GET /jobs/1/cancel
   def cancel_assignment
@@ -146,6 +154,7 @@ class JobsController < ApplicationController
     #Send out again?
     respond_to do |format|
       if @job.save
+        @job.mark_cancelled() 
         #Notify owner if there is one
         JobMailer.notify_job_cancelled(@job,current_user).deliver
         format.html { redirect_to :dashboard, :notice => 'You have cancelled the job. Thanks for nothin.' }
@@ -188,6 +197,7 @@ class JobsController < ApplicationController
     @job.status = Job::ASSIGNED
     respond_to do |format|
       if @job.save
+        @job.mark_accepted() 
         JobMailer.thanks_for_taking_job(@job,@event).deliver
         JobMailer.notify_job_taken(@job,@event).deliver
         format.html { redirect_to @job, :notice => 'You have been assigned to the job.' }

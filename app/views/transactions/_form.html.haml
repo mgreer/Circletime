@@ -1,0 +1,8 @@
+= simple_form_for(@transaction) do |f|
+  = f.error_notification
+  .inputs
+    = f.input :user
+    = f.input :job
+    = f.input :action_id, :collection => Transaction::ACTIONS
+  .actions
+    = f.button :submit

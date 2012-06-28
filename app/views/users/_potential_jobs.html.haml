@@ -16,4 +16,4 @@
             #{job.user} is offering #{ pluralize( job.stars, "star" ) }
           %p.action
             =link_to "I can do it", sign_up_for_job_path(job) , :class => "button small"
-            =link_to "Sorry, I can't do it", "#" , :class => "link"
+            =link_to "Sorry, I can't do it", turndown_job_path(job) , :class => "link"

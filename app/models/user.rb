@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :class_name => self.class.to_s, :as => :invited_by
 
+  has_many :transactions
+
   has_one :circle, :dependent => :delete
   has_many :memberships, :dependent => :delete_all
   has_many :circle_memberships, :through => :memberships, :source => :circle
@@ -96,7 +98,14 @@ class User < ActiveRecord::Base
   end
   
   def potential_jobs
-    self.circle_jobs.where('jobs.time > ? AND jobs.worker_id IS NULL', Time.now.localtime )
+    @jobs = self.circle_jobs.where('jobs.time > ? AND jobs.worker_id IS NULL', Time.now.localtime )
+    @unseen_jobs = []
+    @jobs.each do |job|
+      unless job.turned_down_by( self )
+        @unseen_jobs.push(job)
+      end
+    end
+    @unseen_jobs
   end
   
   def latest_job
