@@ -96,21 +96,25 @@ nav.tabs
   float: none
   display: block
   border-bottom: 1px solid #ddd
-  height: 34px
   margin: 1em 0
   overflow: auto
   ul
-    position: absolute
     overflow: auto
   li
+    color: #000!important
+    overflow: auto
     a
-      line-height: 27px
-      background: #ddd
+      font-size: 1.2em
+      background-color: #ddd
       border: 1px solid #ddd
+      padding: 0 .5em
     &.on a
       font-weight: bold
-      background: #fff
+      background-color: #fff
       border-bottom: 1px solid #fff
+
+#main article nav.tabs ul li a
+  color: $color_hot !important
 
 /* ===================
  *  Theme
