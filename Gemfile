@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -42,7 +42,7 @@ gem 'jquery-rails'
 
 gem "haml"
 gem "will_paginate"
-gem "mocha"
+#gem "mocha"
 
 gem "simple_form"
 gem 'ui_datepicker-rails3'

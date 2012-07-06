@@ -41,4 +41,8 @@ Circletime::Application.configure do
 
   FONTDECK_URL = "http://f.fontdeck.com/s/css/Ejh9NZvG+vyk1dvMsJtcSfagWLs/localhost/9017.css"
     
+  #don't show all asset requests
+  config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
+  
+  
 end

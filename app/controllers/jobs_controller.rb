@@ -130,11 +130,16 @@ class JobsController < ApplicationController
     end
   end
 
-  # GET /jobs/1/turndown
+  # PUT /jobs/1/turndown
+  # PUT /jobs/1/turndown.json
   def turndown
     @job = Job.find(params[:id])
     @job.mark_turneddown(current_user)
-    redirect_to :dashboard, :notice => "You turned down #{@job.user}'s job."
+
+    respond_to do |format|
+      format.html { redirect_to :dashboard, :notice => "You turned down #{@job.user}'s job." }
+      format.json { head :ok }
+    end
   end
 
 

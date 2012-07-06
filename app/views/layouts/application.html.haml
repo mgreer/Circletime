@@ -18,6 +18,8 @@
     = stylesheet_link_tag     FONTDECK_URL
     = stylesheet_link_tag    "application"
     = csrf_meta_tags
+    = favicon_link_tag 'shared/poppy-icon.png', :type => 'image/png'
+    
     /[if lt IE 9]
       %script{ :src => "js/libs/html5-3.4-respond-1.1.0.min.js" }
   %body{ :id => to_slug( "#{controller.controller_path}-#{controller.action_name}" ), :class => to_slug( "#{controller.controller_path}" ) }

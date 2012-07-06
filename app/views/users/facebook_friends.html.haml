@@ -2,26 +2,31 @@
 - @page_name = 'facebook'
 = render 'users/invitations/tabs'
 
-%section
-  %ul.facepile
-    - @friends.each do |friend|
-      %li 
-        %img{:src => "#{friend.picture}"}
-        - if friend.installed
-          - local_user = find_user_from_facebook( :uid => friend.identifier )
-          - if local_user
+- if current_user.fb_user
+  %section
+    %ul.facepile
+      - @friends.each do |friend|
+        %li{ :id => "friend #{friend.id}" }
+          %img{:src => "#{friend.picture}"}
+          - if friend.installed
+            - local_user = find_user_from_facebook( :uid => friend.identifier )
+            - if local_user
 
-            - if !current_user.circle.users.include?( local_user )
-              =link_to local_user.name, local_user
-              Add #{get_pronoun_from_user(friend)} to your circle
+              - if !current_user.circle.users.include?( local_user )
+                =link_to local_user.name, local_user
+                =link_to "Add #{get_pronoun_from_user(friend)} to your circle", add_member_to_circle_path(local_user.id), :remote => true, :method => :post
+              - else
+                =link_to local_user.name, local_user
+                is in your circle already
             - else
-              =link_to local_user.name, local_user
-              is in your circle already
-        - else
-          %span= friend.name
-        %a.facebook_invite{:id => friend.identifier,:name => friend.name} Invite
-        #{get_pronoun_from_user(friend)} to your circle
-
+              can't find user #{friend.name}
+          - else
+            %span= friend.name
+            %a.facebook_invite{:id => friend.identifier,:name => friend.name} Invite
+            #{get_pronoun_from_user(friend)} to your circle
+-else
+  Connect to Facebook
+  
 %section
   %div#fb-root
   %script{:src=>"http://connect.facebook.net/en_US/all.js"}

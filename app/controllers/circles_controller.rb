@@ -85,13 +85,20 @@ class CirclesController < ApplicationController
   end
   
   # POST /circles/member/1
+  # POST /circles/member/1.text
   def add_member
     @member = User.find(params[:id])
     current_user.add_member( @member )
     if current_user.circle.save
-      redirect_to :back, :notice => 'Successfully added your friend to your circle.'.html_safe
+      respond_to do |format|
+         format.html { redirect_to :back, :notice => 'Successfully added your friend to your circle.'.html_safe }
+         format.text { render :text => "#{@member.first_name} is in your circle" }
+      end
     else
-      redirect_to :back, :error => 'Error adding them to circle.'
+      respond_to do |format|
+        format.html { redirect_to :back, :error => 'Error adding them to circle.'}
+        format.text { render :text => "Error adding #{@member.first_name} to your circle." }
+      end
     end   
   end
 
