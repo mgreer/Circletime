@@ -6,18 +6,21 @@
   %section
     %ul.facepile
       - @friends.each do |friend|
-        %li{ :id => "friend #{friend.id}" }
+        %li{ :id => "fb_#{friend.id}" }
           %img{:src => "#{friend.picture}"}
           - if friend.installed
             - local_user = find_user_from_facebook( :uid => friend.identifier )
             - if local_user
-
-              - if !current_user.circle.users.include?( local_user )
-                =link_to local_user.name, local_user
-                =link_to "Add #{get_pronoun_from_user(friend)} to your circle", add_member_to_circle_path(local_user.id), :remote => true, :method => :post
-              - else
-                =link_to local_user.name, local_user
-                is in your circle already
+              %span{ :id => "user_#{local_user.id}" }
+                - if !current_user.circle.users.include?( local_user )
+                  =link_to local_user.name, local_user
+                  =link_to "Add #{get_pronoun_from_user(friend)} to your circle", 
+                    add_member_to_circle_path(local_user.id), 
+                    :remote => true, 
+                    :method => :post
+                - else
+                  =link_to local_user.name, local_user
+                  is in your circle already
             - else
               can't find user #{friend.name}
           - else
