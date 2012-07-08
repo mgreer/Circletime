@@ -8,7 +8,10 @@
 
 %section
   %p.madlibs
-    I need a #{@job.job_type.name}
+    - if @job.worker.nil?
+      #{@job.user} needs a #{@job.job_type.name}
+    - else
+      #{@job.worker} #{@job.job_type.future} for #{@job.user}    
     on 
     %b
       #{@job.date.strftime("%b %d")} 
@@ -17,14 +20,14 @@
         starting at #{@job.time_in_zone.strftime("%I:%M%p (%Z)")} 
       for #{pluralize(@job.duration,@job.work_unit.name)} 
       \.
-    - unless @job.description.nil?
+    - unless @job.description.empty?
       %p 
         %b more details:
         %br
         %pre
           = @job.description
   %p
-    Do me this favor and I'll give you #{pluralize(@job.stars,'Star')}.  
+    This is worth #{pluralize(@job.stars,'Star')}.  
 
 %section
   - if current_user == @job.user
