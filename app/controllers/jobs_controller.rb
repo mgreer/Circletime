@@ -193,7 +193,9 @@ class JobsController < ApplicationController
         else
           event.dtstart =   @job.time
         end
-        event.location =    @job.user.location
+        unless @job.user.location.nil?
+          event.location =    @job.user.location
+        end
         event.add_attendee  @job.worker.email
         event.add_attendee  @job.user.email
         event.organizer =   @job.user.email
