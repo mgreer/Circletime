@@ -178,39 +178,44 @@ class JobsController < ApplicationController
     Rails.logger.info("   worker = #{@job.worker}")
     if @job.worker.nil?
       @job.worker = current_user
-    end
-    Rails.logger.info("   worker now = #{@job.worker}")
-    @event = RiCal.Calendar do |cal|
-      cal.event do |event|      
-        event.add_x_property 'X-GOOGLE-CALENDAR-CONTENT-TITLE', @job.to_s
-        event.description = @job.to_s
-        event.summary =     @job.to_s
-        if @job.job_type.work_unit.hours > 23
-          event.dtstart =   @job.time.to_date
-          unless @job.job_type.is_misc
-            event.dtend =   @job.endtime
+      Rails.logger.info("   worker now = #{@job.worker}")
+      @event = RiCal.Calendar do |cal|
+        cal.event do |event|      
+          event.add_x_property 'X-GOOGLE-CALENDAR-CONTENT-TITLE', @job.to_s
+          event.description = @job.to_s
+          event.summary =     @job.to_s
+          if @job.job_type.work_unit.hours > 23
+            event.dtstart =   @job.time.to_date
+            unless @job.job_type.is_misc
+              event.dtend =   @job.endtime
+            end
+          else
+            event.dtstart =   @job.time
           end
-        else
-          event.dtstart =   @job.time
+          unless @job.user.location.nil?
+            event.location =    @job.user.location
+          end
+          event.add_attendee  @job.worker.email
+          event.add_attendee  @job.user.email
+          event.organizer =   @job.user.email
         end
-        unless @job.user.location.nil?
-          event.location =    @job.user.location
-        end
-        event.add_attendee  @job.worker.email
-        event.add_attendee  @job.user.email
-        event.organizer =   @job.user.email
       end
-    end
-    @job.status = Job::ASSIGNED
-    respond_to do |format|
-      if @job.save
-        @job.mark_accepted() 
-        JobMailer.thanks_for_taking_job(@job,@event).deliver
-        JobMailer.notify_job_taken(@job,@event).deliver
-        format.html { redirect_to @job, :notice => 'You have been assigned to the job.' }
-        format.json { render :json => @job, :status => :created, :location => @job }
-      else
-        format.html { redirect_to @job, :notice => 'There was an error in assiging you to this job.' }
+      @job.status = Job::ASSIGNED
+      respond_to do |format|
+        if @job.save
+          @job.mark_accepted() 
+          JobMailer.thanks_for_taking_job(@job,@event).deliver
+          JobMailer.notify_job_taken(@job,@event).deliver
+          format.html { redirect_to @job, :notice => 'You have been assigned to the job.' }
+          format.json { render :json => @job, :status => :created, :location => @job }
+        else
+          format.html { redirect_to @job, :notice => 'There was an error in assiging you to this job.' }
+          format.json { render :json => @job.errors, :status => :unprocessable_entity }
+        end
+      end
+    else  
+      respond_to do |format|
+        format.html { redirect_to @job, :notice => 'This job has already been taken by another' }
         format.json { render :json => @job.errors, :status => :unprocessable_entity }
       end
     end
