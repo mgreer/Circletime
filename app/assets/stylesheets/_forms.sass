@@ -49,7 +49,7 @@ input[type=submit], .button
   margin: .2em
   float: left
   border: 1px solid $color_cool
-  color: #fff
+  color: $form_color
   text-shadow: rgba(56, 101, 112,.8) 0 1px 0
   white-space: nowrap
   &:active
@@ -57,8 +57,8 @@ input[type=submit], .button
   &:hover
     opacity: .9
 
-.button, a.button
-  color: #fff
+.button, body #main-container a.button
+  color: $form_color!important
   text-decoration: none
 
 a.button.small
@@ -173,7 +173,7 @@ a.button.small
         &.option a
           
       &.lit li 
-        background-color: lighten($color_cool,20%)
+        background-color: lighten($color_cool,70%)
         border: none
         &:hover 
           background-color: lighten($color_cool,40%)
