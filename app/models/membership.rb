@@ -4,6 +4,8 @@ class Membership < ActiveRecord::Base
   has_many :jobs, :through => :user
 
   audited :associated_with => :user
+
+  attr_accessible :circle
     
   validates :user_id, :uniqueness => { :scope => :circle_id, :message => "Can only add the user to the circle once" }
   
