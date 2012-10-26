@@ -19,6 +19,10 @@ class Global.MadLib
       $(@form).find("input.datepicker").datepicker
         dateFormat: "M d, yy"
         minDate: new Date()
+    else if Global.is_mobile
+      $(@form).find("input.datepicker").each ->
+        console.log this
+        this.type = "date"
       
   class MadLibInput
     constructor: (@input) ->

@@ -24,7 +24,7 @@
       = f.association :job_type, :include_blank => false
       %span#date
         \ on
-        = f.input :time, :as => :string, :input_html => { :name => "job[time(1i)]", :type => "date", :class => 'datepicker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
+        = f.input :time, :as => :string, :input_html => { :name => "job[time(1i)]", :class => 'datepicker', :size => "10" ,:value => @job.time.strftime("%b %d, %Y")}, :placeholder => "a date"
       %span#time{ :class => "#{@time_class}" }
         \ at
         = f.input :time, :input_html => { :name => "job[time(2i)]" }, :collection => 1..12, :selected => @job.time.strftime("%H").to_i
