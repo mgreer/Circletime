@@ -68,6 +68,7 @@ class JobsController < ApplicationController
     params[:job].parse_time_select! :time
 
     @job = Job.new(params[:job])
+    Rails.logger.info("--------New job created: "+params[:job].to_s)
     @job.user = current_user
     @job.circle = current_user.circle
     @job.status = Job::WAITING

@@ -6,6 +6,8 @@ class Job < ActiveRecord::Base
   @event
 
   audited :associated_with => :user
+  
+  attr_accessible :stars, :time, :duration, :description, :job_type_id
 
   has_many :transactions
 
