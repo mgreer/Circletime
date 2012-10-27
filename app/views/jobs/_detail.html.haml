@@ -35,7 +35,7 @@
   %a{ :target => "_new", :href => "mailto:#{@job.user.email}" }
     #{@job.user.email}
 
-- if @job.worker.nil?
+- if @job.worker.nil? && current_user != @job.user
   %p.action
     =link_to "I can do it", sign_up_for_job_path(@job) , :class => "button small"
     =link_to "Sorry, I can't do it", turndown_job_path(@job) , :class => "link"
