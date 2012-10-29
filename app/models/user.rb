@@ -148,6 +148,7 @@ class User < ActiveRecord::Base
     #and inverse
     Rails.logger.info("---------adding inviter to new circle")
     self.invited_by.memberships.create(:circle => self.circle)    
+    UserMailer.notify_accepted_invitation(@inviter,self)
 #    self.circle.users.create( @inviter ) 
 #    self.circle.save() 
   end  

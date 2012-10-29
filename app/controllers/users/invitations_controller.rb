@@ -24,7 +24,7 @@ class Users::InvitationsController < Devise::InvitationsController
         Rails.logger.info("------------creating #{email}")
         @invitee = User.invite!({:email => email}, current_inviter)
         if @invitee.errors.empty?
-          Rails.logger.info("------------created #{@invitee}")
+          Rails.logger.info("------------created #{@invitee}")          
         end
       end
     end
