@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   # GET /audits
   # GET /audits.json
   def audits
-    @audits = Audited::Adapters::ActiveRecord::Audit.last(20).reverse 
+    @audits = Audit.last(20).reverse 
 
     respond_to do |format|
       format.html # index.html.erb
