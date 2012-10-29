@@ -10,6 +10,7 @@ class Job < ActiveRecord::Base
   attr_accessible :stars, :time, :duration, :description, :job_type_id
 
   has_many :transactions
+  has_many :recipients, :dependent => :delete_all
 
   WAITING = 0
   ASSIGNED = 1

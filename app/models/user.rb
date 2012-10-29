@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :delete_all
   has_many :circle_memberships, :through => :memberships, :source => :circle
 
+  has_many :job_requests, :through => :recipients, :source => :job
+
   has_many :jobs
   has_many :work_jobs, :class_name => "Job", :foreign_key => "worker_id"
   has_many :circle_jobs, :through => :circle_memberships, :source => :jobs
