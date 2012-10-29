@@ -35,7 +35,9 @@ class JobsController < ApplicationController
     @job = Job.new
     @job.time = Time.zone.now().advance(:hours => 1,:days => 1)
     @job_types = JobType.all
-    @job.circle = current_user.circle
+    @job.user = current_user
+    
+    Rails.logger.info("------NEW JOB, creating from defaults..")
     #set type to default
     unless params[ :job_type_id ].nil?
       @job.job_type = JobType.find( params[ :job_type_id ] )
@@ -44,11 +46,16 @@ class JobsController < ApplicationController
       unless current_user.latest_job.nil?
         @job.job_type = current_user.latest_job.job_type
       else
-        @job.job_type = @job_types[0]
+        @job.job_type = JobType.first  
       end
     end
+    Rails.logger.info("--------JobType = "+@job.job_type.to_s)    
     #set default stars to job_type default
     @job.stars = @job.job_type.stars
+    
+    #set default recipients to circle
+    @job.request_recipients = current_user.circle.users
+    Rails.logger.info("--------Recipients = "+@job.request_recipients.to_s)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -70,7 +77,6 @@ class JobsController < ApplicationController
     @job = Job.new(params[:job])
     Rails.logger.info("--------New job created: "+params[:job].to_s)
     @job.user = current_user
-    @job.circle = current_user.circle
     @job.status = Job::WAITING
     @job.endtime =  @job.time.advance(:hours => @job.hours)
 
@@ -95,7 +101,7 @@ class JobsController < ApplicationController
     end
     JobMailer.invite_circle_to_job(@job).deliver
     Rails.logger.info("--------invites sent out again")
-    @invites = @job.circle.users.map{ |r| "#{r.name}" }.join ', '
+    @invites = @job.request_recipients.map{ |r| "#{r.name}" }.join ', '
     redirect_to :dashboard, :notice => 'We sent out invites again to '+@invites
   end
 

@@ -4,7 +4,7 @@ class JobMailer < ActionMailer::Base
   def invite_circle_to_job(new_job)
     @job = new_job
     @creator = @job.user
-    @emails = @job.circle.users(:select => :email).map(&:email)
+    @emails = @job.request_recipients(:select => :email).map(&:email)
     
     @url  = sign_up_for_job_path(@job)
     Rails.logger.info("---------MAILING A NEW JOB OUT TO CIRCLE---------!!!")

@@ -43,6 +43,11 @@
       \.
       %p.more 
         = f.input :description,  :input_html => { :placeholder => "[more details]", :rows => 1 }
+        
+      %p.recipients
+        %h4
+          Let's ask:
+        = f.association :request_recipients, :as => :check_boxes, :collection => @job.user.circle.users
 
     .actions
       = f.button :submit

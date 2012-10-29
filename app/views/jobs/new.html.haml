@@ -1,9 +1,4 @@
 - content_for:title, "New job"
 = render 'form'
 
-%section
-  %p 
-    This job is going out to: 
-    = @job.circle.users.map{ |r| "#{r.name}" }.join ', '
-
 = link_to 'Back', jobs_path

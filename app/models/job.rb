@@ -7,10 +7,11 @@ class Job < ActiveRecord::Base
 
   audited :associated_with => :user
   
-  attr_accessible :stars, :time, :duration, :description, :job_type_id
+  attr_accessible :stars, :time, :duration, :description, :job_type_id, :request_recipient_ids
 
   has_many :transactions
   has_many :recipients, :dependent => :delete_all
+  has_many :request_recipients, :through => :recipients, :source => :user
 
   WAITING = 0
   ASSIGNED = 1
