@@ -1,0 +1,19 @@
+%h1 Listing audits
+%table
+  %tr
+    %th created_at
+    %th auditable_type
+    %th auditable_id
+    %th associated_type
+    %th associated_id
+    %th action
+    %th audited_changes
+  - @audits.each do |audit|
+    %tr
+      %td= audit.created_at
+      %td= audit.auditable_type
+      %td= audit.auditable_id
+      %td= audit.associated_type
+      %td= audit.associated_id
+      %td= audit.action
+      %td= audit.audited_changes

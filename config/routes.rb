@@ -19,6 +19,8 @@ Circletime::Application.routes.draw do
   
   root :to => 'users#dashboard'
   
+  match '/audits' => 'admin#audits'
+  
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/dashboard' => 'users#dashboard' , :as => :dashboard
