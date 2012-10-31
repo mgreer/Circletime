@@ -15,6 +15,15 @@ class Audit < Audited::Adapters::ActiveRecord::Audit
       end
     end
   end
+
+  def self.by_class_and_action(classname, action, limit=20)
+    @audits = Audit.order("id DESC").limit(limit)
+    @audits = @audits.where( :auditable_type => classname ) if classname.present?
+    @audits = @audits.where( :action => action )            if action.present?
+
+    @audits
+  end
+  
   def to_s
     "audit"
   end
