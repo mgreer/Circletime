@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   # GET /audits
   # GET /audits.json
   def audits
-    @audits = Audit.by_class_and_action(params[:classname],params[:actionname],20)
+    @audits = Audit.by_class_and_action( params[:user][:classname], params[:user][:action], 20 )
 
     respond_to do |format|
       format.html # index.html.erb

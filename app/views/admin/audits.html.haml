@@ -1,4 +1,13 @@
+
 %h1 Listing audits
+
+
+= simple_form_for :user, :url => '/audits' do |f|
+  = f.error_notification
+  = f.input :classname, :collection => ["User", "Circle"]
+  = f.input :action, :collection => ["create", "update"]
+  = f.submit 'Search'
+
 %table
   %tr
     %th created_at
