@@ -36,7 +36,7 @@ Circletime::Application.routes.draw do
   match '/jobs/:id/details' => 'jobs#details' , :as => :job_details
   match '/jobs/:id/turndown' => 'jobs#turndown' , :as => :turndown_job
   
-  match '/circles/member/:id' => 'circles#add_member', :as => :add_member_to_circle, :via => :post
+  match '/circles/member/:id' => 'circles#add_member', :as => :add_member_to_circle, :via => [:get, :post]
   match '/circles/member/:id' => 'circles#remove_member', :as => :remove_member_from_circle, :via => :delete
       
   # The priority is based upon order of creation:
