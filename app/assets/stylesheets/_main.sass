@@ -45,7 +45,7 @@ nav li
     color: $color_link
     &:hover
       text-decoration: underline
-      color: lighten( $color_link, 20% )
+      color: $color_link
 h3
   font-size: 2em
   font-weight: bold
@@ -136,12 +136,12 @@ nav.tabs
 #header-container 
   header a
     background: none
-    color: lighten($color_cool,20%)
+    color: $color_link
     &:hover
-      color: lighten($color_cool,30%)
+      color: darken($color_link,30%)
   #title 
     span
-      color: lighten($color_cool,20%)
+      color: darken($color_link,20%)
     a
       color: lighten($text_color,0%)
       text-decoration: none
