@@ -20,6 +20,7 @@ header
     font-weight: 1400
     a
       text-decoration:none
+      color:inherit
     span
       text-align: right
       font-size: 50%
@@ -130,19 +131,19 @@ nav.tabs
     padding: 0
 
 #header-container, #footer-container, #main aside
-  background: darken($color_cool,0%)
+  background: #fff
 
 #header-container 
   header a
     background: none
-    color: lighten($color_cool,40%)
+    color: lighten($color_cool,20%)
     &:hover
-      color: lighten($color_cool,70%)
+      color: lighten($color_cool,30%)
   #title 
     span
-      color: lighten($color_cool,70%)
+      color: lighten($color_cool,20%)
     a
-      color: lighten($color_hot,0%)
+      color: lighten($text_color,0%)
       text-decoration: none
 
 body
