@@ -133,7 +133,11 @@ class User < ActiveRecord::Base
 
   def fb_user
     facebook = authentications.where(:provider => :facebook).first
-    ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
+    unless facebook.nil?
+      return ::FbGraph::User.fetch facebook.uid, :access_token => facebook.token
+    else
+      return nil
+    end
   end
 
   #overriding from devise:invitable

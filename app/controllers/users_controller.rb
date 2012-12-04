@@ -58,8 +58,10 @@ class UsersController < ApplicationController
   # GET /facebook_friends
   # GET /facebook_friends.json
   def facebook_friends
-    @friends = current_user.fb_user.friends(:fields => "installed,name,id,picture,gender,email")
-    @friends.sort! { |a,b| "#{!a.installed} #{a.name.downcase}" <=> "#{!b.installed} #{b.name.downcase}" }    
+    unless current_user.fb_user.nil?
+      @friends = current_user.fb_user.friends(:fields => "installed,name,id,picture,gender,email")
+      @friends.sort! { |a,b| "#{!a.installed} #{a.name.downcase}" <=> "#{!b.installed} #{b.name.downcase}" }    
+    end
     respond_to do |format|
       format.html # facebook_friends.html.haml
       format.json { render :json => @friends }
