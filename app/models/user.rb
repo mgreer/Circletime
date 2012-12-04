@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_associated_audits
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :location, :timezone_offset
+  attr_accessible :email, :name, :password, :encrypted_password, :password_confirmation, :remember_me, :location, :timezone_offset
   
   has_many :authentications, :dependent => :delete_all  
 

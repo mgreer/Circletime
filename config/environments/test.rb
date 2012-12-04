@@ -36,4 +36,18 @@ Circletime::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
+
+  FACEBOOK_APP_ID = "188343644605595"
+  FACEBOOK_TOKEN = "a79e0b110812c55237c8b4d608c76428"
+  
+  GOOGLE_ACCOUNT_ID = "UA-31924754-1"
+
+  FONTDECK_URL = "http://f.fontdeck.com/s/css/Ejh9NZvG+vyk1dvMsJtcSfagWLs/localhost/9017.css"
+    
+  #don't show all asset requests
+  config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
+  
 end

@@ -38,9 +38,9 @@
               %li= link_to 'Your friends', circles_path     
     / #header-container
     
-    - unless flash.empty? || ( flash[:notice].blank? && flash[:error].blank? && flash[:message].blank? )
+    - unless flash.empty? || ( flash[:alert].blank? && flash[:notice].blank? && flash[:error].blank? && flash[:message].blank? )
       #messaging
-        - [:notice, :error, :message].each do |key| 
+        - [:alert, :notice, :error, :message].each do |key| 
           - unless flash[key].blank? 
             %p{ :class => "flash flash_#{key}" }= flash[key]
 

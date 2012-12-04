@@ -5,7 +5,6 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3'
 gem "pg"
 
 gem 'thin'
@@ -15,6 +14,11 @@ gem 'ri_cal'
 gem "sourceninja", "~> 0.0.6"
 gem 'detect_timezone_rails'
 gem "audited-activerecord"
+
+group :test do
+  gem "factory_girl_rails"
+  gem 'sqlite3'
+end
 
 gem 'json'
 
