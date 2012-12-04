@@ -138,19 +138,21 @@ class User < ActiveRecord::Base
 
   #overriding from devise:invitable
   def accept_invitation!    
-    super
-    #add to the inviter's circle
-    @inviter = self.invited_by
-    Rails.logger.info("---------adding invitee to #{@inviter.circle} ")
-#    @inviter.circle.users.create( self )
-#    @inviter.circle.save()
-    self.memberships.create(:circle => self.invited_by.circle)
-    #and inverse
-    Rails.logger.info("---------adding inviter to new circle")
-    self.invited_by.memberships.create(:circle => self.circle)    
-    UserMailer.notify_accepted_invitation(@inviter,self)
-#    self.circle.users.create( @inviter ) 
-#    self.circle.save() 
+    unless @inviter.nil?
+      super
+      #add to the inviter's circle
+      @inviter = self.invited_by
+      Rails.logger.info("---------adding invitee to #{@inviter.circle} ")
+  #    @inviter.circle.users.create( self )
+  #    @inviter.circle.save()
+      self.memberships.create(:circle => self.invited_by.circle)
+      #and inverse
+      Rails.logger.info("---------adding inviter to new circle")
+      self.invited_by.memberships.create(:circle => self.circle)    
+      UserMailer.notify_accepted_invitation(@inviter,self)
+  #    self.circle.users.create( @inviter ) 
+  #    self.circle.save() 
+    end
   end  
   protected  
     def deliver_invitation
