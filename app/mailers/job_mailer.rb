@@ -18,7 +18,7 @@ class JobMailer < ActionMailer::Base
        :content => event.export()
      }
     @email = "#{@job.worker.name} <#{@job.worker.email}>"
-    mail(:to => @email, :subject => "Thanks for handling my #{@job.job_type.name} job!").deliver
+    mail(:to => @email, :subject => "Thanks for taking my #{@job.job_type.name} request #{@job.worker.first_name}. Save to your calendar! ").deliver
   end
   
   def notify_job_taken(job,event)
