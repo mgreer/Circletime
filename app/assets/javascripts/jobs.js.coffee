@@ -7,6 +7,7 @@ $ ->
   fixUnits = ($job_type=false) ->
     $duration = $("#job_duration option:selected",$el).val()
     $suffix = ""
+    $stars = 1
     if !$job_type
       $job_type = new Object()
       $base = $("#units",$el).text()
@@ -14,9 +15,17 @@ $ ->
       if $s_place == -1
         $s_place = $base.indexOf(",")
       $job_type.unit = $base.substring(0,$s_place)
+    else
+      $stars = $job_type.stars
     if $duration > 1
       $suffix = "s"
     $("#units",$el).text( $job_type.unit+""+$suffix+"," )
+    
+    $stars = $stars * $duration
+    $option = $("select#job_stars option[value=" + $stars + "]")
+    console.log $option
+    $option.attr "selected", "selected"
+    $option.trigger "change"
 
   #on job_type select change
   $el.find("select#job_job_type_id").change ->
