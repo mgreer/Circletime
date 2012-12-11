@@ -30,6 +30,7 @@
     This is worth #{pluralize(@job.stars,'Star')}.  
 
 %section
+  = link_to "Dashboard", :root
   - if current_user == @job.user
     = link_to 'Edit', edit_job_path(@job)
   - elsif @job.worker.nil?
