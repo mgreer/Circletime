@@ -66,6 +66,9 @@ class Global.MadLib
       if Global.is_mobile
         super
         return
+      $( @input ).change =>
+        @sync( $input, $ul )
+        super
       $input = $(@input)
       $input.wrap "<div class=\"custom_select\"></div>"
       $input.val $input.find("option:selected").val()
@@ -78,9 +81,7 @@ class Global.MadLib
         $option = $(this)
         $ul.append "<li class=\"option\" data-value=\"" + $option.val() + "\"><a href=\"#\">" + $option.html() + "</a></li>"
       $input.hide()
-      $selected_value = $input.find("option:selected").val()
-      $ul.find("li[data-value=\"" + $selected_value + "\"]").addClass "current"
-      $el.width $("li.current *", $ul).width()
+      @sync( $input, $ul )
       $input.change =>
         @resize()  
       $("li.option", $ul).each ->
@@ -100,6 +101,13 @@ class Global.MadLib
         $ul.addClass "touchable" 
         $ul.draggable( { axis: "y", grid: [50, $("li",$ul).first().height()] } )
       super
+ 
+    #sync displayed list to core options
+    sync: ( $input, $ul )=>
+      $selected_value = $input.find("option:selected").val()
+      $ul.find("li.current").removeClass "current"
+      $ul.find("li[data-value=\"" + $selected_value + "\"]").addClass "current"
+      @el.width $("li.current *", $ul).width()      
  
     resize: =>
       $content = $("option:selected", $(@input)).text()
@@ -146,7 +154,8 @@ class Global.MadLib
             else if event.which == 13
               @el.find("li a:hover").click()
           
-        @ul.css "top", ($("li.current", @ul).position().top * -1)
+        if ( $("li.current").length > 0 )
+          @ul.css "top", ($("li.current", @ul).position().top * -1)
         @ul.toggleClass "lit"
 
       turn: ($isUp = true) =>
