@@ -46,7 +46,7 @@
         
       %p.recipients
         %h4
-          Let's ask:
+          Send this to:
         = f.association :request_recipients, :as => :check_boxes, :collection => @job.user.circle.users
 
     .actions
