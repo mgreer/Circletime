@@ -1,7 +1,6 @@
 
 @import "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css"
 @import mixins
-  
 body, p, ol, ul, td 
   font-family: $font_text
   color: $text_color
@@ -12,8 +11,13 @@ h1
   font-style: normal
   font-weight: normal
 
+#header-container  
+  height: 48px
 header 
-  position: relative
+  z-index: 2
+  position: fixed
+  top: 0
+  left: 0
   padding: 0
   height: 48px
   width: 320px
@@ -30,7 +34,7 @@ header
     position: absolute
     top: 10px
     right: 10px
-    z-index: 100
+    z-index: 1
     a.button
       float: none
       background-color: $color_button!important
@@ -38,7 +42,7 @@ header
 section
   clear: both
   padding: 1em 0
-    
+
 nav li
   float: left
   padding: 0
@@ -128,10 +132,8 @@ nav.tabs
  * ===================
 
 #header-container
-  border-bottom: 2px solid darken($color_cool,10%)
 
 #footer-container, #main aside
-  border-top: 2px solid darken($color_cool,10%)
   overflow: auto
   nav li a
     padding: 0
@@ -152,8 +154,8 @@ nav.tabs
       color: lighten($text_color,0%)
       text-decoration: none
 
-body
-  background-color: white  
+body,#main-container
+  background-color: #F3EFE7
 
 ::-moz-selection
   background: darken($color_cool,100%)

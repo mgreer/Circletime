@@ -52,8 +52,10 @@
         - if user_signed_in?
           %nav
             %ul
-              %li= link_to "Logout", destroy_user_session_path, :method => :delete
-    / #main-container
+              %li= link_to 'Invite friends', new_user_invitation_path
+              %li= link_to "Dashboard", :root
+              %li= link_to 'Account', circles_path    
+    / #footer-container
 
   :javascript
     var _gaq=[["_setAccount","#{ GOOGLE_ACCOUNT_ID }"],["_trackPageview"],["_trackPageLoadTime"]];
