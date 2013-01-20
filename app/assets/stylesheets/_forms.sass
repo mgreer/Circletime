@@ -37,23 +37,26 @@
     input[type=hidden]
       display: none
     input[type=text],input[type=email],input[type=password]
-      @include rounded(.3em)
-      padding: 1em
-      border: 1px solid $color_cool
+      @include rounded(.2em)
+      padding: .7em
+      background: $color_input_back
+      border: 1px solid $color_input_border
       
 input[type=submit], .button
-  @include rounded(.2em)
-  @include gradient-bg(lighten($color_button,10%),$color_button)
+  @include rounded(.3em)
+  background: $color_button
   text-align: center
   font-family: $font_title
-  font-weight: 300
-  font-size: 2em
-  padding: .5em
+  font-weight: bold
+  font-size: .8em
+  padding: .4em .7em .5em .7em
   margin: .2em
   float: left
-  border: 1px solid $color_cool
+  box-shadow: 0 0 0 1px rgba(211, 212, 176, .2)
+  border-width: 0
+  border-top: 1px solid lighten($color_button,20%)
   color: $form_color
-  text-shadow: rgba(56, 101, 112,.8) 0 1px 0
+  text-transform: uppercase
   white-space: nowrap
   &:active
     box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 1), inset 0 0px 2px rgba(0, 0, 0, 0.9)
@@ -200,7 +203,7 @@ a.button.small
       margin-top: 8px
       left: -5px
   .actions input.btn
-    font-size: 1.4em
+    font-size: default
   
 .tester
   position: absolute

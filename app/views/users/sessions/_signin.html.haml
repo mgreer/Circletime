@@ -2,8 +2,9 @@
   = simple_form_for(resource, :as => resource_name, :url => user_session_path) do |f|
     .error
       = f.error_notification
-    .facebook
-      = link_to 'Login with Facebook', '/users/auth/facebook/', :class => "button"
+    -#
+      .facebook
+        = link_to 'Login with Facebook', '/users/auth/facebook/', :class => "button"
     
     .inputs
       = f.input :email, :required => true, :autofocus => true, :placeholder => "Email"

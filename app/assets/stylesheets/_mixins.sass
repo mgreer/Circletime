@@ -1,18 +1,18 @@
 //$font_title: "adelle","Cambria","Georgia","Times","Times New Roman",serif
 //$font_text: "droid-sans","Helvetica Neue",Helvetica,Arial,sans-serif
-$font_title: 'Helvetica Neue', Helvetica, Arial, sans-serif
-$font_text:  'Helvetica Neue', Helvetica, Arial, sans-serif
+$font_title: arial, sans-serif
+$font_text:  arial, sans-serif
 //$color_link: #21759B
 $text_color: #111
-$form_color: #111
+$form_color: #fff
 
 $color_link: #648FFC
 $color_hot: #9B2075
-$color_button: #888
+$color_button: #7CE0DA
 $color_hot_light: #CF52A8
 $color_cool: #21759B
 $color_cool_light: #53a8CF
-$color_facebook: #3B5998
+$color_facebook: $color_button
 $color_special: #28ADD2
 $color_special_light: #5CC0DD
 $color_special_border: #41646F
@@ -20,7 +20,10 @@ $color_accept: #8AB902
 $color_cancel: #BC4029
 $width_container: 960px
 
-@mixin rounded($radius:10px) 
+$color_input_back: #FFFEFB
+$color_input_border: #ECD3A8
+
+@mixin rounded($radius:2px) 
   -moz-border-radius: $radius
   -webkit-border-radius: $radius
   border-radius: $radius
