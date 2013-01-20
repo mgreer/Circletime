@@ -1,6 +1,8 @@
 
 @import "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css"
 @import mixins
+body
+  font-size: 1em
 body, p, ol, ul, td 
   font-family: $font_text
   color: $text_color
@@ -57,19 +59,16 @@ nav li
       text-decoration: underline
       color: $color_link
 h3
-  font-size: 2em
+  font-size: 1.5em
   font-weight: bold
 
 article 
   p, a
-    font-size: 1.5em
+    font-size: 1em
   h1
     font-size: 100%
     font-weight: bold
     text-transform: uppercase    
-
-p,td
-  font-size: 120%
 
 table
   width: 100%
@@ -150,11 +149,13 @@ nav.tabs
     height: 60px
     li
       margin: 0
-      width: 33%
+      width: 106px
       a
+        padding: 0
         height: 60px
+        width: 100%
         text-indent: -999px
-#users-dashboard .dashboard a, #users-invitations-new .invite a
+#users-dashboard .dashboard, #users-invitations-new .invite,#users-show .account
   background: rgba(255,0,0,.1)
 
 #header-container 
