@@ -25,18 +25,12 @@
       %script{ :src => "js/libs/html5-3.4-respond-1.1.0.min.js" }
   %body{ :id => to_slug( "#{controller.controller_path}-#{controller.action_name}" ), :class => to_slug( "#{controller.controller_path}" ) }
     #header-container
-      %header.wrapper.clearfix
-        %h1#title
+      %header
+        #title
           = link_to "Poppygo", :root
-          - if content_for?(:title)
-            %span= yield :title
         - if user_signed_in?
-          %nav
-            %ul
-              %li= link_to "Home", :root
-              %li= link_to 'Ask a favor', new_job_path
-              %li= link_to 'Invite friend', new_user_invitation_path
-              %li= link_to 'Your friends', circles_path     
+          #ask
+            = link_to 'Ask', new_job_path, :class => "button"
     / #header-container
     
     - unless flash.empty? || ( flash[:alert].blank? && flash[:notice].blank? && flash[:error].blank? && flash[:message].blank? )

@@ -13,21 +13,25 @@ h1
   font-weight: normal
 
 header 
-  h1
-    font-size: 150%
-    margin: .4em 0
-    text-align: left!important
-    font-weight: 1400
-    a
-      text-decoration:none
-      color:inherit
-    span
-      text-align: right
-      font-size: 50%
-      text-transform: uppercase
-      color: darken($color_cool,20%)
+  padding: 0
+  height: 48px
+  width: 320px
+  background-image: image-url("/assets/shared/header.png")
+  
   #title a
-    font-weight: 600
+    display: block
+    text-indent: -999px
+    height: 48px
+    width: 100px
+    margin: 0 auto
+    z-index: 0
+  #ask
+    position: absolute
+    top: 5px
+    right: 5px
+    z-index: 100
+    a
+      float: none
 
 section
   clear: both
