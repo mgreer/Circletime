@@ -48,13 +48,13 @@
       / #main
     / #main-container
     #footer-container
-      %footer.wrapper
+      %footer
         - if user_signed_in?
           %nav
             %ul
-              %li= link_to 'Invite friends', new_user_invitation_path
-              %li= link_to "Dashboard", :root
-              %li= link_to 'Account', circles_path    
+              %li= link_to 'Invite friends', new_user_invitation_path, :class => "invite"
+              %li= link_to "Dashboard", :root, :class => "dashboard"
+              %li= link_to 'Account', circles_path, :class => "account"
     / #footer-container
 
   :javascript

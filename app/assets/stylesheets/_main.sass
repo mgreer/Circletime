@@ -131,15 +131,31 @@ nav.tabs
  *  Theme
  * ===================
 
-#header-container
-
-#footer-container, #main aside
-  overflow: auto
-  nav li a
-    padding: 0
-
 #header-container, #footer-container, #main aside
-  background: #fff
+  background: $color_back_main
+
+#footer-container
+  width: 320px
+  height: 60px
+  padding: 0
+
+  footer
+    position: fixed
+    bottom: 0
+    left: 0
+    padding: 0
+    margin: 0
+    background-image: image-url("/assets/shared/nav-sprite.png") 
+    width: 320px
+    height: 60px
+    li
+      margin: 0
+      width: 33%
+      a
+        height: 60px
+        text-indent: -999px
+#users-dashboard .dashboard a, #users-invitations-new .invite a
+  background: rgba(255,0,0,.1)
 
 #header-container 
   header a
@@ -155,7 +171,7 @@ nav.tabs
       text-decoration: none
 
 body,#main-container
-  background-color: #F3EFE7
+  background-color: $color_back_main
 
 ::-moz-selection
   background: darken($color_cool,100%)
@@ -171,9 +187,3 @@ body,#main-container
   #messaging
     margin: 0 2em
     box-shadow: none
-  footer h3
-    clear: both
-  header #title span
-    float: right
-  header a
-    font-size: .95em
