@@ -18,6 +18,9 @@
     %ul
       - @user.potential_jobs.each do |job|
         %li
+          %p.thumb 
+            = image_tag ("shared/thumb-frame.png"), :class => "frame"
+            = image_tag @user.avatar.url(:mobile), :class => "pic"
           %p.actions
             =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
             =link_to "No", turndown_job_path(job) , :class => "no"
