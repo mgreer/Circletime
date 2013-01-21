@@ -1,8 +1,15 @@
 - content_for:title, @user.name
   
+%ul.subnav
+  %li.first#upcoming
+    Scheduled
+  %li.on
+    Friends Req
+  %li.last
+    Open Req
 
 - unless @user.upcoming_jobs.empty?
-  %section#upcoming.listing
+  %section#upcoming_list.listing
     %h3 Upcoming favors        
     %ul
       - @user.upcoming_jobs.each do |job|
@@ -14,7 +21,7 @@
 
 
 - unless @user.potential_jobs.empty?
-  %section#friends_req.listing
+  %section#friends_req_list.listing
     %ul
       - @user.potential_jobs.each do |job|
         %li
@@ -40,7 +47,7 @@
             #{job.user} is offering #{ pluralize( job.stars, "star" ) }
               
 - unless @user.future_open_jobs.empty?
-  %section#open_req.listing
+  %section#open_req_list.listing
     %h3 Waiting for a favor       
     %ul
       - @user.future_open_jobs.each do |job|

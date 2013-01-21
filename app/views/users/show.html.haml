@@ -1,8 +1,7 @@
-%p#notice= notice
 %p.thumb 
-  = image_tag @user.avatar.url(:mobile)
-%p
-  %b Name:
+  = image_tag ("shared/thumb-frame.png"), :class => "frame"
+  = image_tag @user.avatar.url(:mobile), :class => "pic"
+
   = @user.name
 %p
   %b Stars:
@@ -14,17 +13,8 @@
   %b Email:
   = @user.email
 %p
-  %b Worked Jobs:
-  = @user.work_jobs
-%p
   %b Timezone:
   = @user.timezone
   = Time
-%p
-  %b Jobs:
-  - @user.jobs.each do |job|
-    = link_to job, job_path(job)
-
-
     
 = link_to 'Edit', edit_user_path(@user)
