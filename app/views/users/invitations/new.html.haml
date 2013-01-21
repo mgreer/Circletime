@@ -1,6 +1,5 @@
 - content_for:title, "Invite Friend"
 - @page_name = 'email'
-= render 'tabs'
 
 %section{:id => "invite_users" }
   = simple_form_for :user, :url => invitation_path(:user), :html => {:method => :post} do |f|

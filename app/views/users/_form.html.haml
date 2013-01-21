@@ -1,4 +1,4 @@
-= simple_form_for @user do |f|
+= simple_form_for @user, :html => { :multipart => true } do |f|
   .inputs
     = f.input :name
     = f.input :stars
@@ -6,5 +6,6 @@
     = f.input :timezone_offset, :collection => User::TZ_MAPPING.invert()
     = f.input :phone
     = f.input :email
+    = f.file_field :avatar
   .actions
     = f.button :submit

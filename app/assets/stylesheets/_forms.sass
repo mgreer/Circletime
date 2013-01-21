@@ -186,7 +186,20 @@ a.button.small
           background-color: lighten($color_cool,40%)
         a
           color: $color_hot
-
+.yes,.no
+  width: 30px
+  height: 32px
+  text-indent: -999px
+  display: block
+  margin-left: 5px
+  float: right
+  &:hover
+    opacity: .9
+.yes
+  background: image-url("/assets/shared/button-yes.png")
+.no
+  background: image-url("/assets/shared/button-no.png")
+  
 /* Smartphones (portrait and landscape) -----------
 @media only screen and (min-width : 320px) and (max-width : 569px)
   .madlibs

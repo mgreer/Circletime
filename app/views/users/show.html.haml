@@ -1,4 +1,6 @@
 %p#notice= notice
+%p 
+  = image_tag @user.avatar.url(:mobile)
 %p
   %b Name:
   = @user.name
@@ -22,7 +24,7 @@
   %b Jobs:
   - @user.jobs.each do |job|
     = link_to job, job_path(job)
+
+
     
 = link_to 'Edit', edit_user_path(@user)
-|
-\#{link_to 'Back', users_path}

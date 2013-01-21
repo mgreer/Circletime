@@ -49,6 +49,7 @@ gem "will_paginate"
 #gem "mocha"
 
 gem "simple_form"
+gem "paperclip", "~> 3.0"
 gem 'ui_datepicker-rails3'
 
 gem 'devise'

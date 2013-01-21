@@ -1,16 +1,8 @@
 - content_for:title, @user.name
-%section
-  %b You have #{ pluralize( @user.stars, "star" ) } available.
   
-%section.actions
-  = link_to 'Ask a favor', new_job_path, :class => "button"
-  = link_to 'Invite friend', new_user_invitation_path, :class => "button"
-
-- content_for:aside do
-  = render "potential_jobs"
 
 - unless @user.upcoming_jobs.empty?
-  %section
+  %section#upcoming.listing
     %h3 Upcoming favors        
     %ul
       - @user.upcoming_jobs.each do |job|
@@ -19,9 +11,33 @@
             #{ link_to "#{job.worker} #{job.job_type.future} for you on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
           -else
             #{ link_to "You #{job.job_type.future} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
-            
+
+
+- unless @user.potential_jobs.empty?
+  %section#friends_req.listing
+    %ul
+      - @user.potential_jobs.each do |job|
+        %li
+          %p.actions
+            =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
+            =link_to "No", turndown_job_path(job) , :class => "no"
+          %p.description
+            .who
+              #{job.user} 
+            .what
+              wants a #{job.job_type}
+            .when
+              %b=job.date.strftime("%b %d")
+              - unless job.job_type.is_misc
+                - if job.work_unit.hours < 23
+                  from #{ job.time_in_zone.strftime("%-l%P") }-#{ job.endtime_in_zone.strftime("%-l%P") }
+                - else
+                  - job.date.strftime("%b %d")
+          %p.detail
+            #{job.user} is offering #{ pluralize( job.stars, "star" ) }
+              
 - unless @user.future_open_jobs.empty?
-  %section
+  %section#open_req.listing
     %h3 Waiting for a favor       
     %ul
       - @user.future_open_jobs.each do |job|
