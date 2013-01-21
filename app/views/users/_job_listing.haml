@@ -1,14 +1,25 @@
 %p.thumb 
   = image_tag ("shared/thumb-frame.png"), :class => "frame"
   = image_tag @user.avatar.url(:mobile), :class => "pic"
-%p.actions
-  =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
-  =link_to "No", turndown_job_path(job) , :class => "no"
+- if view == "friends_req"
+  %p.actions
+    =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
+    =link_to "No", turndown_job_path(job) , :class => "no"
 %p.description
   .who
-    #{job.user} 
+    - if job.worker == current_user || view == "open_req"
+      You
+    - else
+      #{job.user} 
   .what
-    wants a #{job.job_type}
+    - if view == "upcoming"
+      #{job.job_type.future} for #{job.user}
+    - else
+      - if view == "friends_req"
+        wants
+      - else
+        want
+      a #{job.job_type}
   .when
     %b=job.date.strftime("%b %d")
     - unless job.job_type.is_misc

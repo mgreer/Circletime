@@ -13,44 +13,21 @@
     %ul
       - @user.upcoming_jobs.each do |job|
         %li
-          - if job.user == current_user
-            = render 'job_listing'
-            #{ link_to "#{job.worker} #{job.job_type.future} for you on #{ job.date.strftime("%B %d") }", job_details_path(job) }
-          -else
-            #{ link_to "You #{job.job_type.future} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job) }
+          = render "job_listing", :job => job, :view => "upcoming"
 
 - unless @user.potential_jobs.empty?
   %section#friends_req_list.listing.on
     %ul
       - @user.potential_jobs.each do |job|
         %li
-          %p.thumb 
-            = image_tag ("shared/thumb-frame.png"), :class => "frame"
-            = image_tag @user.avatar.url(:mobile), :class => "pic"
-          %p.actions
-            =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
-            =link_to "No", turndown_job_path(job) , :class => "no"
-          %p.description
-            .who
-              #{job.user} 
-            .what
-              wants a #{job.job_type}
-            .when
-              %b=job.date.strftime("%b %d")
-              - unless job.job_type.is_misc
-                - if job.work_unit.hours < 23
-                  from #{ job.time_in_zone.strftime("%-l%P") }-#{ job.endtime_in_zone.strftime("%-l%P") }
-                - else
-                  - job.date.strftime("%b %d")
-          %p.detail
-            #{job.user} is offering #{ pluralize( job.stars, "star" ) }
+          = render "job_listing", :job => job, :view => "friends_req"
               
 - unless @user.future_open_jobs.empty?
   %section#open_req_list.listing
     %ul
       - @user.future_open_jobs.each do |job|
         %li
-          #{ link_to "On #{ job.created_at.strftime("%B %d") } you asked for a #{job.job_type} for #{ job.date.strftime("%B %d") }", job_details_path(job) }
+          = render "job_listing", :job => job, :view => "open_req"
             
 
         
