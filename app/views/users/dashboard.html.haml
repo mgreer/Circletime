@@ -1,58 +1,37 @@
 - content_for:title, @user.name
   
-%ul.subnav
+%ul.subnav#subnav
   %li.first#upcoming
     Scheduled
-  %li.on
+  %li.on#friend_req
     Friends Req
-  %li.last
+  %li.last#open_req
     Open Req
 
 - unless @user.upcoming_jobs.empty?
   %section#upcoming_list.listing
-    %h3 Upcoming favors        
     %ul
       - @user.upcoming_jobs.each do |job|
         %li
           - if job.user == current_user
-            #{ link_to "#{job.worker} #{job.job_type.future} for you on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
+            = render 'job_listing'
+            #{ link_to "#{job.worker} #{job.job_type.future} for you on #{ job.date.strftime("%B %d") }", job_details_path(job) }
           -else
-            #{ link_to "You #{job.job_type.future} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax" }
-
+            #{ link_to "You #{job.job_type.future} for #{job.user} on #{ job.date.strftime("%B %d") }", job_details_path(job) }
 
 - unless @user.potential_jobs.empty?
-  %section#friends_req_list.listing
+  %section#friends_req_list.listing.on
     %ul
       - @user.potential_jobs.each do |job|
         %li
-          %p.thumb 
-            = image_tag ("shared/thumb-frame.png"), :class => "frame"
-            = image_tag @user.avatar.url(:mobile), :class => "pic"
-          %p.actions
-            =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
-            =link_to "No", turndown_job_path(job) , :class => "no"
-          %p.description
-            .who
-              #{job.user} 
-            .what
-              wants a #{job.job_type}
-            .when
-              %b=job.date.strftime("%b %d")
-              - unless job.job_type.is_misc
-                - if job.work_unit.hours < 23
-                  from #{ job.time_in_zone.strftime("%-l%P") }-#{ job.endtime_in_zone.strftime("%-l%P") }
-                - else
-                  - job.date.strftime("%b %d")
-          %p.detail
-            #{job.user} is offering #{ pluralize( job.stars, "star" ) }
+          = render 'job_listing'
               
 - unless @user.future_open_jobs.empty?
   %section#open_req_list.listing
-    %h3 Waiting for a favor       
     %ul
       - @user.future_open_jobs.each do |job|
         %li
-          #{ link_to "On #{ job.created_at.strftime("%B %d") } you asked for a #{job.job_type} for #{ job.date.strftime("%B %d") }", job_details_path(job), :class => "fancybox fancybox.ajax"  }
+          #{ link_to "On #{ job.created_at.strftime("%B %d") } you asked for a #{job.job_type} for #{ job.date.strftime("%B %d") }", job_details_path(job) }
             
 
         
