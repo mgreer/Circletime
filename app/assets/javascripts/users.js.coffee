@@ -56,8 +56,6 @@ $ ->
   $el = $("#users-dashboard")
   $("#subnav li",$el).click ->
     $list = $( "#"+$(this).attr("id")+"_list", $el )
-    $("section.on", $el).removeClass("on")
-    $("#subnav li.on",$el).removeClass("on")
-    $list.addClass("on")
-    $(this).addClass("on")
+    $("section.on", $el).add("#subnav li.on",$el).removeClass("on")
+    $list.add(this).addClass("on")
     
