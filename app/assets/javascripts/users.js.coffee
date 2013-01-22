@@ -29,6 +29,7 @@ if $("#fb-root").get(0)
       sendInvite $uid, $name, "Join me on Circletime so we can trade babysitting, petsitting, and other favors."
       
 $(document).ready ->
+  ###
   $("#invite_users .user_email").bind "keydown", (event) ->
     $input = $(this)
     if event.which == 188 || event.which == 32
@@ -46,7 +47,7 @@ $(document).ready ->
         $input.prev().remove()
         $input.remove()
       false
-
+  ###
   if $("#devise-registrations-new #new_user").size() > 0 || $("#users-invitations-edit").size() > 0
     $tz = ((new Date().getTimezoneOffset()/60)+1)*-1
     $("#user_timezone_offset").val( $tz )

@@ -1,6 +1,6 @@
 %p.thumb 
   = image_tag ("shared/thumb-frame.png"), :class => "frame"
-  = image_tag @user.avatar.url(:mobile), :class => "pic"
+  = image_tag job.user.avatar.url(:mobile), :class => "pic"
 - if view == "friends_req"
   %p.actions
     =link_to "Yes", sign_up_for_job_path(job) , :class => "yes"
@@ -13,7 +13,12 @@
       #{job.user} 
   .what
     - if view == "upcoming"
-      #{job.job_type.future} for #{job.user}
+      #{job.job_type.future} for 
+      - if job.user == current_user
+        you
+      - else
+        #{job.user}
+        
     - else
       - if view == "friends_req"
         wants
@@ -27,6 +32,7 @@
         from #{ job.time_in_zone.strftime("%-l%P") }-#{ job.endtime_in_zone.strftime("%-l%P") }
       - else
         - job.date.strftime("%b %d")
-%p.detail
-  %span{:class => "stars stars_#{job.stars}"}
-  %span.description=job.description
+.detail
+  %p.amount
+    %span{:class => "stars stars_#{job.stars}"}
+  %p.description=job.description
