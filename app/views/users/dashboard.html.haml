@@ -14,26 +14,35 @@
     - unless @user.future_open_jobs.empty?
       %span.number #{@user.future_open_jobs.size}
 
-- unless @user.upcoming_jobs.empty?
-  %section#upcoming_list.listing
+%section#upcoming_list.listing
+  - unless @user.upcoming_jobs.empty?
     %ul
       - @user.upcoming_jobs.each do |job|
         %li
           = render "job_listing", :job => job, :view => "upcoming"
+  - else
+    %p
+      You do not have any scheduled jobs
 
-- unless @user.potential_jobs.empty?
-  %section#friends_req_list.listing.on
+%section#friends_req_list.listing.on
+  - unless @user.potential_jobs.empty?
     %ul
       - @user.potential_jobs.each do |job|
         %li
           = render "job_listing", :job => job, :view => "friends_req"
+  - else
+    %p
+      Your friends have not currently requested any jobs
               
-- unless @user.future_open_jobs.empty?
-  %section#open_req_list.listing
+%section#open_req_list.listing
+  - unless @user.future_open_jobs.empty?
     %ul
       - @user.future_open_jobs.each do |job|
         %li
           = render "job_listing", :job => job, :view => "open_req"
+  - else
+    %p
+      You are not waiting on any job requests
             
 
         
