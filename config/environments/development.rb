@@ -43,6 +43,14 @@ Circletime::Application.configure do
     
   #don't show all asset requests
   config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
-  
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['PoppyGo-dev'],
+      :access_key_id => ENV['AKIAIFI6KQ4GOSEIQMIA'],
+      :secret_access_key => ENV['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']
+    }
+  }  
   
 end

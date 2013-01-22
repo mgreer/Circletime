@@ -50,6 +50,7 @@ gem "will_paginate"
 
 gem "simple_form"
 gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
 gem 'ui_datepicker-rails3'
 
 gem 'devise'

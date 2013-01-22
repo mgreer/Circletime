@@ -1,6 +1,6 @@
 %p.thumb 
   = image_tag ("shared/thumb-frame.png"), :class => "frame"
-  = image_tag @user.avatar.url(:mobile), :class => "pic"
+  = image_tag @user.avatar.url(:mobile), :class => "pic", :bucket => "PoppyGo-dev"
 
   = @user.name
 %p

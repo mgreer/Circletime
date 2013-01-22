@@ -69,4 +69,13 @@ Circletime::Application.configure do
   
   FONTDECK_URL = "http://f.fontdeck.com/s/css/J8lPZ2Tmm95McLfprLcxXpR+LtE/www.poppygo.com/18062.css"
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['PoppyGo-dev'],
+      :access_key_id => ENV['AKIAIFI6KQ4GOSEIQMIA'],
+      :secret_access_key => ENV['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']
+    }
+  }
+
 end
