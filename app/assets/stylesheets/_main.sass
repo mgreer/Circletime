@@ -148,6 +148,7 @@ nav.tabs
   overflow: auto
   li
     float: left
+    position: relative
     border: 1px solid #D3B98B
     border-width: 1px 0 1px 1px
     font-size: .9em
@@ -164,7 +165,18 @@ nav.tabs
     &.on
       background: #E1DBCA
       color: #fff
-
+.number
+  display: block
+  position: absolute
+  top: -5px
+  right: 0
+  font-weight: normal
+  font-size: .75em  
+  background-image: image-url("/assets/shared/number-back.png")
+  line-height: 15px
+  width: 15px
+  text-align: center  
+  color: #fff
 /* ===================
  *  Theme
  * ===================
@@ -224,6 +236,8 @@ body,#main-container
   
 /* Smartphones (portrait and landscape) -----------
 @media only screen and (min-width : 320px) and (max-width : 569px)
+  body
+    width: 320px
   #messaging
     margin: 0 2em
     box-shadow: none

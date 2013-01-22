@@ -3,10 +3,16 @@
 %ul.subnav#subnav
   %li.first#upcoming
     Scheduled
+    - unless @user.upcoming_jobs.empty?
+      %span.number #{@user.upcoming_jobs.size}
   %li.on#friends_req
     Friends Req
+    - unless @user.potential_jobs.empty?
+      %span.number #{@user.potential_jobs.size}
   %li.last#open_req
     Open Req
+    - unless @user.future_open_jobs.empty?
+      %span.number #{@user.future_open_jobs.size}
 
 - unless @user.upcoming_jobs.empty?
   %section#upcoming_list.listing
