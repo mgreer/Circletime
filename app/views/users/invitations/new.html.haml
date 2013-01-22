@@ -3,9 +3,10 @@
 
 %section{:id => "invite_users" }
   = simple_form_for :user, :url => invitation_path(:user), :html => {:method => :post} do |f|
-    .madlibs
+    %div
       Invite 
-      %input{ :type => :email, :name => "user_email[]", :size => 8, :class => "user_email", :value => @email, :placeholder => "a friend" }
+      %input{ :type => :email, :name => "user_email[]", :size => 22, :class => "user_email", :value => @email, :placeholder => "a friend" }
+      %br
       to join your circle.
     .actions
       = f.submit "Invite"
