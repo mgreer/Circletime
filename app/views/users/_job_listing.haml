@@ -28,4 +28,5 @@
       - else
         - job.date.strftime("%b %d")
 %p.detail
-  #{job.user} is offering #{ pluralize( job.stars, "star" ) }
+  %span{:class => "stars stars_#{job.stars}"}
+  %span.description=job.description

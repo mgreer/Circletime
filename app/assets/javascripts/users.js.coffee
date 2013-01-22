@@ -58,4 +58,5 @@ $ ->
     $list = $( "#"+$(this).attr("id")+"_list", $el )
     $("section.on", $el).add("#subnav li.on",$el).removeClass("on")
     $list.add(this).addClass("on")
-    
+  $("section.listing li",$el).click ->
+    $(".detail",this).slideToggle()

@@ -21,7 +21,7 @@
         %li
           = render "job_listing", :job => job, :view => "upcoming"
   - else
-    %p
+    %p.empty
       You do not have any scheduled jobs
 
 %section#friends_req_list.listing.on
@@ -31,7 +31,7 @@
         %li
           = render "job_listing", :job => job, :view => "friends_req"
   - else
-    %p
+    %p.empty
       Your friends have not currently requested any jobs
               
 %section#open_req_list.listing
@@ -41,7 +41,7 @@
         %li
           = render "job_listing", :job => job, :view => "open_req"
   - else
-    %p
+    %p.empty
       You are not waiting on any job requests
             
 

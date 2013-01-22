@@ -58,25 +58,56 @@
     font-size: .9em
     line-height: 1.2em
     border-bottom: 1px solid #C4AD84
+    p.empty
+      padding: 10px
+      margin: 5px
     li
-      padding: 5px
+      padding: 0
       background: #F3F1ED
       border-top: 1px solid #C4AD84
-    .thumb
-      float: left
-      margin: 10px
-    .detail
-      display: none
-    .who
-      font-weight: bold
-    .when
-      color: $color_link
-    .actions
-      width: 80px
-      float: right
-    > p
-      padding: 10px
-  section.listing.on
-    display: block
-    
-  
+      p
+        margin: 0
+        padding: 0
+      .description
+        padding: 5px
+      .thumb
+        float: left
+        margin: 10px
+      .detail
+        display: none
+      .who
+        font-weight: bold
+      .when
+        color: $color_link
+        border-bottom: 1px dashed #C4AD84
+        padding-bottom: 5px
+        margin-bottom: 5px
+      .actions
+        width: 80px
+        float: right
+
+      .detail
+        margin: 0
+        padding: 10px
+        display: none
+        border-top: 1px solid #C4AD84
+        background: #FFFAF0
+        color: #BA967A
+        .stars
+          display: block
+          height: 16px
+          background-image: image-url("/assets/shared/star.png")
+        .stars_1
+          width: 20px
+        .stars_2
+          width: 40px
+        .stars_3
+          width: 60px
+        .stars_4
+          width: 80px
+        .stars_5
+          width: 100px
+
+
+    &.on
+      display: block
