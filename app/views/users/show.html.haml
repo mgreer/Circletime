@@ -13,6 +13,10 @@
   %b Email:
   = @user.email
 %p
+  %b Friends:  
+  - @user.circle.users.each do |friend|
+    #{friend.name},
+%p
   %b Timezone:
   = @user.timezone
   = Time
