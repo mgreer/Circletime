@@ -10,7 +10,10 @@
     - if job.worker == current_user || view == "open_req"
       You
     - else
-      #{job.user} 
+      - if view == "upcoming"
+        #{job.worker}
+      - else
+        #{job.user} 
   .what
     - if view == "upcoming"
       #{job.job_type.future} for 
