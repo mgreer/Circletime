@@ -96,26 +96,11 @@ aside
 
 .no_aside #main article
   width: 100%
-
-@keyframes fadeOut
-  0%
-    opacity: 1
-  100%
-    opacity: 0
-    
-@-webkit-keyframes fadeOut
-  0%
-    opacity: 1
-  100%
-    opacity: 0
     
 #messaging
-  animation: fadeOut 500ms linear 3s
-  -webkit-animation: fadeOut 500ms linear 3s
-  -webkit-animation-fill-mode: forwards
   position: absolute
   top: 20px
-  opacity: .8
+  opacity: .9
   @include gradient-bg(darken(#FFFEFB,10%),lighten(#FFFEFB,10%))
   box-shadow: 0 5px 10px #444
   padding: .2em 1em
