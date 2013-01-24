@@ -36,5 +36,5 @@
         - job.date.strftime("%b %d")
 .detail
   %p.amount
-    %span{:class => "stars stars_#{job.stars}"}
+    %span{:class => "stars", :style=>"width:#{20*job.stars}px"}
   %p.description=job.description
