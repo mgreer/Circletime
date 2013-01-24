@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :encrypted_password, :password_confirmation, :remember_me, :location, :timezone_offset
 
   attr_accessible :avatar
-  has_attached_file :avatar, :bucket => "PoppyGo-dev", :styles => { :medium => "300x300>", :thumb => "100x100>", :mobile => "40x40"}, :default_url => '/assets/shared/pink-cupcake.png'
+  has_attached_file :avatar, :bucket => "PoppyGo-dev", :styles => { :medium => "300x300>", :thumb => "100x100>", :mobile => "40x40"}, :default_url => '/assets/shared/pink-p.png'
   
   has_many :authentications, :dependent => :delete_all  
 
