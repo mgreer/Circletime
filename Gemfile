@@ -11,7 +11,7 @@ gem 'thin'
 
 gem 'dalli'
 gem 'ri_cal'
-gem "sourceninja", "~> 0.0.6"
+#gem "sourceninja", "~> 0.0.6"
 gem 'detect_timezone_rails'
 gem "audited-activerecord"
 
@@ -60,4 +60,4 @@ gem 'oauth2'
 gem 'fb_graph'
 gem 'omniauth-facebook'
 
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
