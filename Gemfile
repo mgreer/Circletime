@@ -60,4 +60,4 @@ gem 'oauth2'
 gem 'fb_graph'
 gem 'omniauth-facebook'
 
-#gem 'newrelic_rpm'
+gem 'newrelic_rpm'
