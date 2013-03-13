@@ -33,9 +33,9 @@
             = link_to 'Ask', new_job_path, :class => "button"
     / #header-container
     
-    - unless flash.empty? || ( flash[:alert].blank? && flash[:notice].blank? && flash[:error].blank? && flash[:message].blank? )
+    - unless flash.empty? || ( flash[:error].blank? )
       #messaging
-        - [:alert, :notice, :error, :message].each do |key| 
+        - [:error].each do |key| 
           - unless flash[key].blank? 
             %p{ :class => "flash flash_#{key}" }= flash[key]
 
