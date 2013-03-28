@@ -24,11 +24,21 @@ $width_container: 960px
 
 $color_input_back: #FFFDF7
 $color_input_border: #ECD3A8
+    
+$prefixes: ("-webkit-","-moz-","")
+
+@mixin keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
 
 @mixin rounded($radius:2px) 
-  -moz-border-radius: $radius
-  -webkit-border-radius: $radius
-  border-radius: $radius
+  @each $prefix in $prefixes
+    #{$prefix}border-radius: $radius
+
 @mixin gradient-bg($start, $end)
   background-color: $end
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($start), to($end))

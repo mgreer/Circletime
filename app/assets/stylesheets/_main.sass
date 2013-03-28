@@ -1,6 +1,14 @@
 
 @import "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css"
 @import mixins
+
+@include keyframes(fadeOut)
+  from
+    opacity: 1
+  to
+    opacity: 0
+    display: none
+
 body
   font-size: 1em
 body, p, ol, ul, td 
