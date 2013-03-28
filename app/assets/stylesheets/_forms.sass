@@ -11,21 +11,34 @@
     input
       float: right
   div.field_with_errors
+    position: relative
     background: none 
     input
       background: rgba(255,0,0,.1)
+      border: 2px solid rgba(255, 166, 156, 1) !important
     .error
       text-transform: capitalize
-      color: red
+      background: rgba(255, 166, 156, 1)
       position: absolute
-      margin-top: -22px
-      margin-left: 1em
-  .hide
-    position: absolute
-    visibility: hidden
+      top: -7px
+      left: -7px
+      font-size: 10px
+      line-height: 10px
+      border-radius: 3px
+      padding: 5px
+      color: #fff
+      text-shadow: 1px 1px rgba(100, 0, 0, .5)
+    .hide
+      position: absolute
+      visibility: hidden
   .alert
-    color: red
-    font-weight: red
+    color: #fff
+    background: rgba(255, 166, 156, 1)
+    text-shadow: 1px 1px rgba(100, 0, 0, .5)
+    border-radius: 5px
+    padding: 10px
+    font-size: 14px
+    line-height: 14px
   .checkbox
     display: block
     width: auto
