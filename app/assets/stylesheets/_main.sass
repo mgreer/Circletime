@@ -10,7 +10,7 @@
     display: none
 
 body
-  font-size: 1em
+  font-size: 1.5em
 body, p, ol, ul, td 
   font-family: $font_text
   color: $text_color
@@ -34,12 +34,12 @@ header
   top: 0
   left: 0
   padding: 0
-  height: 48px
+  height: 2em
   width: 100%
   background-image:  image-url("/assets/shared/poppygo.png"),image-url("/assets/shared/header-background.png")
-  background-size: auto,contain
+  background-size: 4em auto, 100% auto
   background-repeat: no-repeat, no-repeat
-  background-position: 20% auto, 0 0
+  background-position: 50% 50%, 0 0
     
   #title a
     display: block
@@ -254,6 +254,7 @@ body,#main-container
 /* Smartphones (portrait and landscape) -----------
 @media only screen and (min-width : 320px) and (max-width : 569px)
   body
+    font-size: 1em
     width: 320px
   #messaging
     margin: 0 2em
