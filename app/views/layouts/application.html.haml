@@ -54,7 +54,7 @@
             %ul
               %li= link_to 'Invite friends', new_user_invitation_path, :class => "invite"
               %li= link_to "Dashboard", :root, :class => "dashboard"
-              %li= link_to 'Account', user_path(:id => current_user.id), :class => "account"
+              %li= link_to 'My Profile', user_path(:id => current_user.id), :class => "account"
       / #footer-container
 
   :javascript
