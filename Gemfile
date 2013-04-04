@@ -7,7 +7,8 @@ gem 'rails', '3.2.11'
 
 gem "pg"
 
-gem 'thin'
+#gem 'thin'
+gem "unicorn"
 
 gem 'dalli'
 gem 'ri_cal'
