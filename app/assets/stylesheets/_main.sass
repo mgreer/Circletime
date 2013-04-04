@@ -70,7 +70,7 @@ header
 
 section
   clear: both
-  padding: .5em 0
+  padding: .5em 1em
 
 nav li
   float: left
@@ -252,7 +252,13 @@ nav.tabs
 
 body,#main-container
   background-color: $color_back_main
-
+#main-container 
+  position: absolute
+  height: 80%!important
+  width: 100%
+  overflow: hidden
+  overflow-y: auto
+ 
 ::-moz-selection
   background: darken($color_cool,100%)
   color: #fff
